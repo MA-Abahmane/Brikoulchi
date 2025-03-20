@@ -36,7 +36,15 @@ ServiceHub is a modern web application that connects local service providers wit
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
    ```
-4. Start the development server:
+3. Look out for a file by the name `env.txt`; it contains the envorimen variables for testing:
+```
+   VITE_SUPABASE_URL=
+   VITE_SUPABASE_ANON_KEY=
+   VITE_GOOGLE_MAPS_API_KEY=
+   /* Copy the values of these vars to use in your .env file */
+   ```
+
+5. Start the development server:
    ```bash
    npm run dev
    ```
