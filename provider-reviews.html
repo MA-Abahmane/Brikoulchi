@@ -1,0 +1,763 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truelysell</title>
+
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
+
+<!-- Themescript -->
+<script src="assets/js/theme-script.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+<!-- Aos -->
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<!-- Tabler Icon CSS -->
+<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+
+<!-- select CSS -->
+<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+<!-- Datatables CSS -->
+<link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="assets/plugins/datatables/datatables.css">
+
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+<!-- Fullcalendar CSS -->
+<link rel="stylesheet" href="assets/plugins/fullcalendar/main.min.css">
+<link rel="stylesheet" href="assets/plugins/fullcalendar/bootstrap-icons.css">
+
+<!-- Fontawesome Icon CSS -->
+<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+<!-- Owlcarousel CSS -->
+<link rel="stylesheet" href="assets/plugins/owlcarousel/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/feather.css">
+
+<!-- Mobile CSS-->
+<link rel="stylesheet" href="assets/plugins/intltelinput/css/intlTelInput.css">
+<link rel="stylesheet" href="assets/plugins/intltelinput/css/demo.css">
+
+<!-- Tagsinput CSS -->
+<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+
+<!-- Calendar CSS -->
+<link rel="stylesheet" href="assets/plugins/simple-calendar/simple-calendar.css">
+
+<!-- Mobile Input -->
+<script src="assets/plugins/intltelinput/js/intlTelInput.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body class="provider-page">
+
+    <!-- Main Wrapper -->
+     <div class="main-wrapper">
+         
+        <!-- Header -->
+        <div class="header provider-header">
+
+            <!-- Logo -->
+            <div class="header-left active">
+                <a href="index.html" class="logo logo-normal">
+                    <img src="assets/img/logo.svg" alt="Logo">
+                </a>
+                <a href="index.html" class="logo-small">
+                    <img src="assets/img/logo-small.svg" alt="Logo">
+                </a>
+                <a id="toggle_btn" href="javascript:void(0);">
+                    <i class="ti ti-menu-deep"></i>
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <div class="header-user">
+                <div class="nav user-menu">
+
+                    <!-- Search -->
+                    <div class="nav-item nav-search-inputs">
+                        <div class="top-nav-search">
+                            <a href="javascript:void(0);" class="responsive-search">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <form action="#" class="dropdown">
+                                <div class="searchinputs" id="dropdownMenuClickable">
+                                    <input type="text" placeholder="Search">
+                                    <div class="search-addon">
+                                        <span><i class="feather-user"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /Search -->
+
+                   <div class="d-flex align-items-center">
+						<div class="me-2 site-link">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-globe me-1"></i>Visit Website</a>
+						</div>
+						<div class="provider-head-links">
+							<div>
+								<a href="javascript:void(0);" id="dark-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="fa-regular fa-moon"></i>
+								</a>
+								<a href="javascript:void(0);" id="light-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="ti ti-sun-filled"></i>
+								</a>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2 dropdown-toggle notify-link" data-bs-toggle="dropdown"><i class="feather-bell"></i></a>
+							<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+								<div class="d-flex dropdown-body align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+									<h6 class="notification-title">Notifications <span class="fs-18 text-gray"> (2)</span></h6>
+									<div class="d-flex align-items-center">
+										<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+										<div class="dropdown">
+											<a href="javascript:void(0);" class="bg-white dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ti ti-calendar-due me-1"></i>Today
+											</a>
+											<ul class="dropdown-menu mt-2 p-3">
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														This Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+	
+								<div class="noti-content">
+									<div class="d-flex flex-column">
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-52.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+														<p class="mb-1 w-100"><span class="text-dark fw-semibold">Stephan Peralt</span> rescheduled the service to 14/01/2024. </p>
+														<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div> 
+														<span>Just Now</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html" class="pb-0">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-36.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+															<p class="mb-1 w-100"><span class="text-dark fw-semibold">Harvey Smith</span> has requested your service.</p>
+															<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div>
+														<span>5 mins ago</span>
+														<div class="d-flex justify-content-start align-items-center mt-2">
+															<span class="btn btn-light btn-sm me-2">Deny</span>
+															<span class="btn btn-dark btn-sm">Accept</span>
+														</div>
+													</div>
+												</div>
+											</a>					
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-02.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold"> Anthony Lewis</span> has left feedback for your recent service </p>
+														<span>10 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-0 mb-3 pb-0">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-22.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold">Brian Villaloboshas </span> cancelled the service scheduled for 14/01/2024.
+														</p>
+														<span>15 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex p-0 notification-footer-btn">
+									<a href="#" class="btn btn-light rounded  me-2">Cancel</a>
+									<a href="#" class="btn btn-dark rounded ">View All</a>
+								</div>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-maximize"></i></a>
+						</div>
+						<div class="dropdown">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown">
+								<div class="booking-user d-flex align-items-center">
+									<span class="user-img">
+										<img src="assets/img/profiles/avatar-02.jpg" alt="user">
+									</span>
+								</div>
+							</a>
+							<ul class="dropdown-menu p-2">
+								<li><a class="dropdown-item d-flex align-items-center" href="login.html"><i class="ti ti-logout me-1"></i>Logout</a></li>
+							</ul>
+						</div>
+                   </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="dropdown mobile-user-menu">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="profile-settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </div>
+            <!-- /Mobile Menu -->
+
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="provider-dashboard.html"><i class="ti ti-layout-grid"></i><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-services.html"><i class="ti ti-briefcase"></i><span>My Services</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-booking.html"><i class="ti ti-calendar-month"></i><span>Bookings </span></a>
+                        </li>
+                        <li>
+                            <a href="staff-list.html"><i class="ti ti-users"></i><span>Staffs</span></a>
+                        </li>
+                        <li>
+                            <a href="customer-list.html"><i class="ti ti-user"></i><span>Customers</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-payout.html"><i class="ti ti-wallet"></i><span>Payout</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-holiday.html"><i class="feather-calendar"></i><span>Holidays & Leave</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-coupons.html"><i class="ti ti-ticket"></i><span>Coupons</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-offers.html"><i class="ti ti-square-percentage"></i><span>Offers</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="provider-reviews.html"><i class="ti ti-star"></i><span>Reviews</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-enquiry.html"><i class="ti ti-mail"></i><span>Enquiries</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-earnings.html"><i class="ti ti-cash-banknote"></i><span>Earnings</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-chat.html"><i class="ti ti-messages"></i><span>Chat</span></a>
+                        </li>					
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i class="ti ti-settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>
+                                    <a href="provider-appointment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Appointment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-accounts-settings.html"><i class="ti ti-chevrons-right me-2"></i>Account</a>
+                                </li>
+                                <li>
+                                    <a href="provider-social-profile.html"><i class="ti ti-chevrons-right me-2"></i>Social Profiles</a>
+                                </li>
+                                <li>
+                                    <a href="provider-security-settings.html"><i class="ti ti-chevrons-right me-2"></i>Security</a>
+                                </li>
+                                <li>
+                                    <a href="provider-plan.html"><i class="ti ti-chevrons-right me-2"></i>Plan & Billings</a>
+                                </li>
+                                <li>
+                                    <a href="payment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Payment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-notifcations.html"><i class="ti ti-chevrons-right me-2"></i>Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="provider-connected-apps.html"><i class="ti ti-chevrons-right me-2"></i>Connected Apps</a>
+                                </li>
+                                <li>
+                                    <a href="verification.html"><i class="ti ti-chevrons-right me-2"></i>Profile Verification</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#del-account"><i class="ti ti-chevrons-right me-2"></i>Delete Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html"><i class="ti ti-logout-2"></i><span>Logout</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">              
+                <div class="row">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-4">
+                        <h4>Reviews</h4>
+                        <div class="d-flex align-items-center">
+                            <span class="fs-14 me-2">Sort</span>
+                            <div class="dropdown me-2">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                    Newly Added
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:void(0);" class="dropdown-item active">Newly Added</a>
+                                    <a href="javascript:void(0);" class="dropdown-item">Oldest</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-22.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Building Construction Services.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-10.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Jeffrey Akridge,</h6>
+                                                        <span class="fs-12">July 11, 2024 11:38 am</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">
+                                        The construction service delivered excellent craftsmanship, completing my home renovation on time with clear communication throughout. Highly recommend for quality and professionalism!
+                                    </p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-20.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Commercial Painting Services.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-11.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Nancy Olson,</h6>
+                                                        <span class="fs-12">July 18, 2024 04:30 pm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">The commercial painting service provided outstanding results, with precise attention to detail and timely completion. Their professionalism and quality of work are top-notch!</p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-23.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Plumbing Services.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-12.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Ramona Kingsley, </h6>
+                                                        <span class="fs-12">July 28, 2024 02:15 pm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">
+                                        The plumbing service was efficient and reliable, quickly resolving the issue with excellent workmanship. Highly recommend for their prompt and professional service!
+                                    </p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-24.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Wooden Carpentry Work.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-02.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Ricardo Lung,</h6>
+                                                        <span class="fs-12">August 01, 2024 10:00 am</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">
+                                        The carpentry service exceeded my expectations with their meticulous attention to detail and superior craftsmanship. They completed the project on time, and the final results were both functional and aesthetically pleasing.
+                                    </p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-25.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Air Conditioner Service.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-13.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Annette Silva,</h6>
+                                                        <span class="fs-12">August 12, 2024 11:40 am</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">The air conditioning service was excellent, with prompt and thorough maintenance that restored my system to peak performance. Their technicians were professional and efficient, making the entire experience hassle-free.</p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-14.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Toughened Glass Fitting Services.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-01.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Stephen Wilson,</h6>
+                                                        <span class="fs-12">August 20, 2024 01:15 pm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">
+                                        The toughened glass fitting service was outstanding, delivering precise installation with high-quality materials. Their attention to detail and professionalism ensured a flawless finish and timely completion.
+                                    </p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <div class="col-xxl-12 col-lg-12">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="review-widget d-sm-flex flex-fill">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="d-flex">
+                                                <span class="review-img me-2">
+                                                    <img src="assets/img/providers/provider-13.jpg" class="rounded img-fluid" alt="User Image">
+                                                </span>
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <h6 class="fs-14 me-2">Car Repair Services.</h6>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                            <span><i class="ti ti-star-filled text-warning"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">
+                                                            <img src="assets/img/user/user-06.jpg" class="rounded-circle " alt="Img">
+                                                        </span>
+                                                        <h6 class="fs-13 me-2">Ryan Rodriguez,</h6>
+                                                        <span class="fs-12">August 24, 2024 06:30 pm</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user-icon d-inline-flex">
+                                        <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#"><i class="ti ti-edit"></i></a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#del-review"><i class="ti ti-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fs-14">
+                                        The car repair service was exceptional, providing prompt and thorough repairs with clear communication throughout. Their expertise and attention to detail restored my vehicle to top condition.
+                                    </p>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="value d-flex align-items-center">
+                        <span>Show</span>
+                        <select>
+                            <option>7</option>
+                        </select>
+                        <span>entries</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <span class="me-2 text-gray-9">1 - 07 of 10</span>
+                        <nav aria-label="Page navigation">
+                            <ul class="paginations d-flex justify-content-center align-items-center"> 
+                                <li class="page-item me-2"><a class="page-link-1 active d-flex justify-content-center align-items-center " href="javascript:void(0);">1</a></li>
+                                <li class="page-item me-2"><a class="page-link-1 d-flex justify-content-center align-items-center " href="javascript:void(0);">2</a></li>
+                                <li class="page-item "><a class="page-link-1 d-flex justify-content-center align-items-center " href="javascript:void(0);">3</a></li>
+                            </ul>
+                            </nav>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- /Page Wrapper -->
+
+             <!-- Delete Staff -->
+            <div class="modal fade custom-modal" id="del-review">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+                            <h5 class="modal-title">Delete Review</h5>
+                            <a href="#" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="write-review">
+                                <form action="provider-reviews.html">
+                                    <p>Are you sure want to delete this Review?</p>
+                                    <div class="modal-submit text-end">
+                                        <a href="#" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                                        <button type="submit" class="btn btn-dark">Yes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Delete Staff -->
+
+     </div>
+     <!-- /Main Wrapper -->
+
+    <!-- Jquery JS -->
+	<script src="assets/js/jquery-3.7.1.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.bundle.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+	<!-- Wow JS -->
+	<script src="assets/js/wow.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+     <!-- Slimscroll JS -->
+	<script src="assets/js/jquery.slimscroll.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+	<!-- select JS -->
+	<script src="assets/plugins/select2/js/select2.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+    <!-- Datepicker Core JS -->
+    <script src="assets/plugins/moment/moment.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+
+    <!-- Datatables JS -->
+	<script src="assets/plugins/datatables/jquery.dataTables.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+	<script src="assets/plugins/datatables/datatables.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>		
+
+	<!-- Fullcalendar JS -->
+	<script src="assets/plugins/fullcalendar/main.min.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>	
+	
+	<!-- Script JS -->
+	<script src="assets/js/script.js" type="4d3dcada2afea0cd6033ef0e-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="4d3dcada2afea0cd6033ef0e-|49" defer=""></script></body>
+</html>

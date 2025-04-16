@@ -1,0 +1,851 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truelysell</title>
+
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
+
+<!-- Themescript -->
+<script src="assets/js/theme-script.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+<!-- Aos -->
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<!-- Tabler Icon CSS -->
+<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+
+<!-- select CSS -->
+<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+<!-- Fontawesome Icon CSS -->
+<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/feather.css">
+
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+<!-- Style CSS -->
+<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body class="provider-page">
+
+    <!-- Main Wrapper -->
+     <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header provider-header">
+
+            <!-- Logo -->
+            <div class="header-left active">
+                <a href="index.html" class="logo logo-normal">
+                    <img src="assets/img/logo.svg" alt="Logo">
+                </a>
+                <a href="index.html" class="logo-small">
+                    <img src="assets/img/logo-small.svg" alt="Logo">
+                </a>
+                <a id="toggle_btn" href="javascript:void(0);">
+                    <i class="ti ti-menu-deep"></i>
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <div class="header-user">
+                <div class="nav user-menu">
+
+                    <!-- Search -->
+                    <div class="nav-item nav-search-inputs">
+                        <div class="top-nav-search">
+                            <a href="javascript:void(0);" class="responsive-search">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <form action="#" class="dropdown">
+                                <div class="searchinputs" id="dropdownMenuClickable">
+                                    <input type="text" placeholder="Search">
+                                    <div class="search-addon">
+                                        <span><i class="feather-user"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /Search -->
+
+                   <div class="d-flex align-items-center">
+						<div class="me-2 site-link">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-globe me-1"></i>Visit Website</a>
+						</div>
+						<div class="provider-head-links">
+                            <div>
+								<a href="javascript:void(0);" id="dark-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="fa-regular fa-moon"></i>
+								</a>
+								<a href="javascript:void(0);" id="light-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="ti ti-sun-filled"></i>
+								</a>
+							</div>					
+                        
+                        </div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2 dropdown-toggle notify-link" data-bs-toggle="dropdown"><i class="feather-bell"></i></a>
+							<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+								<div class="d-flex dropdown-body align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+									<h6 class="notification-title">Notifications <span class="fs-18 text-gray"> (2)</span></h6>
+									<div class="d-flex align-items-center">
+										<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+										<div class="dropdown">
+											<a href="javascript:void(0);" class="bg-white dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ti ti-calendar-due me-1"></i>Today
+											</a>
+											<ul class="dropdown-menu mt-2 p-3">
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														This Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+	
+								<div class="noti-content">
+									<div class="d-flex flex-column">
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-52.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+														<p class="mb-1 w-100"><span class="text-dark fw-semibold">Stephan Peralt</span> rescheduled the service to 14/01/2024. </p>
+														<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div> 
+														<span>Just Now</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html" class="pb-0">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-36.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+															<p class="mb-1 w-100"><span class="text-dark fw-semibold">Harvey Smith</span> has requested your service.</p>
+															<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div>
+														<span>5 mins ago</span>
+														<div class="d-flex justify-content-start align-items-center mt-2">
+															<span class="btn btn-light btn-sm me-2">Deny</span>
+															<span class="btn btn-dark btn-sm">Accept</span>
+														</div>
+													</div>
+												</div>
+											</a>					
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-02.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold"> Anthony Lewis</span> has left feedback for your recent service </p>
+														<span>10 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-0 mb-3 pb-0">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-22.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold">Brian Villaloboshas </span> cancelled the service scheduled for 14/01/2024.
+														</p>
+														<span>15 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex p-0 notification-footer-btn">
+									<a href="#" class="btn btn-light rounded  me-2">Cancel</a>
+									<a href="#" class="btn btn-dark rounded ">View All</a>
+								</div>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-maximize"></i></a>
+						</div>
+						<div class="dropdown">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown">
+								<div class="booking-user d-flex align-items-center">
+									<span class="user-img">
+										<img src="assets/img/profiles/avatar-02.jpg" alt="user">
+									</span>
+								</div>
+							</a>
+							<ul class="dropdown-menu p-2">
+								<li><a class="dropdown-item d-flex align-items-center" href="login.html"><i class="ti ti-logout me-1"></i>Logout</a></li>
+							</ul>
+						</div>
+                   </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="dropdown mobile-user-menu">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="profile-settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </div>
+            <!-- /Mobile Menu -->
+
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="provider-dashboard.html"><i class="ti ti-layout-grid"></i><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-services.html"><i class="ti ti-briefcase"></i><span>My Services</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-booking.html"><i class="ti ti-calendar-month"></i><span>Bookings </span></a>
+                        </li>
+                        <li>
+                            <a href="staff-list.html"><i class="ti ti-users"></i><span>Staffs</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="customer-list.html"><i class="ti ti-user"></i><span>Customers</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-payout.html"><i class="ti ti-wallet"></i><span>Payout</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-holiday.html"><i class="feather-calendar"></i><span>Holidays & Leave</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-coupons.html"><i class="ti ti-ticket"></i><span>Coupons</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-offers.html"><i class="ti ti-square-percentage"></i><span>Offers</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-reviews.html"><i class="ti ti-star"></i><span>Reviews</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-enquiry.html"><i class="ti ti-mail"></i><span>Enquiries</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-earnings.html"><i class="ti ti-cash-banknote"></i><span>Earnings</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-chat.html"><i class="ti ti-messages"></i><span>Chat</span></a>
+                        </li>					
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i class="ti ti-settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>
+                                    <a href="provider-appointment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Appointment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-accounts-settings.html"><i class="ti ti-chevrons-right me-2"></i>Account</a>
+                                </li>
+                                <li>
+                                    <a href="provider-social-profile.html"><i class="ti ti-chevrons-right me-2"></i>Social Profiles</a>
+                                </li>
+                                <li>
+                                    <a href="provider-security-settings.html"><i class="ti ti-chevrons-right me-2"></i>Security</a>
+                                </li>
+                                <li>
+                                    <a href="provider-plan.html"><i class="ti ti-chevrons-right me-2"></i>Plan & Billings</a>
+                                </li>
+                                <li>
+                                    <a href="payment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Payment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-notifcations.html"><i class="ti ti-chevrons-right me-2"></i>Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="provider-connected-apps.html"><i class="ti ti-chevrons-right me-2"></i>Connected Apps</a>
+                                </li>
+                                <li>
+                                    <a href="verification.html"><i class="ti ti-chevrons-right me-2"></i>Profile Verification</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#del-account"><i class="ti ti-chevrons-right me-2"></i>Delete Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html"><i class="ti ti-logout-2"></i><span>Logout</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+        <div class="content container-fluid">
+            <h4 class="mb-4">Customers Details</h4>                
+            <div class="row">
+                <div class="col-xxl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between pb-3 border-bottom mb-3">
+                                <h6>Personal Info</h6>
+                                <span class="badge badge-success-100 d-flex align-items-center"><i class="ti ti-point-filled me-1"></i>Active</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <span class="avatar avatar-lg flex-shrink-0 me-2">
+                                    <img src="assets/img/user/user-01.jpg" class="rounded-circle" alt="Img">
+                                </span>
+                                <div>
+                                    <div class="d-flex flex-wrap row-gap-2">
+                                        <h6 class="me-2 fw-medium">Harvey Smith</h6>
+                                        <span class="badge bg-primary-transparent">
+                                            Last Booking : 16/04/2024  
+                                        </span>
+                                    </div>
+                                    <span class="fs-14"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9cf4fdeeeaf9e5dcf9e4fdf1ecf0f9b2fff3f1">[email&#160;protected]</a></span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center flex-wrap row-gap-2">
+                                <div>
+                                    <h6 class="fs-14">Phone</h6>
+                                    <span class="fs-14">+1 634 967 2145</span>
+                                </div>
+                                <div>
+                                    <h6 class="fs-14">Total Bookings</h6>  
+                                    <span class="fs-14">60</span>
+                                </div>
+                                <div>
+                                    <h6 class="fs-14">Payments</h6>
+                                    <span class="fs-14">4</span>
+                                </div>
+                                
+                                <div>
+                                    <h6 class="fs-14">Created On</h6> 
+                                    <span class="fs-14">14/01/2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex pb-3 border-bottom mb-4">
+                                <h6>Address Info</h6>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <h6 class="me-2 fs-14">Adddress</h6>
+                                    <span class="fs-14"> 7865 Oakwood Drive, Apt 5B, Willow Creek Estates</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center flex-wrap row-gap-2">
+                                <div>
+                                    <h6 class="fs-14">Country</h6>
+                                    <span class="fs-14">United States</span>
+                                </div>
+                                <div>
+                                    <h6 class="fs-14">State</h6>  
+                                    <span class="fs-14">California</span>
+                                </div>
+                                <div>
+                                    <h6 class="fs-14">City</h6>
+                                    <span class="fs-14">Greenfield</span>
+                                </div>
+                                
+                                <div>
+                                    <h6 class="fs-14">Zip Code</h6> 
+                                    <span class="fs-14">93927</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-4">
+                    <h4>Services Info</h4>
+                    <div class="d-flex align-items-center flex-wrap row-gap-3">
+                        <span class="fs-14 me-2">Sort</span>
+                        <div class="dropdown me-2">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                Newly Added
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="javascript:void(0);" class="dropdown-item active">Ascending</a>
+                                <a href="javascript:void(0);" class="dropdown-item">Descending</a>
+                            </div>
+                        </div>
+                        <div class="dropdown me-2">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                Export
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="javascript:void(0);" class="dropdown-item active">Export as PDF</a>
+                                <a href="javascript:void(0);" class="dropdown-item">Export as Excel</a>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center border rounded me-2"><i class="ti ti-printer"></i></a>
+                        <a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center border rounded me-2" id="filter_search"><i class="ti ti-sort-descending"></i></a>
+                    </div>
+                </div>
+                <div id="filter_inputs">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-xl">
+                            <div class="mb-3">
+                                <div class="sel-cal Calendar-icon">
+                                    <span><i class="ti ti-calendar-month"></i></span>
+                                    <input class="form-control datetimepicker" type="text" placeholder="dd-mm-yyyy">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-xl">
+                            <div class="mb-3">
+                                <select class="select">
+                                    <option>Service</option>
+                                    <option>Computer Repair</option>
+                                    <option>Plumbing Services</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-xl">
+                            <div class="mb-3">
+                                <select class="select">
+                                    <option>Staff</option>
+                                    <option>Jeff Fitch</option>
+                                    <option>William Smith</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-xl">
+                            <div class="mb-3">
+                                <select class="select">
+                                    <option>Payment Method</option>
+                                    <option>Paypal</option>
+                                    <option>Stripe</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-xl">
+                            <div class="mb-3">
+                                <select class="select">
+                                    <option>Status</option>
+                                    <option>Paid</option>
+                                    <option>Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="provide-table manage-table">
+                    <div class="table-responsive">
+                        <table class="table  datatable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Booking Date</th>
+                                    <th>Staff Name</th>
+                                    <th>Payment Method</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-15.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">Computer Repair</a></h6>
+                                        </div>
+                                    </td>
+                                    <td>16/04/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-16.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Jeff Fitch</a></h6>
+                                    </td> 
+                                    <td>Paypal</td>
+                                    <td>$2000</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-success-100 d-flex  align-items-center"><i class="ti ti-point-filled"></i>Paid</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-17.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">Steam Car Wash</a></h6>
+                                        </div>
+                                    </td>
+                                    <td>03/05/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-17.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Jacob Kline</a></h6>
+                                    </td> 
+                                    <td>Stripe</td>
+                                    <td>$1800</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-danger-transparent d-flex  align-items-center"><i class="ti ti-point-filled"></i>Overdue</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-19.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">House Cleaning </a></h6>
+                                        </div>
+                                    </td>
+                                    <td>22/06/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-33.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Donald Gordon</a></h6>
+                                    </td> 
+                                    <td>Stripe</td>
+                                    <td>$1200</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-info-transparent d-flex  align-items-center"><i class="ti ti-point-filled"></i>Pending</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-14.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14">Building Construction</h6>
+                                        </div>
+                                    </td>
+                                    <td>14/06/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-26.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Kara Coble</a></h6>
+                                    </td> 
+                                    <td>Paypal</td>
+                                    <td>$1700</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge bg-warning-transparent d-flex  align-items-center"><i class="ti ti-point-filled"></i>Draft</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-16.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">Interior Designing</a></h6>
+                                        </div>
+                                    </td>
+                                    <td>08/07/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-35.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Jacob Vance</a></h6>
+                                    </td> 
+                                    <td>Paypal</td>
+                                    <td>$1100</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-success-100 d-flex  align-items-center"><i class="ti ti-point-filled"></i>Paid</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-23.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">Plumbing Services</a></h6>
+                                        </div>
+                                    </td>
+                                    <td>17/08/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-36.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">William Smith</a></h6>
+                                    </td> 
+                                    <td>Paypal</td>
+                                    <td>$800</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-danger-transparent d-flex  align-items-center"><i class="ti ti-point-filled"></i>Overdue</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="service-details.html" class="avatar avatar-lg me-2">
+                                                <img src="assets/img/providers/provider-13.jpg" class="rounded" alt="user">
+                                            </a>
+                                            <h6 class="fs-14"><a href="service-details.html">Car Repair Services</a></h6>
+                                        </div>
+                                    </td>
+                                    <td>22/10/2024</td>
+                                    <td class="d-flex align-items-center">
+                                        <a href="staff-details.html" class="avatar avatar-lg me-2">
+                                            <img src="assets/img/profiles/avatar-52.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <h6 class="fs-14"><a href="staff-details.html">Taylor Pacheco</a></h6>
+                                    </td> 
+                                    <td>Stripe</td>
+                                    <td>$1000</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="badge badge-danger-transparent d-flex  align-items-center"><i class="ti ti-point-filled"></i>Overdue</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="table-paginate d-flex justify-content-between align-items-center flex-wrap row-gap-3">
+                    <div class="value d-flex align-items-center">
+                        <span>Show</span>
+                        <select>
+                            <option>7</option>
+                        </select>
+                        <span>entries</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <span class="me-2 text-gray-9">1 - 07 of 10</span>
+                        <nav aria-label="Page navigation">
+                            <ul class="paginations d-flex justify-content-center align-items-center">
+                                <li class="page-item me-2"><a class="page-link-1 active d-flex justify-content-center align-items-center " href="javascript:void(0);">1</a></li>
+                                <li class="page-item me-2"><a class="page-link-1 d-flex justify-content-center align-items-center" href="javascript:void(0);">2</a></li>
+                                <li class="page-item "><a class="page-link-1 d-flex justify-content-center align-items-center" href="javascript:void(0);">3</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+        <!-- Add Customer -->
+        <div class="modal fade custom-modal" id="add-user">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content doctor-profile">
+                <div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+                    <h5 class="modal-title">Add Customer </h5>
+                    <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="success.html">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Email</label>
+                                    <input type="email" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Phone Number</label>
+                                    <input type="number" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Address</label>
+                                    <input type="text" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Country</label>
+                                    <select class="select">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">State</label>
+                                    <select class="select">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">City</label>
+                                    <select class="select">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Zip Code</label>
+                                    <input type="text" class="form-control pass-input">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="col-form-label">Status</label>
+                                    <select class="select">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                        <button class="btn btn-dark" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- /Add Customer -->
+
+        <!-- Delete Account -->
+        <div class="modal fade custom-modal" id="del-account">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+                        <h5 class="modal-title">Delete Account</h5>
+                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+                    </div>
+                    <form action="#">
+                        <div class="modal-body">
+                            <p class="mb-3">Are you sure you want to delete This Account? To delete your account, Type your password.</p>
+                            <div class="mb-0">
+                                <label class="form-label">Password</label>
+                                <div class="pass-group">
+                                    <input type="password" class="form-control pass-input" placeholder="*************">
+                                    <span class="toggle-password feather-eye-off"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                            <button type="submit" class="btn btn-dark">Delete Account</button>
+                        </div>	
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Delete Account -->
+
+     </div>
+     <!-- /Main Wrapper -->
+
+    <!-- Jquery JS -->
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.7.1.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.bundle.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+    <!-- Slimscroll JS -->
+	<script src="assets/js/jquery.slimscroll.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+    <!-- Datepicker Core JS -->
+	<script src="assets/plugins/moment/moment.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+	<!-- Wow JS -->
+	<script src="assets/js/wow.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+	<!-- select JS -->
+	<script src="assets/plugins/select2/js/select2.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+
+    <!-- Datatables JS -->
+	<script src="assets/plugins/datatables/jquery.dataTables.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+	<script src="assets/plugins/datatables/datatables.min.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>		
+
+	
+	<!-- Script JS -->
+	<script src="assets/js/script.js" type="8cae377e84cf6d6e71082415-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8cae377e84cf6d6e71082415-|49" defer=""></script></body>
+</html>

@@ -1,0 +1,908 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Truelysell</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
+
+	<!-- Aos -->
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+	<!-- Tabler Icon CSS -->
+	<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+
+    <!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+	<!-- select CSS -->
+	<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+	<!-- Fontawesome Icon CSS -->
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+	<!-- Owlcarousel CSS -->
+	<link rel="stylesheet" href="assets/plugins/owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/css/feather.css">
+
+	<!-- Mobile CSS-->
+	<link rel="stylesheet" href="assets/plugins/intltelinput/css/intlTelInput.css">
+	<link rel="stylesheet" href="assets/plugins/intltelinput/css/demo.css">
+
+	<!-- Tagsinput CSS -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+
+    <!-- Calendar CSS -->
+	<link rel="stylesheet" href="assets/plugins/simple-calendar/simple-calendar.css">
+
+	<!-- Mobile Input -->
+	<script src="assets/plugins/intltelinput/js/intlTelInput.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- Style CSS -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body class="provider-page">
+
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header provider-header">
+
+            <!-- Logo -->
+            <div class="header-left active">
+                <a href="index.html" class="logo logo-normal">
+                    <img src="assets/img/logo.svg" alt="Logo">
+                </a>
+                <a href="index.html" class="logo-small">
+                    <img src="assets/img/logo-small.svg" alt="Logo">
+                </a>
+                <a id="toggle_btn" href="javascript:void(0);">
+                    <i class="ti ti-menu-deep"></i>
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <div class="header-user">
+                <div class="nav user-menu">
+
+                    <!-- Search -->
+                    <div class="nav-item nav-search-inputs">
+                        <div class="top-nav-search">
+                            <a href="javascript:void(0);" class="responsive-search">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <form action="#" class="dropdown">
+                                <div class="searchinputs" id="dropdownMenuClickable">
+                                    <input type="text" placeholder="Search">
+                                    <div class="search-addon">
+                                        <span><i class="feather-user"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /Search -->
+
+                   <div class="d-flex align-items-center">
+						<div class="me-2 site-link">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-globe me-1"></i>Visit Website</a>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-moon"></i></a>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2 dropdown-toggle notify-link" data-bs-toggle="dropdown"><i class="feather-bell"></i></a>
+							<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+								<div class="d-flex dropdown-body align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+									<h6 class="notification-title">Notifications <span class="fs-18 text-gray"> (2)</span></h6>
+									<div class="d-flex align-items-center">
+										<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+										<div class="dropdown">
+											<a href="javascript:void(0);" class="bg-white dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ti ti-calendar-due me-1"></i>Today
+											</a>
+											<ul class="dropdown-menu mt-2 p-3">
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														This Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+	
+								<div class="noti-content">
+									<div class="d-flex flex-column">
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-52.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+														<p class="mb-1 w-100"><span class="text-dark fw-semibold">Stephan Peralt</span> rescheduled the service to 14/01/2024. </p>
+														<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div> 
+														<span>Just Now</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html" class="pb-0">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-36.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+															<p class="mb-1 w-100"><span class="text-dark fw-semibold">Harvey Smith</span> has requested your service.</p>
+															<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div>
+														<span>5 mins ago</span>
+														<div class="d-flex justify-content-start align-items-center mt-2">
+															<span class="btn btn-light btn-sm me-2">Deny</span>
+															<span class="btn btn-dark btn-sm">Accept</span>
+														</div>
+													</div>
+												</div>
+											</a>					
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-02.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold"> Anthony Lewis</span> has left feedback for your recent service </p>
+														<span>10 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-0 mb-3 pb-0">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-22.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold">Brian Villaloboshas </span> cancelled the service scheduled for 14/01/2024.
+														</p>
+														<span>15 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex p-0 notification-footer-btn">
+									<a href="#" class="btn btn-light rounded  me-2">Cancel</a>
+									<a href="#" class="btn btn-dark rounded ">View All</a>
+								</div>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-maximize"></i></a>
+						</div>
+						<div class="dropdown">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown">
+								<div class="booking-user d-flex align-items-center">
+									<span class="user-img">
+										<img src="assets/img/profiles/avatar-02.jpg" alt="user">
+									</span>
+								</div>
+							</a>
+							<ul class="dropdown-menu p-2">
+								<li><a class="dropdown-item d-flex align-items-center" href="login.html"><i class="ti ti-logout me-1"></i>Logout</a></li>
+							</ul>
+						</div>
+                   </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="dropdown mobile-user-menu">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="profile-settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </div>
+            <!-- /Mobile Menu -->
+
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="provider-dashboard.html"><i class="ti ti-layout-grid"></i><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-services.html"><i class="ti ti-briefcase"></i><span>My Services</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-booking.html"><i class="ti ti-calendar-month"></i><span>Bookings </span></a>
+                        </li>
+                        <li class="active">
+                            <a href="staff-list.html"><i class="ti ti-users"></i><span>Staffs</span></a>
+                        </li>
+                        <li>
+                            <a href="customer-list.html"><i class="ti ti-user"></i><span>Customers</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-payout.html"><i class="ti ti-wallet"></i><span>Payout</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-holiday.html"><i class="feather-calendar"></i><span>Holidays & Leave</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-coupons.html"><i class="ti ti-ticket"></i><span>Coupons</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-offers.html"><i class="ti ti-square-percentage"></i><span>Offers</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-reviews.html"><i class="ti ti-star"></i><span>Reviews</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-enquiry.html"><i class="ti ti-mail"></i><span>Enquiries</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-earnings.html"><i class="ti ti-cash-banknote"></i><span>Earnings</span></a>
+                        </li>
+                        <li>
+                            <a href="provider-chat.html"><i class="ti ti-messages"></i><span>Chat</span></a>
+                        </li>					
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i class="ti ti-settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>
+                                    <a href="provider-appointment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Appointment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-accounts-settings.html"><i class="ti ti-chevrons-right me-2"></i>Account</a>
+                                </li>
+                                <li>
+                                    <a href="provider-social-profile.html"><i class="ti ti-chevrons-right me-2"></i>Social Profiles</a>
+                                </li>
+                                <li>
+                                    <a href="provider-security-settings.html"><i class="ti ti-chevrons-right me-2"></i>Security</a>
+                                </li>
+                                <li>
+                                    <a href="provider-plan.html"><i class="ti ti-chevrons-right me-2"></i>Plan & Billings</a>
+                                </li>
+                                <li>
+                                    <a href="payment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Payment</a>
+                                </li>
+                                <li>
+                                    <a href="provider-notifcations.html"><i class="ti ti-chevrons-right me-2"></i>Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="provider-connected-apps.html"><i class="ti ti-chevrons-right me-2"></i>Connected Apps</a>
+                                </li>
+                                <li>
+                                    <a href="verification.html"><i class="ti ti-chevrons-right me-2"></i>Profile Verification</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#del-account"><i class="ti ti-chevrons-right me-2"></i>Delete Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html"><i class="ti ti-logout-2"></i><span>Logout</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid pb-0">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-4">
+                        <h4>Staffs</h4>
+                        <div class="d-flex align-items-center">
+                            <span class="fs-14 me-2">Sort</span>
+                            <div class="dropdown me-2">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                    Newly Added
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:void(0);" class="dropdown-item active">Newly Added</a>
+                                    <a href="javascript:void(0);" class="dropdown-item">Oldest</a>
+                                </div>
+                            </div>
+                            <div class="dropdown me-2">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                    Export
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:void(0);" class="dropdown-item active">Export</a>
+                                    <a href="javascript:void(0);" class="dropdown-item">Import</a>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center border rounded me-2"><i class="ti ti-printer"></i></a>
+                            <a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center border rounded me-2" id="filter_search"><i class="ti ti-sort-descending"></i></a>
+                            <a href="staff-grid.html" class="tags active d-flex justify-content-center align-items-center border rounded me-2"><i class="ti ti-layout-grid"></i></a>
+                            <a href="staff-list.html" class="tags d-flex justify-content-center align-items-center border rounded me-2"><i class="ti ti-list"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-dark d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#add-staff"><i class="ti ti-circle-plus me-2"></i>Add Staffs</a>
+                        </div>
+                    </div>
+                    <div id="filter_inputs">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-xl">
+                                <div class="mb-3">
+                                    <div class="sel-cal Calendar-icon">
+                                        <span><i class="ti ti-calendar-month"></i></span>
+                                        <input class="form-control datetimepicker" type="text" placeholder="dd-mm-yyyy">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xl">
+                                <div class="mb-3">
+                                    <select class="select">
+                                        <option>Staff ID</option>
+                                        <option>ST5246</option>
+                                        <option>ST1269</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xl">
+                                <div class="mb-3">
+                                    <select class="select">
+                                        <option>Staff</option>
+                                        <option>Brian Villalobos</option>
+                                        <option>Stephan Peralt</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xl">
+                                <div class="mb-3">
+                                    <select class="select">
+                                        <option>Status</option>
+                                        <option>Active</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 p-2 rounded mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-41.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-2">ST5863</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Jeff Fitch</a></h6>
+                                            <span class="fs-12">Added on : 06 Jan 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">02</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">02</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-17.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-2">ST6478</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Jacob Kline</a></h6>
+                                            <span class="fs-12">Added on : 18 Jan 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">10</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">04</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-12.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST2496</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Donald Gordon</a></h6>
+                                            <span class="fs-12">Added on : 27 Jan 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">03</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">08</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-26.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST0765</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Kara Coble</a></h6>
+                                            <span class="fs-12">Added on : 15 Feb 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">10</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">15</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-35.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST6485</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Jacob Vance</a></h6>
+                                            <span class="fs-12">Added on : 20 Feb 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">07</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">13</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-36.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST3751</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">William Smith</a></h6>
+                                            <span class="fs-12">Added on : 03 Mar 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">10</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div>
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">30</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-16.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST3498</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Taylor Pacheco</a></h6>
+                                            <span class="fs-12">Added on : 10 Mar 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">05</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div>
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">12</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-02.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST0263</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Anthony Lewis</a></h6>
+                                            <span class="fs-12">Added on : 24 Mar 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">06</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div>
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">10</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-24.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST3185</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Paul Steele</a></h6>
+                                            <span class="fs-12">Added on : 10 Apr 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">08</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div>
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">14</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-13.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST0798</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Ray Homan</a></h6>
+                                            <span class="fs-12">Added on : 17 Apr 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">06</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">15</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-06.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST4638</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Alfonso Lamotte</a></h6>
+                                            <span class="fs-12">Added on : 05 May 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">12</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div>
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">20</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-4 col-md-6">
+                            <div class="card shadow-none rounded">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center bg-light-300 rounded p-2 mb-3">
+                                        <a href="staff-details.html" class="avatar avatar-xl me-2">
+                                            <img src="assets/img/profiles/avatar-02.jpg" class="rounded-circle" alt="user">
+                                        </a>
+                                        <div>
+                                            <span class="badge badge-info-transparent mb-1">ST8351</span>
+                                            <h6 class="fs-16 fw-medium"><a href="staff-details.html">Kim Crosland</a></h6>
+                                            <span class="fs-12">Added on : 19 May 2024</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="fs-14">No of Services</span>
+                                            <h6 class="fs-16 text-center fw-medium">08</h6>
+                                        </div>
+                                        <div class="border-end"></div>
+                                        <div class="">
+                                            <span class="fs-14 ps-1">No of Bookings</span>
+                                            <h6 class="fs-16 text-center fw-medium">16</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+        <!-- Add Staff-->
+        <div class="modal fade custom-modal" id="add-staff">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content doctor-profile">
+                    <div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+                        <h5 class="modal-title">Add Staff </h5>
+                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+                    </div>
+                    <div class="modal-body pb-0">
+                        <form action="success.html">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <div class="d-flex profile-upload align-items-center">
+                                            <span class="d-flex justify-content-center align-items-center p-4 bg-light rounded me-2"><i class="ti ti-photo"></i></span>
+                                            <div>
+                                                <h6 class="fs-16 fw-medium">Profile</h6>
+                                                <span class="fs-14">Image size does not exceed 5MB</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control pass-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control pass-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="number" class="form-control pass-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Address</label>
+                                        <input type="text" class="form-control pass-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Country</label>
+                                        <select class="select">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">State</label>
+                                        <select class="select">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">City</label>
+                                        <select class="select">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Zip Code</label>
+                                        <input type="text" class="form-control pass-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Services</label>
+                                        <select class="select">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        <select class="select">
+                                            <option>Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                            <button class="btn btn-dark" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- /Add Staff -->
+
+         <!-- Delete Account -->
+        <div class="modal fade custom-modal" id="del-account">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+                        <h5 class="modal-title">Delete Account</h5>
+                        <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+                    </div>
+                    <form action="#">
+                        <div class="modal-body">
+                            <p class="mb-3">Are you sure you want to delete This Account? To delete your account, Type your password.</p>
+                            <div class="mb-0">
+                                <label class="form-label">Password</label>
+                                <div class="pass-group">
+                                    <input type="password" class="form-control pass-input" placeholder="*************">
+                                    <span class="toggle-password feather-eye-off"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                            <button type="submit" class="btn btn-dark">Delete Account</button>
+                        </div>	
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Delete Account -->
+
+    </div>
+
+	<!-- Jquery JS -->
+	<script src="assets/js/jquery-3.7.1.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+    <!-- Slimscroll JS -->
+	<script src="assets/js/jquery.slimscroll.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.bundle.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- Wow JS -->
+	<script src="assets/js/wow.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- select JS -->
+	<script src="assets/plugins/select2/js/select2.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- Owlcarousel Js -->
+	<script src="assets/plugins/owlcarousel/owl.carousel.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- cursor JS -->
+	<script src="assets/js/cursor.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+    <!-- Datetimepicker JS -->
+	<script src="assets/js/moment.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+	<script src="assets/js/bootstrap-datetimepicker.min.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+
+	<!-- Script JS -->
+	<script src="assets/js/script.js" type="dc07ca818f5bc74c9bc2b8f5-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dc07ca818f5bc74c9bc2b8f5-|49" defer=""></script></body>
+
+</html>

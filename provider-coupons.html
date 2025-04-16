@@ -1,0 +1,1001 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Truelysell</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
+
+	<!-- Themescript -->
+	<script src="assets/js/theme-script.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Aos -->
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+	<!-- Tabler Icon CSS -->
+	<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.css">
+
+	<!-- select CSS -->
+	<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+	<!-- Fontawesome Icon CSS -->
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="assets/css/feather.css">
+
+	<!-- Mobile Input -->
+	<script src="assets/plugins/intltelinput/js/intlTelInput.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Style CSS -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body class="provider-page">
+
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		<div class="header provider-header">
+
+			<!-- Logo -->
+			<div class="header-left active">
+				<a href="index.html" class="logo logo-normal">
+					<img src="assets/img/logo.svg" alt="Logo">
+				</a>
+				<a href="index.html" class="logo-small">
+					<img src="assets/img/logo-small.svg" alt="Logo">
+				</a>
+				<a id="toggle_btn" href="javascript:void(0);">
+					<i class="ti ti-menu-deep"></i>
+				</a>
+			</div>
+			<!-- /Logo -->
+
+			<a id="mobile_btn" class="mobile_btn" href="#sidebar">
+				<span class="bar-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</a>
+
+			<div class="header-user">
+				<div class="nav user-menu">
+
+					<!-- Search -->
+					<div class="nav-item nav-search-inputs">
+						<div class="top-nav-search">
+							<a href="javascript:void(0);" class="responsive-search">
+								<i class="fa fa-search"></i>
+							</a>
+							<form action="#" class="dropdown">
+								<div class="searchinputs" id="dropdownMenuClickable">
+									<input type="text" placeholder="Search">
+									<div class="search-addon">
+										<span><i class="feather-user"></i></span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /Search -->
+
+					<div class="d-flex align-items-center">
+						<div class="me-2 site-link">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-globe me-1"></i>Visit Website</a>
+						</div>
+						<div class="provider-head-links">
+							<div>
+								<a href="javascript:void(0);" id="dark-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="fa-regular fa-moon"></i>
+								</a>
+								<a href="javascript:void(0);" id="light-mode-toggle" class="dark-mode-toggle me-2">
+									<i class="ti ti-sun-filled"></i>
+								</a>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2 dropdown-toggle notify-link" data-bs-toggle="dropdown"><i class="feather-bell"></i></a>
+							<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+								<div class="d-flex dropdown-body align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+									<h6 class="notification-title">Notifications <span class="fs-18 text-gray"> (2)</span></h6>
+									<div class="d-flex align-items-center">
+										<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+										<div class="dropdown">
+											<a href="javascript:void(0);" class="bg-white dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ti ti-calendar-due me-1"></i>Today
+											</a>
+											<ul class="dropdown-menu mt-2 p-3">
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														This Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" class="dropdown-item rounded-1">
+														Last Week
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+	
+								<div class="noti-content">
+									<div class="d-flex flex-column">
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-52.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+														<p class="mb-1 w-100"><span class="text-dark fw-semibold">Stephan Peralt</span> rescheduled the service to 14/01/2024. </p>
+														<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div> 
+														<span>Just Now</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html" class="pb-0">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-36.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<div class="d-flex align-items-center">
+															<p class="mb-1 w-100"><span class="text-dark fw-semibold">Harvey Smith</span> has requested your service.</p>
+															<span class="d-flex justify-content-end "> <i class="ti ti-point-filled text-primary"></i></span>
+														</div>
+														<span>5 mins ago</span>
+														<div class="d-flex justify-content-start align-items-center mt-2">
+															<span class="btn btn-light btn-sm me-2">Deny</span>
+															<span class="btn btn-dark btn-sm">Accept</span>
+														</div>
+													</div>
+												</div>
+											</a>					
+										</div>
+										<div class="border-bottom mb-3 pb-3">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-02.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold"> Anthony Lewis</span> has left feedback for your recent service </p>
+														<span>10 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="border-0 mb-3 pb-0">
+											<a href="notification.html">
+												<div class="d-flex">
+													<span class="avatar avatar-lg me-2 flex-shrink-0">
+														<img src="assets/img/profiles/avatar-22.jpg" alt="Profile" class="rounded-circle">
+													</span>
+													<div class="flex-grow-1">
+														<p class="mb-1"><span class="text-dark fw-semibold">Brian Villaloboshas </span> cancelled the service scheduled for 14/01/2024.
+														</p>
+														<span>15 mins ago</span>
+													</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex p-0 notification-footer-btn">
+									<a href="#" class="btn btn-light rounded  me-2">Cancel</a>
+									<a href="#" class="btn btn-dark rounded ">View All</a>
+								</div>
+							</div>
+						</div>
+						<div class="provider-head-links">
+							<a href="javascript:void(0);" class="d-flex align-items-center justify-content-center me-2"><i class="feather-maximize"></i></a>
+						</div>
+						<div class="dropdown">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown">
+								<div class="booking-user d-flex align-items-center">
+									<span class="user-img">
+										<img src="assets/img/profiles/avatar-02.jpg" alt="user">
+									</span>
+								</div>
+							</a>
+							<ul class="dropdown-menu p-2">
+								<li><a class="dropdown-item d-flex align-items-center" href="login.html"><i class="ti ti-logout me-1"></i>Logout</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Mobile Menu -->
+			<div class="dropdown mobile-user-menu">
+				<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+				<div class="dropdown-menu dropdown-menu-end">
+					<a class="dropdown-item" href="profile.html">My Profile</a>
+					<a class="dropdown-item" href="profile-settings.html">Settings</a>
+					<a class="dropdown-item" href="login.html">Logout</a>
+				</div>
+			</div>
+			<!-- /Mobile Menu -->
+
+		</div>
+		<!-- /Header -->
+
+		<!-- Sidebar -->
+		<div class="sidebar" id="sidebar">
+			<div class="sidebar-inner slimscroll">
+				<div id="sidebar-menu" class="sidebar-menu">
+					<ul>
+						<li>
+							<a href="provider-dashboard.html"><i class="ti ti-layout-grid"></i><span>Dashboard</span></a>
+						</li>
+						<li>
+							<a href="provider-services.html"><i class="ti ti-briefcase"></i><span>My Services</span></a>
+						</li>
+						<li>
+							<a href="provider-booking.html"><i class="ti ti-calendar-month"></i><span>Bookings </span></a>
+						</li>
+						<li>
+							<a href="staff-list.html"><i class="ti ti-users"></i><span>Staffs</span></a>
+						</li>
+						<li>
+							<a href="customer-list.html"><i class="ti ti-user"></i><span>Customers</span></a>
+						</li>
+						<li>
+							<a href="provider-payout.html"><i class="ti ti-wallet"></i><span>Payout</span></a>
+						</li>
+						<li>
+							<a href="provider-holiday.html"><i class="feather-calendar"></i><span>Holidays & Leave</span></a>
+						</li>
+						<li class="active">
+							<a href="provider-coupons.html"><i class="ti ti-ticket"></i><span>Coupons</span></a>
+						</li>
+						<li>
+							<a href="provider-offers.html"><i class="ti ti-square-percentage"></i><span>Offers</span></a>
+						</li>
+						<li>
+							<a href="provider-reviews.html"><i class="ti ti-star"></i><span>Reviews</span></a>
+						</li>
+						<li>
+							<a href="provider-enquiry.html"><i class="ti ti-mail"></i><span>Enquiries</span></a>
+						</li>
+						<li>
+							<a href="provider-earnings.html"><i class="ti ti-cash-banknote"></i><span>Earnings</span></a>
+						</li>
+						<li>
+							<a href="provider-chat.html"><i class="ti ti-messages"></i><span>Chat</span></a>
+						</li>					
+						<li class="submenu">
+							<a href="javascript:void(0);"><i class="ti ti-settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
+							<ul>
+								<li>
+									<a href="provider-appointment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Appointment</a>
+								</li>
+								<li>
+									<a href="provider-accounts-settings.html"><i class="ti ti-chevrons-right me-2"></i>Account</a>
+								</li>
+								<li>
+									<a href="provider-social-profile.html"><i class="ti ti-chevrons-right me-2"></i>Social Profiles</a>
+								</li>
+								<li>
+									<a href="provider-security-settings.html"><i class="ti ti-chevrons-right me-2"></i>Security</a>
+								</li>
+								<li>
+									<a href="provider-plan.html"><i class="ti ti-chevrons-right me-2"></i>Plan & Billings</a>
+								</li>
+								<li>
+									<a href="payment-settings.html"><i class="ti ti-chevrons-right me-2"></i>Payment</a>
+								</li>
+								<li>
+									<a href="provider-notifcations.html"><i class="ti ti-chevrons-right me-2"></i>Notifications</a>
+								</li>
+								<li>
+									<a href="provider-connected-apps.html"><i class="ti ti-chevrons-right me-2"></i>Connected Apps</a>
+								</li>
+								<li>
+									<a href="verification.html"><i class="ti ti-chevrons-right me-2"></i>Profile Verification</a>
+								</li>
+								<li>
+									<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#del-account"><i class="ti ti-chevrons-right me-2"></i>Delete Account</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="login.html"><i class="ti ti-logout-2"></i><span>Logout</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- /Sidebar -->
+
+		<!-- Page Wrapper -->
+		<div class="page-wrapper">
+			<div class="content container-fluid">
+				<div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+					<h5>Coupons</h5>
+					<div class="d-flex align-items-center">
+						<span class="fs-14 me-2">Sort</span>
+						<div class="dropdown me-2">
+							<a href="javascript:void(0);" class="dropdown-toggle bg-light-300 " data-bs-toggle="dropdown">
+								Newly Added
+							</a>
+							<div class="dropdown-menu">
+								<a href="javascript:void(0);" class="dropdown-item active">Recently Added</a>
+							</div>
+						</div>
+						<a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center  rounded me-2"><i class="ti ti-printer"></i></a>
+						<a href="javascript:void(0);" class="tags d-flex justify-content-center align-items-center border rounded me-2" id="filter_search" z="">
+							<i class="ti ti-sort-descending"></i>
+						</a>
+						<a href="javascript:void(0);" class="btn btn-dark d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#add-coupons"><i class="ti ti-circle-plus me-2"></i>Add Coupon</a>
+					</div>
+				</div>
+				<div id="filter_inputs">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-xl">
+							<div class="mb-3">
+								<div class="sel-cal Calendar-icon">
+									<span><i class="ti ti-calendar-month"></i></span>
+									<input class="form-control datetimepicker" type="text" placeholder="dd-mm-yyyy">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-xl">
+							<div class="mb-3">
+								<select class="select">
+									<option>Services</option>
+									<option>Computer Repairs</option>
+									<option>Plumbing</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-xl">
+							<div class="mb-3">
+								<select class="select">
+									<option>Name</option>
+									<option>Jacob Kline</option>
+									<option>William Smith</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-xl">
+							<div class="mb-3">
+								<select class="select">
+									<option>Code</option>
+									<option>1</option>
+									<option>2</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-xl">
+							<div class="mb-3">
+								<select class="select">
+									<option>Status</option>
+									<option>Paid</option>
+									<option>Pending</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-xl-12 col-lg-12">
+						<!-- Coupons List -->
+						<div class="custom-datatable-filter table-responsive">
+							<table class="table datatable">
+								<thead class="thead-light">
+									<tr>
+
+										<th>Name</th>
+										<th>Code</th>
+										<th>Type</th>
+										<th>Discount </th>
+										<th>Limit</th>
+										<th>Used</th>
+										<th>Valid Date</th>
+										<th>Service Name</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+
+										<td>New Year</td>
+
+										<td>
+											NEW2024
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Jan 01, 2023 - Jan 04, 2023</p>Once per customer days
+										</td>
+										<td>Interior Designing</td>
+										<td><span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+										<td>Black Friday</td>
+										<td>
+											GIFTGUIDE
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">20 Sep 2023 - 22 Sep 2023</p>Once per customer days
+										</td>
+										<td>Car Repair</td>
+										<td><span class="badge badge-soft-danger d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Inactive</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+
+										<td>Christmas</td>
+
+										<td>
+											Winter2024
+										</td>
+										<td>Fixed</td>
+										<td>$2.00</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Dec 24, 2023 - Dec 26, 2023</p>Once per customer days
+										</td>
+										<td>House Cleaning</td>
+										<td><span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+
+										<td>Valentines</td>
+
+										<td>
+											Valentine24
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Feb 13, 2023 -Feb 15, 202</p>Once per customer days
+										</td>
+										<td>Computer Services</td>
+										<td><span class="badge badge-soft-danger d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Inactive</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+
+										<td>Halloween</td>
+
+										<td>
+											SPOOKY15
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Nov 11, 2023 - Nov 12, 2023</p>Once per customer days
+										</td>
+										<td>Car Wash</td>
+										<td><span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+
+										<td>Welcome Bonus</td>
+
+										<td>
+											Welcome24
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Nov 15, 2023 - Nov 17, 2023</p>Once per customer days
+										</td>
+										<td>Plumbing</td>
+										<td><span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+									<tr>
+
+										<td>Thankful Deal</td>
+
+										<td>
+											Thank24
+										</td>
+										<td>Percentage</td>
+										<td>5%</td>
+										<td>100</td>
+										<td>
+											1
+										</td>
+										<td>
+											<p class="fs-14 mb-0">Nov 20, 2023 - Nov 30, 2023</p>Once per customer days
+										</td>
+										<td>Commercial Painting </td>
+										<td><span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span></td>
+										<td>
+											<div class="user-icon d-inline-flex">
+                                                <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#edit-coupons">
+                                                    <i class="ti ti-edit"></i>
+                                                </a>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#del-coupons">
+                                                    <i class="ti ti-trash"></i>
+                                                </a>
+                                            </div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- /Coupons List -->
+					</div>
+
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="value d-flex align-items-center">
+							<span>Show</span>
+							<select>
+								<option>7</option>
+							</select>
+							<span>entries</span>
+						</div>
+						<div class="d-flex align-items-center justify-content-center">
+							<span class="me-2 text-gray-9">1 - 07 of 10</span>
+							<nav aria-label="Page navigation">
+								<ul class="paginations d-flex justify-content-center align-items-center">
+									<li class="page-item me-2"><a class="page-link-1 active d-flex justify-content-center align-items-center " href="javascript:void(0);">1</a></li>
+									<li class="page-item me-2"><a class="page-link-1 d-flex justify-content-center align-items-center " href="javascript:void(0);">2</a></li>
+									<li class="page-item "><a class="page-link-1 d-flex justify-content-center align-items-center " href="javascript:void(0);">3</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- /Page Wrapper -->
+
+		<!-- Add coupons -->
+		<div class="modal fade custom-modal" id="add-coupons">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header d-flex align-items-center justify-content-between  border-0">
+						<h5>Add Coupon</h5>
+						<a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+					</div>
+					<form action="provider-coupons.html">
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Services</label>
+										<select class="select">
+											<option>Select</option>
+											<option>Car Repair</option>
+											<option>Interior Designing</option>
+											<option>House Cleaning</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Coupon Name</label>
+												<input type="text" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Code</label>
+												<input type="text" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Coupon Type</label>
+												<select class="select">
+													<option>Select</option>
+													<option>Percentage</option>
+													<option>Fixed</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Discount</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-square-rounded-percentage"></i></span>
+													<input type="text" class="form-control">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Start Date</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
+													<input type="text" class="form-control datetimepicker" placeholder="dd-mm-yyyy">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">End Date</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
+													<input type="text" class="form-control datetimepicker" placeholder="dd-mm-yyyy">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row align-items-center justify-content-center">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Company Name</label>
+												<select class="select">
+													<option>Select</option>
+													<option>Black Friday</option>
+													<option>Valentines</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="d-flex align-items-center justify-content-center">
+												<div class="form-check form-switch d-flex align-items-center">
+													<input class="form-check-input me-1" type="checkbox" role="switch" id="switch-sm" checked="">
+													<h6 class="fs-14">Once per Customer</h6>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="d-flex  flex-column">
+												<label class="form-label">End Date</label>
+												<div class="d-flex">
+													<div class="form-check me-2">
+													<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+													<label class="form-check-label" for="flexRadioDefault1">
+														Active
+													</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked="">
+													<label class="form-check-label" for="flexRadioDefault2">
+														Inactive
+													</label>
+												</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn bg-gray" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-dark">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Add coupons -->
+
+		<!--Edit coupons -->
+		<div class="modal fade custom-modal" id="edit-coupons">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header d-flex align-items-center justify-content-between  border-0">
+						<h5>Edit Coupon</h5>
+						<a href="#" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+					</div>
+					<form action="provider-coupons.html">
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Services</label>
+										<select class="select">
+											<option>Select</option>
+											<option>Car Repair</option>
+											<option selected="">Interior Designing</option>
+											<option>House Cleaning</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Coupon Name</label>
+												<input type="text" class="form-control" value="Black Friday">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Code</label>
+												<input type="text" class="form-control" value="GIFTGUIDE">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Coupon Type</label>
+												<select class="select">
+													<option>Select</option>
+													<option selected="">Percentage</option>
+													<option>Fixed</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Discount</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-square-rounded-percentage"></i></span>
+													<input type="text" class="form-control" value="5%">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Start Date</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
+													<input type="text" class="form-control datetimepicker" placeholder="dd-mm-yyyy">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">End Date</label>
+												<div class=" input-icon position-relative">
+													<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
+													<input type="text" class="form-control datetimepicker" placeholder="dd-mm-yyyy">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row align-items-center justify-content-center">
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Company Name</label>
+												<select class="select">
+													<option>Select</option>
+													<option>Black Friday</option>
+													<option selected="">Valentines</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="d-flex align-items-center justify-content-center">
+												<div class="form-check form-switch d-flex align-items-center">
+													<input class="form-check-input me-1" type="checkbox" role="switch" id="switch-sm" checked="">
+													<h6 class="fs-14">Once per Customer</h6>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="d-flex  flex-column">
+												<label class="form-label">End Date</label>
+												<div class="d-flex">
+													<div class="form-check me-2">
+													<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+													<label class="form-check-label" for="flexRadioDefault3">
+														Active
+													</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked="">
+													<label class="form-check-label" for="flexRadioDefault4">
+														Inactive
+													</label>
+												</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn bg-gray" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-dark">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Edit coupons -->
+
+		<!-- Delete Staff -->
+		<div class="modal fade custom-modal" id="del-coupons">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+						<h5 class="modal-title">Delete coupons</h5>
+						<a href="#" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+					</div>
+					<div class="modal-body">
+						<div class="write-review">
+							<form action="provider-coupons.html">
+								<p>Are you sure want to delete this coupons?</p>
+								<div class="modal-submit text-end">
+									<a href="#" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+									<button type="submit" class="btn btn-dark">Yes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Delete Staff -->
+
+		<!-- Delete Account -->
+		<div class="modal fade custom-modal" id="del-account">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header d-flex align-items-center justify-content-between border-bottom">
+						<h5 class="modal-title">Delete Account</h5>
+						<a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x-filled fs-20"></i></a>
+					</div>
+					<form action="#">
+						<div class="modal-body">
+							<p class="mb-3">Are you sure you want to delete This Account? To delete your account, Type your password.</p>
+							<div class="mb-0">
+								<label class="form-label">Password</label>
+								<div class="pass-group">
+									<input type="password" class="form-control pass-input" placeholder="*************">
+									<span class="toggle-password feather-eye-off"></span>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+							<button type="submit" class="btn btn-dark">Delete Account</button>
+						</div>	
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /Delete Account -->
+
+	</div>
+
+	<!-- Jquery JS -->
+	<script src="assets/js/jquery-3.7.1.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="assets/js/jquery.slimscroll.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.bundle.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Wow JS -->
+	<script src="assets/js/wow.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- select JS -->
+	<script src="assets/plugins/select2/js/select2.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- cursor JS -->
+	<script src="assets/js/cursor.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Counter JS -->
+	<script src="assets/plugins/countup/jquery.counterup.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+	<script src="assets/plugins/countup/jquery.waypoints.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript">	</script>
+
+	<!-- Datetimepicker JS -->
+	<script src="assets/js/moment.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+	<script src="assets/js/bootstrap-datetimepicker.min.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+
+	<!-- Script JS -->
+	<script src="assets/js/script.js" type="7d90e6b9ae7567707e08fc2a-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="7d90e6b9ae7567707e08fc2a-|49" defer=""></script></body>
+
+</html>
