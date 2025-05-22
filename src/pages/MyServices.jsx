@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext.jsx'
 import FormInput from '../components/FormInput.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { LocationPickerMap } from '../components/Map.jsx'
-import { serviceCategories, addService, getUserServices } from '../data/services.js'
+import { serviceCategories, addService, getUserServices, updateService, deleteService } from '../data/services.js'
 
 const MyServices = () => {
   const { user } = useAuth()
@@ -190,14 +190,46 @@ const MyServices = () => {
       }, 3000)
     }
   }
+
+  const handleUpdateService = (serviceId, updatedService) => {
+    const updated = updateService(serviceId, updatedService)
+    if (updated) {
+      setServices(prev => prev.map(service => 
+        service.id === serviceId ? updated : service
+      ))
+      setMessage({
+        type: 'success',
+        text: 'Service updated successfully!'
+      })
+      setTimeout(() => {
+        setMessage({ type: '', text: '' })
+      }, 3000)
+    }
+  }
+
+  const handleDeleteService = (serviceId) => {
+    if (window.confirm('Are you sure you want to delete this service?')) {
+      const success = deleteService(serviceId)
+      if (success) {
+        setServices(prev => prev.filter(service => service.id !== serviceId))
+        setMessage({
+          type: 'success',
+          text: 'Service deleted successfully!'
+        })
+        setTimeout(() => {
+          setMessage({ type: '', text: '' })
+        }, 3000)
+      }
+    }
+  }
   
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 ">
+    <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-royal-blue">My Services</h1>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-[#3B5BFF] hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-md transition duration-150"
+          className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
         >
           {showForm ? 'Cancel' : 'Create New Service'}
         </button>
@@ -407,7 +439,7 @@ const MyServices = () => {
           <div className="flex justify-end">
             <button
               onClick={handleSubmit}
-              className="bg-[#3B5BFF] hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-md transition duration-150"
+              className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
             >
               Create Service
             </button>
@@ -421,7 +453,13 @@ const MyServices = () => {
         {services.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map(service => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard 
+                key={service.id} 
+                service={service}
+                isEditable={true}
+                onUpdate={handleUpdateService}
+                onDelete={handleDeleteService}
+              />
             ))}
           </div>
         ) : (

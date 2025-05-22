@@ -77,7 +77,7 @@ const Footer = () => {
         
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-700">
-          <p className="text-center text-white">© 2025 Brikoulchi. All rights reserved.</p>
+          <p className="text-center text-white">© 2025 Ana M3ak. All rights reserved.</p>
         </div>
       </div>
     </footer>
