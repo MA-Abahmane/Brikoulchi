@@ -282,7 +282,7 @@ export const getInitialServices = () => {
         category: "Childcare",
         serviceName: "babysit",
         serviceType: "babysitting",
-        title: "Professional babysittinger",
+        title: "Professional Babysitting",
         description: "Experienced offering babysitting, guidance and support",
         phone1: "+201234564592",
         email: "ana.gg@example.com",
