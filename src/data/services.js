@@ -322,24 +322,6 @@ export const addService = (service) => {
   return newService
 }
 
-// Function to update a service
-export const updateService = (serviceId, updatedData) => {
-  const services = getInitialServices()
-  const updatedServices = services.map(service => 
-    service.id === serviceId ? { ...service, ...updatedData } : service
-  )
-  localStorage.setItem('services', JSON.stringify(updatedServices))
-  return updatedServices.find(service => service.id === serviceId)
-}
-
-// Function to delete a service
-export const deleteService = (serviceId) => {
-  const services = getInitialServices()
-  const updatedServices = services.filter(service => service.id !== serviceId)
-  localStorage.setItem('services', JSON.stringify(updatedServices))
-  return true
-}
-
 // Function to get services by userId
 export const getUserServices = (userId) => {
   const services = getInitialServices()
