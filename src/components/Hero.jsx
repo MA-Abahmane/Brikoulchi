@@ -19,7 +19,7 @@ const Hero = () => {
       <div className="relative flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Find the Best Local Services with Ana M3ak
+            Find the Best Local Services with Brikoulchi
           </h1>
           <p className="text-lg sm:text-xl text-white mb-8 max-w-xl mx-auto">
             Connect with trusted local service providers in your area for all your needs
