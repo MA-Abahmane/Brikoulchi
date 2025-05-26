@@ -92,9 +92,6 @@ const Login = () => {
             </Link>
           </p>
           
-          <div className="mt-4 text-gray-500 text-sm">
-            <p>Test account: username: "testuser", password: "password123"</p>
-          </div>
         </div>
       </div>
     </div>

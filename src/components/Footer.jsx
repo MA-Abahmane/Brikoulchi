@@ -15,9 +15,9 @@ const Footer = () => {
               <li>
                 <Link to="/services" className="text-white hover:text-royal-gold transition duration-150">Services</Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="mailto:support@anam3ak.com" className="text-white hover:text-royal-gold transition duration-150">Contact</a>
-              </li>
+              </li> */}
             </ul>
           </div>
           
