@@ -1,8 +1,10 @@
 # Project License
 ## Copyright (c) 2025 Team MAA. All rights reserved.
 
-### This software and its associated documentation, code, files, and any related materials (collectively, the "Project") are the exclusive property of The Brikoulchi Group (the "Licensor"). The Project is protected by copyright law and international treaties.
-Terms of Use
+``` This software and its associated documentation, code, files, and any related materials (collectively, the "Project") are the exclusive property of The Brikoulchi Group (the "Licensor"). The Project is protected by copyright law and international treaties.```
+
+
+## Terms of Use
 
 ### No Unauthorized Use: 
 The Project may not be used, copied, modified, distributed, displayed, performed, or otherwise exploited in any manner without the explicit, prior written consent of the Licensor.
@@ -29,7 +31,7 @@ The Project is provided "as is" without any warranties, express or implied, incl
 Any violation of this license, including unauthorized use or plagiarism, will be pursued to the fullest extent permitted by law, including but not limited to civil and criminal remedies for copyright infringement.
 
 
-### Contact
+## Contact
 For inquiries regarding the use of the Project, please contact ma.abahmane@gmail.com.
 This license is effective as of 2025 and governs all use of the Project. By accessing or using the Project, you agree to be bound by the terms of this license.
 
