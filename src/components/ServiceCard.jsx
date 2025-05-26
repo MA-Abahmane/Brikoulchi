@@ -4,13 +4,13 @@ const ServiceCard = ({ service }) => {
   return (
     <Link to={`/service/${service.id}`} className="block">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-        <div className="h-48 bg-gray-200 relative">
+        <div className="h-48 bg-gray-200  relative">
           <img 
             src={`/${service.category.toLowerCase().replace(/\s+/g, '_')}.jpg`}
             alt={service.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute top-0 right-0 bg-secondary/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 m-3 rounded-full">
+          <div className="absolute bg-[rgba(0,170,185,0.9)] top-0 right-0  backdrop-blur-sm text-white text-xs font-bold px-4 py-2 m-3 rounded-full">
             {service.category}
           </div>
         </div>
