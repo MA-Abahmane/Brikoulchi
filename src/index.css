@@ -3,32 +3,65 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: royalblue;
+  --primary-dark: #3048CC;
+  --secondary-color: #00C4CC;
+  --secondary-dark: #00A3B3;
+  --background-color: #141414;
+  --surface-color: #1a1a1a;
+  --text-color: #FFFFFF;
+  --border-color: #4a90e2;
+  --hover-color: #8ab8ff;
+}
+
 /* Admin Panel Styles */
 .app-container {
   display: flex;
   min-height: 100vh;
-  background-color: #141414;
-  color: #FFFFFF;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .sidebar {
   width: 250px;
-  background-color: #1a1a1a;
+  background-color: var(--surface-color);
   padding: 2rem;
-  border-right: 1px solid #4a90e2;
+  border-right: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }
 
 .sidebar-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #4a90e2;
+  color: var(--primary-color);
   margin-bottom: 2rem;
 }
 
 .nav-link {
   display: block;
   padding: 0.75rem 1rem;
-  color: #FFFFFF;
+  color: var(--text-color);
   text-decoration: none;
   border-radius: 0.375rem;
   margin-bottom: 0.5rem;
@@ -37,8 +70,8 @@
 
 .nav-link:hover,
 .nav-link.active {
-  background-color: #4a90e2;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .main-content {
@@ -50,13 +83,13 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #FFFFFF;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
 }
 
 .card {
-  background-color: #1a1a1a;
-  border: 1px solid #4a90e2;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -70,15 +103,15 @@
 }
 
 .stat-card {
-  background-color: #1a1a1a;
-  border: 1px solid #4a90e2;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   padding: 1.5rem;
   text-align: center;
 }
 
 .stat-card h3 {
-  color: #8ab8ff;
+  color: var(--hover-color);
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -86,19 +119,19 @@
 .stat-card .value {
   font-size: 2rem;
   font-weight: bold;
-  color: #FFFFFF;
+  color: var(--text-color);
 }
 
 .chart-container {
-  background-color: #1a1a1a;
-  border: 1px solid #4a90e2;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .chart-container h2 {
-  color: #8ab8ff;
+  color: var(--hover-color);
   font-size: 1.25rem;
   margin-bottom: 1rem;
 }
@@ -106,23 +139,31 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .table {
+    display: table;
+  }
 }
 
 .table th,
 .table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #4a90e2;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .table th {
-  color: #8ab8ff;
+  color: var(--hover-color);
   font-weight: 600;
 }
 
 .button {
-  background-color: #4a90e2;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   border: none;
@@ -131,7 +172,7 @@
 }
 
 .button:hover {
-  background-color: #8ab8ff;
+  background-color: var(--hover-color);
 }
 
 .form-group {
@@ -141,16 +182,16 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #FFFFFF;
+  color: var(--text-color);
 }
 
 .form-group input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #4a90e2;
+  border: 1px solid var(--border-color);
   border-radius: 0.375rem;
-  background-color: #1a1a1a;
-  color: #FFFFFF;
+  background-color: var(--surface-color);
+  color: var(--text-color);
 }
 
 .error-message {
@@ -168,20 +209,20 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #141414;
+  background-color: var(--background-color);
 }
 
 .login-form {
-  background-color: #1a1a1a;
+  background-color: var(--surface-color);
   padding: 2rem;
   border-radius: 0.5rem;
-  border: 1px solid #4a90e2;
+  border: 1px solid var(--border-color);
   width: 100%;
   max-width: 400px;
 }
 
 .login-form h2 {
-  color: #FFFFFF;
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -192,17 +233,17 @@
 
 .login-form label {
   display: block;
-  color: #FFFFFF;
+  color: var(--text-color);
   margin-bottom: 0.5rem;
 }
 
 .login-form input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #4a90e2;
+  border: 1px solid var(--border-color);
   border-radius: 0.375rem;
-  background-color: #1a1a1a;
-  color: #FFFFFF;
+  background-color: var(--surface-color);
+  color: var(--text-color);
 }
 
 .login-form .button {
