@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 
 function MapView() {
   const [services, setServices] = useState([]);
-  const [center, setCenter] = useState([30.0444, 31.2357]); // Default to Cairo
+  const [center, setCenter] = useState([31.7917, 7.0926]); // Default to Cairo
 
   useEffect(() => {
     const storedServices = JSON.parse(localStorage.getItem('services') || '[]');
@@ -19,7 +19,7 @@ function MapView() {
     <div>
       <h1 className="page-title">Service Locations</h1>
       <div className="card" style={{ height: '500px' }}>
-        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
+        <MapContainer center={center} zoom={3} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

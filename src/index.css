@@ -15,6 +15,10 @@
   --hover-color: #8ab8ff;
 }
 
+.chart-container canvas {
+  filter: drop-shadow(0 0 6px #FFFFFF44);
+}
+
 /* Admin Panel Styles */
 .app-container {
   display: flex;

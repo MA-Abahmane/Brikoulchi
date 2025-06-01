@@ -2,8 +2,8 @@
 export const getUserLocation = async () => {
   // Default location (Cairo, Egypt)
   const defaultLocation = {
-    lat: 30.0444,
-    lng: 31.2357
+    lat: 7.0926,
+    lng: 31.7917
   }
 
   try {
@@ -59,7 +59,7 @@ export const getUserLocation = async () => {
 // Create custom marker icon
 export const createMarkerIcon = (color = '#1E3A8A') => {
   return {
-    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png`,
+    iconUrl: `pin.png`,
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],

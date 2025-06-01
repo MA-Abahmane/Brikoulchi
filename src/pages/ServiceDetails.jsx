@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ServicesMap } from '../components/Map.jsx'
 
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [service, setService] = useState(null)
+  const [provider, setProvider] = useState(null)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [reviews, setReviews] = useState([])
@@ -15,6 +16,14 @@ const ServiceDetails = () => {
     const foundService = services.find(s => s.id === id)
     if (foundService) {
       setService(foundService)
+      
+      // Load service provider info
+      const users = JSON.parse(localStorage.getItem('users') || '[]')
+      const foundProvider = users.find(u => u.username === foundService.userId)
+      if (foundProvider) {
+        const { password, ...providerWithoutPassword } = foundProvider
+        setProvider(providerWithoutPassword)
+      }
       
       // Load reviews
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
@@ -80,6 +89,24 @@ const ServiceDetails = () => {
         <div className="p-8">
           <h1 className="text-3xl font-bold text-primary mb-4">{service.title}</h1>
           
+          {/* Provider Info */}
+          {provider && (
+            <Link 
+              to={`/user/${provider.username}`}
+              className="flex items-center mb-6 hover:bg-gray-50 p-3 rounded-lg transition-colors"
+            >
+              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
+              </div>
+              <div className="ml-4">
+                <div className="font-semibold text-gray-800">
+                  {provider.firstName} {provider.lastName}
+                </div>
+                <div className="text-sm text-gray-600">View Provider Profile</div>
+              </div>
+            </Link>
+          )}
+          
           <div className="flex items-center mb-6">
             <div className="flex text-secondary">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -134,6 +161,18 @@ const ServiceDetails = () => {
                   <i className="fas fa-tools mr-3 text-primary"></i>
                   {service.serviceType}
                 </p>
+                {service.workDays && (
+                  <p className="flex items-center">
+                    <i className="fas fa-calendar mr-3 text-primary"></i>
+                    Working Days: {service.workDays}
+                  </p>
+                )}
+                {service.workHours && (
+                  <p className="flex items-center">
+                    <i className="fas fa-clock mr-3 text-primary"></i>
+                    Working Hours: {service.workHours}
+                  </p>
+                )}
               </div>
             </div>
           </div>
