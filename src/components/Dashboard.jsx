@@ -170,7 +170,7 @@ function Dashboard() {
       legend: {
         position: 'right',
         labels: {
-          color: 'var(--text-color)'
+          color: '#FFFFFF'
         }
       }
     }
