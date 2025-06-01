@@ -68,6 +68,7 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script id="google-translate-script">
+        
         // Google Translate integration
                 function loadGoogleTranslate() {
             if (window.google && google.translate) {
@@ -110,6 +111,8 @@
                     z-index: 9999;
                     font-family: sans-serif;
                     user-select: none;
+                    display: flex;
+                    align-items: center;
                 }
 
                 .lang-pill {
@@ -167,7 +170,38 @@
                 #langToggle {
                     color: #3B5BFF;
                 }
+
+                #up {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    background: white;
+                    border: 5px solid #3B5BFF;
+                    position: fixed;
+                    right: 160px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                    transition: width 0.4s ease , background 0.3s;
+                    white-space: nowrap;
+                }
+
+                #up:hover {
+                    border: 7px solid #3B5BFF;
+                }
+
                 </style>
+
+                <!-- Up Button 
+                 <a id='up' href='#'> 
+                     <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#3B5BFF" viewBox="0 0 24 24" >
+                         <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                         <path d="m6.29 11.29 1.42 1.42L12 8.41l4.29 4.3 1.42-1.42L12 5.59z"></path><path d="m6.29 16.29 1.42 1.42 4.29-4.3 4.29 4.3 1.42-1.42-5.71-5.7z"></path>
+                    </svg>
+                 </a>
+                 -->
 
                 <div class="lang-wrapper">
                     <div class="lang-list" id="langList">
