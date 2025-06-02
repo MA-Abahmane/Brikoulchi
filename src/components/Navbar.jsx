@@ -25,7 +25,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             <img src="/logoTrans.jpg" alt="Brikoulchi Logo" className="h-10 w-10" />
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Brikoulchi
+              BRIKOULCHI
             </span>
           </div>
         </Link>
