@@ -12,7 +12,34 @@
   --surface-color: #1a1a1a;
   --text-color: #FFFFFF;
   --border-color: #4a90e2;
-  --hover-color: #8ab8ff;
+    --hover-color: #8ab8ff;
+}
+/* Modern Brikoulchi Pattern Background */
+
+
+.website-container {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  position: relative;
+}
+
+main {
+    z-index: 1;
+}
+
+.website-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/bg.png);
+  background-size: 100px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity: .37;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .chart-container canvas {
