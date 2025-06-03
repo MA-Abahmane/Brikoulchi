@@ -84,17 +84,13 @@ const SignUp = () => {
   }
   
   const handleSubmit = () => {
-    if (validateForm()) {
-      console.log('Form submitted:', formData)
-      
+    if (validateForm()) {      
       const success = signup({
         ...formData,
-        id: Date.now().toString()
       })
       
       if (success) {
         console.log('Signup successful')
-        navigate('/login')
       } else {
         setErrors({
           form: 'Username or email already exists'

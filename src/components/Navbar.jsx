@@ -14,6 +14,8 @@ const Navbar = () => {
   }
   
   const toggleMenu = () => {
+    // console.log(isAuthenticated);
+    
     setIsMenuOpen(!isMenuOpen)
   }
   
@@ -56,7 +58,7 @@ const Navbar = () => {
                   Logout
                 </button>
                 <span className="text-gray-500">
-                  Welcome, {user?.firstName || user?.username}
+                  Welcome, {user.name}
                 </span>
               </>
             ) : (

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import axios, { Axios } from 'axios'
+import axios from 'axios'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ const Login = () => {
     password: ''
   })
   const [error, setError] = useState('')
-  const {isAuthenticated, setisAuthenticated} = useState(false);
+  const { isAuthenticated, setlogin } = useAuth();
   const navigate = useNavigate()
   const login = async (email, password) => {
     try {
@@ -25,14 +25,26 @@ const Login = () => {
       });
 
       // Save token to localStorage
-      localStorage.setItem('auth_token', response.data.token);
-      // setisAuthenticated(true);
-      return console.log(response.data)
+      localStorage.setItem('auth_token', response.data.data.token);
+      const token = localStorage.getItem('auth_token');
+      console.log(token);
+      console.log(localStorage.getItem('currentUser'));
+      
+      console.log('also here');
+      
+      setlogin(email, password);
+      console.log('Login successful')
+      navigate('/')
+      console.log(response)
+      console.log(response.data)
+      console.log(response.data.data.token)
+      return true;
     } catch (error) {
       // Handle different error cases
       if (error.response) {
         // Server responded with non-2xx status
-        console.error('Login failed:', error.response.data);
+        console.error('Login failed test:', error.response.data);
+        setError(error.response.data.message)
         throw error.response.data;
       } else if (error.request) {
         // No response received
@@ -69,15 +81,15 @@ const Login = () => {
     }
 
     // Try to login
-    const success = login(formData.username, formData.password)
+    login(formData.username, formData.password)
 
-    if (success) {
-      console.log('Login successful')
-      navigate('/')
-    } else {
-      console.log('Login failed')
-      setError('Invalid username or password')
-    }
+    // if (success ) {
+    //   console.log('Login successful')
+    //   navigate('/')
+    // } else {
+    //   console.log('Login failed')
+    //   setError('Invalid username or password')
+    // }
   }
 
   return (
