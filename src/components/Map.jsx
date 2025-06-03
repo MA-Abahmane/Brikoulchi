@@ -41,7 +41,7 @@ const LocationMarker = ({ position, onLocationSelected, editable = false }) => {
 
 // Component for services map with multiple markers
 const ServicesMap = ({ services, height = 400 }) => {
-  const [userLocation, setUserLocation] = useState({ lat: 30.0444, lng: 31.2357 })
+  const [userLocation, setUserLocation] = useState({ lat: 31.7917, lng: 7.0926 })
   
   useEffect(() => {
     const fetchLocation = async () => {
@@ -56,7 +56,7 @@ const ServicesMap = ({ services, height = 400 }) => {
   
   return (
     <div style={{ height }}>
-      <MapContainer center={userLocation} zoom={10} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={userLocation} zoom={3} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -96,7 +96,7 @@ const LocationPickerMap = ({ initialPosition, onLocationSelected }) => {
   
   return (
     <div className="map-container">
-      <MapContainer center={position} zoom={13} style={{ height: '300px', width: '100%' }}>
+      <MapContainer center={position} zoom={3} style={{ height: '300px', width: '100%' }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

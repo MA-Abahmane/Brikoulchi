@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ServicesMap } from '../components/Map.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { isAuthenticated, user } = useAuth()
   const [service, setService] = useState(null)
+  const [provider, setProvider] = useState(null)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [reviews, setReviews] = useState([])
@@ -16,22 +19,54 @@ const ServiceDetails = () => {
     if (foundService) {
       setService(foundService)
       
-      // Load reviews
+      // Load service provider info
+      const users = JSON.parse(localStorage.getItem('users') || '[]')
+      const foundProvider = users.find(u => u.username === foundService.userId)
+      if (foundProvider) {
+        const { password, ...providerWithoutPassword } = foundProvider
+        setProvider(providerWithoutPassword)
+      }
+      
+      // Load reviews with user info
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
-      setReviews(serviceReviews)
+      const reviewsWithUsers = serviceReviews.map(review => {
+        const reviewUser = users.find(u => u.username === review.userId)
+        return {
+          ...review,
+          userInfo: reviewUser ? {
+            username: reviewUser.username,
+            firstName: reviewUser.firstName,
+            lastName: reviewUser.lastName
+          } : null
+        }
+      })
+      setReviews(reviewsWithUsers)
     }
   }, [id])
 
   const handleRatingSubmit = () => {
+    if (!isAuthenticated) {
+      navigate('/login')
+      return
+    }
+
     if (rating && comment) {
       const newReview = {
         id: Date.now(),
+        userId: user.username,
         rating,
         comment,
         date: new Date().toISOString()
       }
 
-      const updatedReviews = [...reviews, newReview]
+      const updatedReviews = [...reviews, {
+        ...newReview,
+        userInfo: {
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
+      }]
       setReviews(updatedReviews)
       localStorage.setItem(`reviews_${id}`, JSON.stringify(updatedReviews))
 
@@ -71,7 +106,7 @@ const ServiceDetails = () => {
             alt={service.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute top-0 right-0 bg-secondary text-white px-4 py-2 m-4 rounded-full">
+          <div className="absolute top-0 right-0 bg-primary text-white px-4 py-2 m-4 rounded-full">
             {service.category}
           </div>
         </div>
@@ -79,6 +114,24 @@ const ServiceDetails = () => {
         {/* Service Details */}
         <div className="p-8">
           <h1 className="text-3xl font-bold text-primary mb-4">{service.title}</h1>
+          
+          {/* Provider Info */}
+          {provider && (
+            <Link 
+              to={`/user/${provider.username}`}
+              className="flex items-center mb-6 hover:bg-gray-50 p-3 rounded-lg transition-colors"
+            >
+              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
+              </div>
+              <div className="ml-4">
+                <div className="font-semibold text-gray-800">
+                  {provider.firstName} {provider.lastName}
+                </div>
+                <div className="text-sm text-gray-600">View Provider Profile</div>
+              </div>
+            </Link>
+          )}
           
           <div className="flex items-center mb-6">
             <div className="flex text-secondary">
@@ -134,6 +187,18 @@ const ServiceDetails = () => {
                   <i className="fas fa-tools mr-3 text-primary"></i>
                   {service.serviceType}
                 </p>
+                {service.workDays && (
+                  <p className="flex items-center">
+                    <i className="fas fa-calendar mr-3 text-primary"></i>
+                    Working Days: {service.workDays}
+                  </p>
+                )}
+                {service.workHours && (
+                  <p className="flex items-center">
+                    <i className="fas fa-clock mr-3 text-primary"></i>
+                    Working Hours: {service.workHours}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -151,46 +216,70 @@ const ServiceDetails = () => {
             {/* Add Review */}
             <div className="bg-gray-50 p-6 rounded-lg mb-8">
               <h3 className="text-lg font-medium mb-4">Add a Review</h3>
-              <div className="flex items-center mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center mb-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        onClick={() => setRating(star)}
+                        className={`text-2xl ${star <= rating ? 'text-secondary' : 'text-gray-300'} hover:text-secondary focus:outline-none mr-1`}
+                      >
+                        <i className="fas fa-star"></i>
+                      </button>
+                    ))}
+                  </div>
+                  <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Write your review..."
+                    className="w-full p-3 border border-gray-300 rounded-md mb-4"
+                    rows="4"
+                  ></textarea>
                   <button
-                    key={star}
-                    onClick={() => setRating(star)}
-                    className={`text-2xl ${star <= rating ? 'text-secondary' : 'text-gray-300'} hover:text-secondary focus:outline-none mr-1`}
+                    onClick={handleRatingSubmit}
+                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
                   >
-                    <i className="fas fa-star"></i>
+                    Submit Review
                   </button>
-                ))}
-              </div>
-              <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Write your review..."
-                className="w-full p-3 border border-gray-300 rounded-md mb-4"
-                rows="4"
-              ></textarea>
-              <button
-                onClick={handleRatingSubmit}
-                className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
-              >
-                Submit Review
-              </button>
+                </>
+              ) : (
+                <div className="text-center">
+                  <p className="text-gray-600 mb-4">Please log in to leave a review</p>
+                  <Link
+                    to="/login"
+                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
+                  >
+                    Log In
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Reviews List */}
             <div className="space-y-6">
               {reviews.map((review) => (
                 <div key={review.id} className="border-b border-gray-200 pb-6">
-                  <div className="flex items-center mb-2">
-                    <div className="flex text-secondary">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <i 
-                          key={star}
-                          className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
-                        ></i>
-                      ))}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center">
+                      <div className="flex text-secondary">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <i 
+                            key={star}
+                            className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
+                          ></i>
+                        ))}
+                      </div>
+                      {review.userInfo && (
+                        <Link 
+                          to={`/user/${review.userInfo.username}`}
+                          className="ml-4 font-medium text-primary hover:text-primary-dark"
+                        >
+                          {review.userInfo.firstName} {review.userInfo.lastName}
+                        </Link>
+                      )}
                     </div>
-                    <span className="ml-2 text-gray-500 text-sm">
+                    <span className="text-gray-500 text-sm">
                       {new Date(review.date).toLocaleDateString()}
                     </span>
                   </div>

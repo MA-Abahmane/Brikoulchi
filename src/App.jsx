@@ -12,6 +12,7 @@ import AdminPanel from './components/AdminPanel.jsx'
 import Home from './pages/Home.jsx'
 import Services from './pages/Services.jsx'
 import ServiceDetails from './pages/ServiceDetails.jsx'
+import UserProfile from './pages/UserProfile.jsx'
 import Login from './pages/Login.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Account from './pages/Account.jsx'
@@ -58,6 +59,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<Services />} />
               <Route path="/service/:id" element={<ServiceDetails />} />
+              <Route path="/user/:username" element={<UserProfile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/account" element={
