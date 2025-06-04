@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 
@@ -6,6 +6,35 @@ const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth()
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [hasNewMessages, setHasNewMessages] = useState(false)
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      const checkNewMessages = () => {
+        const users = JSON.parse(localStorage.getItem('users') || '[]')
+          .filter(u => u.username !== user?.username);
+        
+        for (const otherUser of users) {
+          const chatId = [user.username, otherUser.username].sort().join('_');
+          const messages = JSON.parse(localStorage.getItem(`chat_${chatId}`) || '[]');
+          
+          const hasUnread = messages.some(msg => 
+            msg.sender !== user.username && !msg.read
+          );
+          
+          if (hasUnread) {
+            setHasNewMessages(true);
+            return;
+          }
+        }
+        setHasNewMessages(false);
+      };
+
+      checkNewMessages();
+      const interval = setInterval(checkNewMessages, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated, user]);
   
   const handleLogout = () => {
     logout()
@@ -25,7 +54,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             <img src="/logoTrans.jpg" alt="Brikoulchi Logo" className="h-10 w-10" />
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              BRIKOULCHI
+              Brikoulchi
             </span>
           </div>
         </Link>
@@ -48,6 +77,12 @@ const Navbar = () => {
                 </Link>
                 <Link to="/my-services" className="text-gray-700 hover:text-primary transition">
                   My Services
+                </Link>
+                <Link to="/webchat" className="text-gray-700 hover:text-primary transition relative">
+                  Chat
+                  {hasNewMessages && (
+                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  )}
                 </Link>
                 <button 
                   onClick={handleLogout}
@@ -114,6 +149,16 @@ const Navbar = () => {
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Services
+                  </Link>
+                  <Link 
+                    to="/webchat" 
+                    className="block text-gray-700 hover:text-primary transition relative"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Chat
+                    {hasNewMessages && (
+                      <span className="absolute top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    )}
                   </Link>
                   <button 
                     onClick={handleLogout}

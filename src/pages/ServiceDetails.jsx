@@ -117,20 +117,31 @@ const ServiceDetails = () => {
           
           {/* Provider Info */}
           {provider && (
-            <Link 
-              to={`/user/${provider.username}`}
-              className="flex items-center mb-6 hover:bg-gray-50 p-3 rounded-lg transition-colors"
-            >
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
-                {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
-              </div>
-              <div className="ml-4">
-                <div className="font-semibold text-gray-800">
-                  {provider.firstName} {provider.lastName}
+            <div className="flex items-center justify-between mb-6 bg-gray-50 p-3 rounded-lg">
+              <Link 
+                to={`/user/${provider.username}`}
+                className="flex items-center hover:bg-gray-100 p-3 rounded-lg transition-colors"
+              >
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                  {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
                 </div>
-                <div className="text-sm text-gray-600">View Provider Profile</div>
-              </div>
-            </Link>
+                <div className="ml-4">
+                  <div className="font-semibold text-gray-800">
+                    {provider.firstName} {provider.lastName}
+                  </div>
+                  <div className="text-sm text-gray-600">View Provider Profile</div>
+                </div>
+              </Link>
+              {isAuthenticated && user?.username !== provider.username && (
+                <Link
+                  to="/webchat"
+                  className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors flex items-center"
+                >
+                  <i className="fas fa-comments mr-2"></i>
+                  Chat with Provider
+                </Link>
+              )}
+            </div>
           )}
           
           <div className="flex items-center mb-6">

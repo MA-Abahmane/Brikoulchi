@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { getUserServices } from '../data/services.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const UserProfile = () => {
   const { username } = useParams()
+  const { user: currentUser, isAuthenticated } = useAuth()
   const [user, setUser] = useState(null)
   const [services, setServices] = useState([])
   
@@ -35,16 +37,27 @@ const UserProfile = () => {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* User Info Section */}
         <div className="p-8">
-          <div className="flex items-center mb-6">
-            <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              {user.firstName?.charAt(0)}{user.lastName?.charAt(0)}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center">
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                {user.firstName?.charAt(0)}{user.lastName?.charAt(0)}
+              </div>
+              <div className="ml-6">
+                <h1 className="text-3xl font-bold text-primary">
+                  {user.firstName} {user.lastName}
+                </h1>
+                <p className="text-gray-600">@{user.username}</p>
+              </div>
             </div>
-            <div className="ml-6">
-              <h1 className="text-3xl font-bold text-primary">
-                {user.firstName} {user.lastName}
-              </h1>
-              <p className="text-gray-600">@{user.username}</p>
-            </div>
+            {isAuthenticated && currentUser?.username !== user.username && (
+              <Link
+                to="/webchat"
+                className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors flex items-center"
+              >
+                <i className="fas fa-comments mr-2"></i>
+                Send Message
+              </Link>
+            )}
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -105,7 +118,8 @@ const UserProfile = () => {
             Services by {user.firstName}
           </h2>
           
-          {services.length > 0 ? (
+          {services.length > 
+ 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map(service => (
                 <ServiceCard key={service.id} service={service} />
