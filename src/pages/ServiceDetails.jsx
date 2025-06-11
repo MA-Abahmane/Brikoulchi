@@ -18,7 +18,7 @@ const ServiceDetails = () => {
     const foundService = services.find(s => s.id === id)
     if (foundService) {
       setService(foundService)
-      
+
       // Load service provider info
       const users = JSON.parse(localStorage.getItem('users') || '[]')
       const foundProvider = users.find(u => u.username === foundService.userId)
@@ -26,7 +26,7 @@ const ServiceDetails = () => {
         const { password, ...providerWithoutPassword } = foundProvider
         setProvider(providerWithoutPassword)
       }
-      
+
       // Load reviews with user info
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
       const reviewsWithUsers = serviceReviews.map(review => {
@@ -86,13 +86,13 @@ const ServiceDetails = () => {
     )
   }
 
-  const averageRating = reviews.length 
-    ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length 
+  const averageRating = reviews.length
+    ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length
     : 0
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
-      <button 
+      <button
         onClick={() => navigate('/services')}
         className="mb-6 flex items-center text-primary hover:text-primary-dark transition-colors"
       >
@@ -103,7 +103,7 @@ const ServiceDetails = () => {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Service Image */}
         <div className="h-64 relative">
-          <img 
+          <img
             src={`/${service.category.toLowerCase().replace(/\s+/g, '_')}.jpg`}
             alt={service.title}
             className="w-full h-full object-cover"
@@ -116,11 +116,11 @@ const ServiceDetails = () => {
         {/* Service Details */}
         <div className="p-8">
           <h1 className="text-3xl font-bold text-primary mb-4">{service.title}</h1>
-          
+
           {/* Provider Info */}
           {provider && (
             <div className="flex items-center justify-between mb-6 bg-gray-50 p-3 rounded-lg">
-              <Link 
+              <Link
                 to={`/user/${provider.username}`}
                 className="flex items-center hover:bg-gray-100 p-3 rounded-lg transition-colors"
               >
@@ -145,11 +145,11 @@ const ServiceDetails = () => {
               )}
             </div>
           )}
-          
+
           <div className="flex items-center mb-6">
             <div className="flex text-secondary">
               {[1, 2, 3, 4, 5].map((star) => (
-                <i 
+                <i
                   key={star}
                   className={`fas fa-star ${star <= averageRating ? 'text-secondary' : 'text-gray-300'}`}
                 ></i>
@@ -277,7 +277,7 @@ const ServiceDetails = () => {
                     <div className="flex items-center">
                       <div className="flex text-secondary">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <i 
+                          <i
                             key={star}
                             className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
                           ></i>
@@ -296,7 +296,7 @@ const ServiceDetails = () => {
                               {review.userInfo.firstName[0]}{review.userInfo.lastName[0]}
                             </div>
                           )}
-                          <Link 
+                          <Link
                             to={`/user/${review.userInfo.username}`}
                             className="font-medium text-primary hover:text-primary-dark"
                           >
