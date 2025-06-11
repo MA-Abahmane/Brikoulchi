@@ -117,7 +117,7 @@ const chartOptions = {
     legend: {
       position: 'top',
       labels: {
-        color: '#FFFFFF',       // Neon cyan for legend labels
+        color: '#00C8FF',       // Neon cyan for legend labels
         font: {
           weight: 'bold'
         }
@@ -127,14 +127,14 @@ const chartOptions = {
       backgroundColor: '#00C8FF', // Pure black tooltip background
       borderColor: '#3D5AFE',     // Neon royal blue border
       borderWidth: 1,
-      titleColor: '#FFFFFF',  // White title for contrast
+      titleColor: '#00C8FF',
       bodyColor: '#E0EFFF'        // Slightly softer white for readability
     }
   },
   scales: {
     y: {
       ticks: {
-        color: '#FFFFFFDD',         // Neon ice blue ticks
+        color: '#6EC3F4',         // Neon ice blue ticks
         font: {
           weight: '600'
         }
@@ -145,7 +145,7 @@ const chartOptions = {
     },
     x: {
       ticks: {
-        color: '#FFFFFFDD',         // Matching neon tick color
+        color: '#6EC3F4',         // Matching neon tick color
         font: {
           weight: '600'
         }

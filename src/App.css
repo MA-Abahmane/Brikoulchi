@@ -5,7 +5,9 @@
   text-align: center;
 }
 
-
+.chart-container canvas {
+  filter: drop-shadow(0 0 4px #3D5AFE);
+}
 
 .logo {
   height: 6em;

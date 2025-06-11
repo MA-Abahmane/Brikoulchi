@@ -45,6 +45,7 @@ function Dashboard() {
     labels: [],
     datasets: []
   });
+  const [topRatedServices, setTopRatedServices] = useState([]);
 
   useEffect(() => {
     // Get data from localStorage
@@ -57,8 +58,13 @@ function Dashboard() {
     let totalRating = 0;
     let reviewsByDate = {};
     
-    services.forEach(service => {
+    // Calculate top rated services with actual data
+    const servicesWithRatings = services.map(service => {
       const reviews = JSON.parse(localStorage.getItem(`reviews_${service.id}`) || '[]');
+      const avgRating = reviews.length 
+        ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length 
+        : 0;
+      
       totalReviews += reviews.length;
       totalRating += reviews.reduce((acc, rev) => acc + rev.rating, 0);
       
@@ -67,7 +73,21 @@ function Dashboard() {
         const date = new Date(review.date).toLocaleDateString();
         reviewsByDate[date] = (reviewsByDate[date] || 0) + 1;
       });
+
+      return {
+        title: service.title,
+        rating: avgRating,
+        reviewCount: reviews.length
+      };
     });
+
+    // Get top 5 rated services (only those with reviews)
+    const topRated = servicesWithRatings
+      .filter(service => service.reviewCount > 0)
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 5);
+    
+    setTopRatedServices(topRated);
 
     // Calculate services by category
     const categoryCount = services.reduce((acc, service) => {
@@ -170,14 +190,14 @@ function Dashboard() {
       legend: {
         position: 'right',
         labels: {
-          color: '#FFFFFF'
+          color: 'var(--text-color)'
         }
       }
     }
   };
 
   return (
-    <div>
+    <div className="admin-page-container">
       <h1 className="page-title">Dashboard</h1>
       
       <div className="stats-grid">
@@ -233,17 +253,42 @@ function Dashboard() {
 
         <div className="chart-container">
           <h2>Top Rated Services</h2>
-          <Bar 
-            data={{
-              labels: ['Service A', 'Service B', 'Service C', 'Service D', 'Service E'],
-              datasets: [{
-                label: 'Rating',
-                data: [4.8, 4.6, 4.5, 4.3, 4.2],
-                backgroundColor: '#3D5AFE',
-              }]
-            }}
-            options={chartOptions}
-          />
+          {topRatedServices.length > 0 ? (
+            <Bar 
+              data={{
+                labels: topRatedServices.map(service => service.title.substring(0, 20) + '...'),
+                datasets: [{
+                  label: 'Rating',
+                  data: topRatedServices.map(service => service.rating),
+                  backgroundColor: '#3D5AFE',
+                }]
+              }}
+              options={{
+                ...chartOptions,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    max: 5,
+                    ticks: {
+                      color: 'var(--text-color)'
+                    }
+                  },
+                  x: {
+                    ticks: {
+                      color: 'var(--text-color)'
+                    }
+                  }
+                }
+              }}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-64 text-gray-500">
+              <div className="text-center">
+                <i className="fas fa-star text-4xl mb-4"></i>
+                <p>No rated services yet</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
