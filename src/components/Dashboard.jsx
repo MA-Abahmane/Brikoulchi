@@ -123,7 +123,7 @@ function Dashboard() {
         label: 'Active Users',
         data: dailyActiveUsers,
         borderColor: '#00C8FF', // Neon Cyan Blue
-        backgroundColor: 'rgba(0, 200, 255, 0.15)', // Translucent for soft fill
+        backgroundColor: 'rgb(243, 243, 243)', // Translucent for soft fill
         pointBackgroundColor: '#FFFFFF',
         tension: 0.4
       }]
@@ -135,7 +135,7 @@ function Dashboard() {
         label: 'Reviews',
         data: reviewsTrend,
         borderColor: '#A66DD4', // Lavender-Violet
-        backgroundColor: 'rgba(166, 109, 212, 0.15)', // Soft translucent fill
+        backgroundColor: 'rgba(243, 243, 243, 0.9)', // Soft translucent fill
         pointBackgroundColor: '#FFFFFF',
         tension: 0.4
       }]
@@ -190,7 +190,7 @@ function Dashboard() {
       legend: {
         position: 'right',
         labels: {
-          color: 'var(--text-color)'
+          color: '#FFFFFF'
         }
       }
     }
@@ -261,6 +261,8 @@ function Dashboard() {
                   label: 'Rating',
                   data: topRatedServices.map(service => service.rating),
                   backgroundColor: '#3D5AFE',
+                  borderColor: 'rgba(255,255,255,.7)',
+                  borderWidth: 1, 
                 }]
               }}
               options={{
@@ -270,12 +272,12 @@ function Dashboard() {
                     beginAtZero: true,
                     max: 5,
                     ticks: {
-                      color: 'var(--text-color)'
+                      color: '#FFFFFF'
                     }
                   },
                   x: {
                     ticks: {
-                      color: 'var(--text-color)'
+                      color: '#FFFFFF'
                     }
                   }
                 }

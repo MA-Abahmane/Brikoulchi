@@ -235,7 +235,9 @@ const chartOptions = {
               datasets: [{
                 label: 'Services',
                 data: Object.values(analyticsData.categoryDistribution),
-                backgroundColor: ' rgba(255, 255, 102, 0.85)'
+                backgroundColor: ' rgba(255, 255, 102, 0.85)',
+                borderColor: 'rgba(255,255,255,.9)',
+                borderWidth: 2, 
               }]
             }}
             options={chartOptions}
