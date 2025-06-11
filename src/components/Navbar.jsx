@@ -7,16 +7,6 @@ const Navbar = () => {
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [hasNewMessages, setHasNewMessages] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
   
   useEffect(() => {
     if (isAuthenticated) {
@@ -68,7 +58,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             <img src="/logoTrans.jpg" alt="Brikoulchi Logo" className="h-10 w-10 rounded-full" />
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              BRIKOULCHI
+              Brikoulchi
             </span>
           </div>
         </Link>
@@ -92,28 +82,12 @@ const Navbar = () => {
                 <Link to="/my-services" className="text-gray-700 hover:text-primary transition-colors font-medium">
                   My Services
                 </Link>
-                <Link to="/webchat" className="text-gray-700 hover:text-primary transition-colors font-medium relative">
+                <Link to="/webchat" className="text-gray-700 hover:text-primary transition relative">
                   Chat
                   {hasNewMessages && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                   )}
                 </Link>
-                <div className="flex items-center space-x-3">
-                  {user?.profileImage ? (
-                    <img
-                      src={user.profileImage}
-                      alt="Profile"
-                      className="w-8 h-8 rounded-full object-cover border-2 border-gray-200"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                      {user?.firstName?.[0]}{user?.lastName?.[0]}
-                    </div>
-                  )}
-                  <span className="text-gray-600 font-medium">
-                    {user?.firstName || user?.username}
-                  </span>
-                </div>
                 <button 
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 font-medium"
@@ -202,13 +176,12 @@ const Navbar = () => {
                   </Link>
                   <Link 
                     to="/webchat" 
-                    className="block text-gray-700 hover:text-primary transition-colors font-medium py-2 relative"
+                    className="block text-gray-700 hover:text-primary transition relative"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <i className="fas fa-comments w-5 mr-2"></i>
                     Chat
                     {hasNewMessages && (
-                      <span className="absolute top-2 left-8 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                      <span className="absolute top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                     )}
                   </Link>
                   <button 

@@ -124,17 +124,9 @@ const ServiceDetails = () => {
                 to={`/user/${provider.username}`}
                 className="flex items-center hover:bg-gray-100 p-3 rounded-lg transition-colors"
               >
-                {provider.profileImage ? (
-                  <img
-                    src={provider.profileImage}
-                    alt={`${provider.firstName} ${provider.lastName}`}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
-                    {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
-                  </div>
-                )}
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                  {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
+                </div>
                 <div className="ml-4">
                   <div className="font-semibold text-gray-800">
                     {provider.firstName} {provider.lastName}
