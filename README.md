@@ -120,3 +120,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Icons by Font Awesome
 - Maps by Leaflet
 - Images from Pexels
+
+## 🎯 The Brikoulchi Team
+- Abahmane Mohamed Amine   - _Front-End Department_
+- Akarkoune Abdelali       - _Back-End Department_
+- Droussi Mohamed          - _Documentation Department_
+- Ayoub Amerzoug           - _Design Department_
