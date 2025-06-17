@@ -4,8 +4,8 @@
 
 ## 📋 Overview
 
-Brikoulchi is a comprehensive local services platform that connects service providers with customers in their area. Whether you need a plumber, electrician, or any other service professional, Brikoulchi makes it easy to find and connect with trusted local providers.
-[PDOCUMENT](DOCUMENT.md)
+Brikoulchi is a comprehensive local services platform that connects service providers with customers in their area. Whether you need a plumber, electrician, or any other service professional, Brikoulchi makes it easy to find and connect with trusted local providers...
+[Project Document](DOCUMENT.md)
 
 ### ✨ Key Features
 
