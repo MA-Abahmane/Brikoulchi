@@ -80,8 +80,26 @@ npm run dev
 - **Storage**: Local Storage
 
 ## 📱 Screenshots
+### Multi Language Support
+![Supported Languages](assets/lang.jpeg)
+### Nour AI
+![AI](assets/ai.jpeg)
+### Header
+![Header](assets/Header.jpeg)
+### Home Page
+![Home Page](assets/main.jpeg)
+### Categories
+![Service Categories](assets/categories.jpeg)
+### Service Map
+![Service Map](assets/map.jpeg)
+### Admin Dashboard
+![Admin Dashboard](assets/anals1.jpeg) 
+![User Profile](assets/anals2.jpeg)
+### Excel Export Data
+![Excel Export Data](assets/exel.jpeg)
+### Footer
+![Footer](assets/Footer.jpeg)
 
-[Add screenshots here]
 
 ## 👥 Contributing
 
