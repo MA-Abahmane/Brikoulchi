@@ -7,14 +7,17 @@ import { getServicesByCategory } from '../data/services.js'
 const Services = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialCategory = searchParams.get('category') || 'All Services'
-  
+
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
   const [services, setServices] = useState([])
-  
+
   useEffect(() => {
-    const filteredServices = getServicesByCategory(selectedCategory)
-    setServices(filteredServices)
-    
+    const filteredServices =async () => {
+      const servs = await getServicesByCategory(selectedCategory)
+      setServices(servs)
+    }
+    filteredServices();
+
     // Update URL with selected category
     if (selectedCategory === 'All Services') {
       setSearchParams({})
@@ -22,24 +25,25 @@ const Services = () => {
       setSearchParams({ category: selectedCategory })
     }
   }, [selectedCategory, setSearchParams])
-  
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category)
+
+  const handleCategorySelect = (catname) => {
+    console.log(catname);
+    setSelectedCategory(catname)
   }
-  
+
   return (
     <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl font-bold text-royal-blue mb-8">Browse Services</h1>
-      
+
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar with filters */}
         <div className="w-full md:w-64 flex-shrink-0">
-          <CategoryFilter 
+          <CategoryFilter
             selectedCategory={selectedCategory}
             onSelectCategory={handleCategorySelect}
           />
         </div>
-        
+
         {/* Main content */}
         <div className="flex-grow">
           <div className="mb-6">
@@ -50,7 +54,7 @@ const Services = () => {
               {services.length} {services.length === 1 ? 'service' : 'services'} available
             </p>
           </div>
-          
+
           {services.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map(service => (

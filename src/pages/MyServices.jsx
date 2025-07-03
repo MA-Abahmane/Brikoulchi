@@ -3,8 +3,9 @@ import { useAuth } from '../context/AuthContext.jsx'
 import FormInput from '../components/FormInput.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { LocationPickerMap } from '../components/Map.jsx'
-import { serviceCategories, addService, getUserServices } from '../data/services.js'
-
+import { addService, getUserServices } from '../data/services.js'
+import APICategories from '../data/services.js'
+const Categories = APICategories();
 const MyServices = () => {
   const { user } = useAuth()
   const [services, setServices] = useState([])
@@ -49,7 +50,7 @@ const MyServices = () => {
   
   useEffect(() => {
     if (selectedCategory) {
-      const category = serviceCategories.find(c => c.name === selectedCategory)
+      const category = Categories.find(c => c.name === selectedCategory)
       setAvailableServices(category ? category.services : [])
       setSelectedServiceType('')
       setAvailableServiceTypes([])
@@ -62,7 +63,7 @@ const MyServices = () => {
   
   useEffect(() => {
     if (selectedCategory && selectedServiceType) {
-      const category = serviceCategories.find(c => c.name === selectedCategory)
+      const category = Categories.find(c => c.name === selectedCategory)
       if (category && category.subcategories && category.subcategories[selectedServiceType]) {
         setAvailableServiceTypes(category.subcategories[selectedServiceType])
       } else {
@@ -228,7 +229,7 @@ const MyServices = () => {
               error={errors.category}
             >
               <option value="">Select a category</option>
-              {serviceCategories.map(category => (
+              {Categories.map(category => (
                 <option key={category.id} value={category.name}>
                   {category.name}
                 </option>

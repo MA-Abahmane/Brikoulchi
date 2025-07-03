@@ -27,12 +27,16 @@ export const AuthProvider = ({ children }) => {
     //   ) {
     const name = username.match(/^([^@]+)/)[1];
     const User = {
-      username: username,
-      name: name,
-      email: 'test@example.com',
-      phone: '1234567890'
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      phone1: '',
+      phone2: '',
+      password: '',
+      confirmPassword: ''
     }
-    console.log( "dd"+ localStorage.getItem('auth_token'));
+    console.log("dd" + localStorage.getItem('auth_token'));
     localStorage.setItem('currentUser', JSON.stringify(User))
     setUser(User)
     setIsAuthenticated(true)
@@ -111,7 +115,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // // Update user info
-  const updateUserInfo = (updatedInfo) => {
+  const updateUserInfo = async (updatedInfo) => {
     //   const users = JSON.parse(localStorage.getItem('users')) || []
     //   const updatedUsers = users.map(u => u.username === user.username ? { ...u, ...updatedInfo } : u)
 
@@ -122,6 +126,15 @@ export const AuthProvider = ({ children }) => {
     //   setUser(updatedUser)
 
     //   return true
+    const res = await axios.put('http://127.0.0.1:8000/api/updateUserInfo', updatedInfo, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+      
+    })
+    console.log(res);
   }
 
   return (

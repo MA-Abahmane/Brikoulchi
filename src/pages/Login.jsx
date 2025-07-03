@@ -12,9 +12,10 @@ const Login = () => {
   const [error, setError] = useState('')
   const { isAuthenticated, setlogin } = useAuth();
   const navigate = useNavigate()
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/auth/login', {
+      const response = await axios.post(`${apiUrl}/auth/login`, {
         email: email,
         password: password
       }, {
@@ -25,6 +26,11 @@ const Login = () => {
       });
 
       // Save token to localStorage
+      localStorage.setItem('auth_id', response.data.data.user.id);
+      localStorage.getItem('auth_id');
+
+      // console.log(response);
+      
       localStorage.setItem('auth_token', response.data.data.token);
       const token = localStorage.getItem('auth_token');
       console.log(token);
