@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
     //   setUser(null)
     //   setIsAuthenticated(false)
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/auth/logout', {}, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/logout`, {}, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
           'Accept': 'application/json',
@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
-      
+
     })
     console.log(res);
   }

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import axios from 'axios'
-
+import BrikoulchiApi from '../api/BrikoulchiApij.jsx'
 const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -12,57 +11,48 @@ const Login = () => {
   const [error, setError] = useState('')
   const { isAuthenticated, setlogin } = useAuth();
   const navigate = useNavigate()
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const login = async (email, password) => {
-    try {
-      const response = await axios.post(`${apiUrl}/auth/login`, {
-        email: email,
-        password: password
-      }, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      // Save token to localStorage
-      localStorage.setItem('auth_id', response.data.data.user.id);
-      localStorage.getItem('auth_id');
-
-      // console.log(response);
-      
-      localStorage.setItem('auth_token', response.data.data.token);
-      const token = localStorage.getItem('auth_token');
-      console.log(token);
-      console.log(localStorage.getItem('currentUser'));
-      
-      console.log('also here');
-      
-      setlogin(email, password);
-      console.log('Login successful')
-      navigate('/')
-      console.log(response)
-      console.log(response.data)
-      console.log(response.data.data.token)
-      return true;
-    } catch (error) {
-      // Handle different error cases
-      if (error.response) {
-        // Server responded with non-2xx status
-        console.error('Login failed test:', error.response.data);
-        setError(error.response.data.message)
-        throw error.response.data;
-      } else if (error.request) {
-        // No response received
-        console.error('No response:', error.request);
-        throw { message: 'Network error - no server response' };
-      } else {
-        // Other errors
-        console.error('Error:', error.message);
-        throw { message: error.message };
+  const login = async ({username, password}) => {
+  try {
+    const response = await BrikoulchiApi.post('/auth/login', {
+      username,
+      password
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
+    });
+
+    const { token, user } = response.data.data;
+
+    if (token && user?.id) {
+      localStorage.setItem('auth_token', token);
+      localStorage.setItem('auth_id', user.id);
+    }
+    console.log('hello');
+    
+
+    // Optionally update state
+    // setLogin(true);
+
+    navigate('/');
+
+    return true;
+  } catch (error) {
+    if (error.response) {
+      console.error('Login failed:', error.response.data);
+      setError(error.response.data.message);
+      throw error.response.data;
+    } else if (error.request) {
+      console.error('No response:', error.request);
+      throw { message: 'Network error - no server response' };
+    } else {
+      console.error('Error:', error.message);
+      throw { message: error.message };
     }
   }
+};
+
   // Redirect if already logged in
   if (isAuthenticated) {
     navigate('/')
@@ -87,7 +77,7 @@ const Login = () => {
     }
 
     // Try to login
-    login(formData.username, formData.password)
+    login({"username":formData.username, "password":formData.password})
 
     // if (success ) {
     //   console.log('Login successful')
