@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import BrikoulchiApi from '../api/BrikoulchiApij.jsx'
+import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -11,47 +11,42 @@ const Login = () => {
   const [error, setError] = useState('')
   const { isAuthenticated, setlogin } = useAuth();
   const navigate = useNavigate()
-  const login = async ({username, password}) => {
-  try {
-    const response = await BrikoulchiApi.post('/auth/login', {
-      username,
-      password
-    }, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+  const login = async ({ username, password }) => {
+    try {
+      const response = await BrikoulchiApi.post('/auth/login', {
+        username,
+        password
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const { token, user } = response.data.data;
+      console.log('hello');
+
+
+      // Optionally update state
+      // setLogin(true);
+
+      navigate('/');
+
+      return true;
+    } catch (error) {
+      if (error.response) {
+        console.error('Login failed:', error.response.data);
+        setError(error.response.data.message);
+        throw error.response.data;
+      } else if (error.request) {
+        console.error('No response:', error.request);
+        throw { message: 'Network error - no server response' };
+      } else {
+        console.error('Error:', error.message);
+        throw { message: error.message };
       }
-    });
-
-    const { token, user } = response.data.data;
-
-    if (token && user?.id) {
-      localStorage.setItem('auth_token', token);
-      localStorage.setItem('auth_id', user.id);
     }
-    console.log('hello');
-    
-
-    // Optionally update state
-    // setLogin(true);
-
-    navigate('/');
-
-    return true;
-  } catch (error) {
-    if (error.response) {
-      console.error('Login failed:', error.response.data);
-      setError(error.response.data.message);
-      throw error.response.data;
-    } else if (error.request) {
-      console.error('No response:', error.request);
-      throw { message: 'Network error - no server response' };
-    } else {
-      console.error('Error:', error.message);
-      throw { message: error.message };
-    }
-  }
-};
+  };
 
   // Redirect if already logged in
   if (isAuthenticated) {
@@ -77,7 +72,7 @@ const Login = () => {
     }
 
     // Try to login
-    login({"username":formData.username, "password":formData.password})
+    login({ "username": formData.username, "password": formData.password })
 
     // if (success ) {
     //   console.log('Login successful')

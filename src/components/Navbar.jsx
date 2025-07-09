@@ -42,7 +42,7 @@ const Navbar = () => {
             <Link to="/services" className="text-gray-700 hover:text-primary transition">
               Services
             </Link>
-            
+            {console.log(isAuthenticated)}
             {isAuthenticated ? (
               <>
                 <Link to="/account" className="text-gray-700 hover:text-primary transition">
@@ -58,7 +58,7 @@ const Navbar = () => {
                   Logout
                 </button>
                 <span className="text-gray-500">
-                  Welcome, {user.name}
+                  {/* Welcome, {user.name} */}
                 </span>
               </>
             ) : (

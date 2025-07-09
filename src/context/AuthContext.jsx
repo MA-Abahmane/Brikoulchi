@@ -1,30 +1,24 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import BrikoulchiApi from '../api/BrikoulchiApi'
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState(null)
+  const [username, setUsername] = useState(null)
   const navigate = useNavigate();
   useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-      setIsAuthenticated(true)
+    const getIsAuth = async () => {
+      const res = await BrikoulchiApi('/auth/isAuthenticated');
+      setIsAuthenticated(res);
+      getIsAuth();
     }
-  }, [])
+  }, []);
 
   const setlogin = async (username, password) => {
-    //   // Check if identifier is an email
-    //   const isEmail = identifier.includes('@')
     console.log('im here');
-    setIsAuthenticated(true);
-    //   // Check hardcoded test user
-    //   if (
-    //     (!isEmail && identifier === 'testuser' && password === 'password123') ||
-    //     (isEmail && identifier === 'test@example.com' && password === 'password123')
-    //   ) {
+    // setIsAuthenticated(true);
     const name = username.match(/^([^@]+)/)[1];
     const User = {
       firstName: '',
@@ -36,44 +30,14 @@ export const AuthProvider = ({ children }) => {
       password: '',
       confirmPassword: ''
     }
-    console.log("dd" + localStorage.getItem('auth_token'));
     localStorage.setItem('currentUser', JSON.stringify(User))
-    setUser(User)
-    setIsAuthenticated(true)
+    setUsername(User)
+    // setIsAuthenticated(true)
     return true
   }
 
-  //   // Check localStorage for registered users
-  //   const users = JSON.parse(localStorage.getItem('users')) || []
-  //   const foundUser = users.find(u => 
-  //     (isEmail ? u.email === identifier : u.username === identifier) && 
-  //     u.password === password
-  //   )
 
-  //   if (foundUser) {
-  //     const { password, ...userWithoutPassword } = foundUser
-  //     localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword))
-  //     setUser(userWithoutPassword)
-  // setIsAuthenticated(true)
-  //     return true
-  //   }
-
-  //   return false
-  // }
-
-  // // Signup function
   const signup = async (newUser) => {
-    //   const users = JSON.parse(localStorage.getItem('users')) || []
-
-    //   // Check if username or email already exists
-    //   if (users.some(user => user.username === newUser.username || user.email === newUser.email)) {
-    //     return false
-    //   }
-
-    //   users.push(newUser)
-    //   localStorage.setItem('users', JSON.stringify(users))
-    //   return true
-
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/auth/register', newUser, {
         headers: {
@@ -81,8 +45,6 @@ export const AuthProvider = ({ children }) => {
           'Content-Type': 'application/json'
         }
       })
-
-      // Save token to localStorage
       console.log('signup successful')
       navigate('/login')
       return true;
@@ -92,22 +54,10 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async () => {
-    // localStorage.removeItem('auth_token'); // Clear the stored token
-    //   localStorage.removeItem('currentUser')
-    //   setUser(null)
-    //   setIsAuthenticated(false)
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/logout`, {}, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+      const response = await BrikoulchiApi.post(`/auth/logout`, {}, {
       });
       console.log(response.data.message); // "Successfully logged out"
-      localStorage.removeItem('auth_token'); // Clear the stored token
-      localStorage.removeItem('currentUser')
-      setUser(null)
       setIsAuthenticated(false)
     } catch (error) {
       console.error('Logout failed:', error.response.data);
@@ -116,15 +66,6 @@ export const AuthProvider = ({ children }) => {
 
   // // Update user info
   const updateUserInfo = async (updatedInfo) => {
-    //   const users = JSON.parse(localStorage.getItem('users')) || []
-    //   const updatedUsers = users.map(u => u.username === user.username ? { ...u, ...updatedInfo } : u)
-
-    //   localStorage.setItem('users', JSON.stringify(updatedUsers))
-
-    //   const updatedUser = { ...user, ...updatedInfo }
-    //   localStorage.setItem('currentUser', JSON.stringify(updatedUser))
-    //   setUser(updatedUser)
-
     //   return true
     const res = await axios.put('http://127.0.0.1:8000/api/updateUserInfo', updatedInfo, {
       headers: {
@@ -140,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{
       isAuthenticated,
-      user,
+      username,
       setlogin,
       logout,
       signup,
