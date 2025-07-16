@@ -1,24 +1,25 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import ConfermationBox from './ConfirmationBox.jsx'
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth()
-  const navigate = useNavigate()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const handleLogout = () => {
-    logout()
-    navigate('/')
-    setIsMenuOpen(false)
+    logout();
+    navigate('/');
+    setIsMenuOpen(false);
   }
-  
+
   const toggleMenu = () => {
     // console.log(isAuthenticated);
-    
+
     setIsMenuOpen(!isMenuOpen)
   }
-  
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-4 py-6">
       <nav className="max-w-7xl mx-auto flex justify-between items-center">
@@ -31,7 +32,7 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
-        
+
         {/* Navigation Pill */}
         <div className="bg-white/80 backdrop-blur-lg rounded-full shadow-lg px-6 py-2">
           {/* Desktop menu */}
@@ -51,8 +52,8 @@ const Navbar = () => {
                 <Link to="/my-services" className="text-gray-700 hover:text-primary transition">
                   My Services
                 </Link>
-                <button 
-                  onClick={handleLogout}
+                <button
+                  onClick={()=>{setConfirm(true)}}
                   className="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary-dark transition"
                 >
                   Logout
@@ -72,53 +73,53 @@ const Navbar = () => {
               </>
             )}
           </div>
-          
+
           {/* Mobile menu button */}
-          <button 
+          <button
             onClick={toggleMenu}
             className="md:hidden text-gray-700 hover:text-primary transition"
           >
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
           </button>
         </div>
-        
+
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="absolute top-full right-4 mt-2 md:hidden bg-white rounded-lg shadow-lg p-4 w-48">
             <div className="space-y-3">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="block text-gray-700 hover:text-primary transition"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                to="/services" 
+              <Link
+                to="/services"
                 className="block text-gray-700 hover:text-primary transition"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
               </Link>
-              
+
               {isAuthenticated ? (
                 <>
-                  <Link 
-                    to="/account" 
+                  <Link
+                    to="/account"
                     className="block text-gray-700 hover:text-primary transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Account
                   </Link>
-                  <Link 
-                    to="/my-services" 
+                  <Link
+                    to="/my-services"
                     className="block text-gray-700 hover:text-primary transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Services
                   </Link>
-                  <button 
-                    onClick={handleLogout}
+                  <button
+                    onClick={()=>{setConfirm(true)}}
                     className="block w-full text-left text-gray-700 hover:text-primary transition"
                   >
                     Logout
@@ -126,15 +127,15 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link 
-                    to="/login" 
+                  <Link
+                    to="/login"
                     className="block text-gray-700 hover:text-primary transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Login
                   </Link>
-                  <Link 
-                    to="/signup" 
+                  <Link
+                    to="/signup"
                     className="block text-gray-700 hover:text-primary transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -145,6 +146,11 @@ const Navbar = () => {
             </div>
           </div>
         )}
+      {confirm && <ConfermationBox 
+      onConfirm={()=>{handleLogout();setConfirm(false)}} 
+      onCancel={()=>{setConfirm(false)}} 
+      message='are you sure you want to logout !?'
+      />}
       </nav>
     </div>
   )

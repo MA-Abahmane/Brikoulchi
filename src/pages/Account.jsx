@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-
+import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 const Account = () => {
-  const { user, updateUserInfo } = useAuth()
+  const { user, updateUserInfo, setIsAuthenticated } = useAuth()
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -16,7 +16,15 @@ const Account = () => {
   })
 
   const [message, setMessage] = useState({ type: '', text: '' })
-
+  useEffect(() => {
+    const getIsAuth = async () => {
+      const res = await BrikoulchiApi('/auth/isAuthenticated');
+      setIsAuthenticated(res.data.data.status);
+      console.log(res);
+      console.log('anadou'); 
+    }
+    getIsAuth();
+  }, []);
   useEffect(() => {
     if (user) {
       console.log(localStorage.getItem('auth_id'));

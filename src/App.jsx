@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext.jsx'
 
@@ -21,7 +21,7 @@ import MyServices from './pages/MyServices.jsx'
 function App() {
   const { isAuthenticated } = useAuth()
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
-  
+
   // Protected route component
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated) {

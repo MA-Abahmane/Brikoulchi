@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Hero from '../components/Hero.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
 import ServiceSlider from '../components/ServiceSlider.jsx'
-import { ServicesMap } from '../components/Map.jsx'
+// import { ServicesMap } from '../components/Map.jsx'
 import { getInitialServices } from '../data/services.js'
 import getInitialCategories from '../data/services.js'
 
@@ -12,7 +12,6 @@ const Home = () => {
   const [allServices, setAllServices] = useState([])
   const [topRatedServices, setTopRatedServices] = useState([])
   const [newServices, setNewServices] = useState([])
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -119,7 +118,7 @@ const Home = () => {
             <p className="text-gray-600">Explore service providers in your area</p>
           </div>
 
-          <ServicesMap services={allServices} />
+          {/* <ServicesMap services={allServices} /> */}
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">

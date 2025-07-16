@@ -1,87 +1,48 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import FormInput from '../components/FormInput.jsx'
-import { useAuth } from '../context/AuthContext.jsx'
-import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import FormInput from '../components/FormInput.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import BrikoulchiApi from '../api/BrikoulchiApi.jsx';
+import axios from 'axios';
+
 const Login = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  })
-  const [error, setError] = useState('')
-  const { isAuthenticated, setlogin } = useAuth();
-  const navigate = useNavigate()
-  const login = async ({ username, password }) => {
-    try {
-      const response = await BrikoulchiApi.post('/auth/login', {
-        username,
-        password
-      }, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const { token, user } = response.data.data;
-      console.log('hello');
-
-
-      // Optionally update state
-      // setLogin(true);
-
-      navigate('/');
-
-      return true;
-    } catch (error) {
-      if (error.response) {
-        console.error('Login failed:', error.response.data);
-        setError(error.response.data.message);
-        throw error.response.data;
-      } else if (error.request) {
-        console.error('No response:', error.request);
-        throw { message: 'Network error - no server response' };
-      } else {
-        console.error('Error:', error.message);
-        throw { message: error.message };
-      }
-    }
-  };
-
-  // Redirect if already logged in
-  if (isAuthenticated) {
-    navigate('/')
-    return null
-  }
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const { setIsAuthenticated, setAccessToken} = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = () => {
-    setError('')
+  const handleSubmit = async () => {
+    setError('');
+    const { username, password } = formData;
 
-    // Basic validation
-    if (!formData.username.trim() || !formData.password.trim()) {
-      setError('Please enter both username and password')
-      return
+    if (!username.trim() || !password.trim()) {
+      setError('Please enter both username and password');
+      return;
     }
 
-    // Try to login
-    login({ "username": formData.username, "password": formData.password })
+    try {
+      const res = await BrikoulchiApi.post('api/auth/login', {
+        username,
+        password
+      });
 
-    // if (success ) {
-    //   console.log('Login successful')
-    //   navigate('/')
-    // } else {
-    //   console.log('Login failed')
-    //   setError('Invalid username or password')
-    // }
-  }
+      setAccessToken(res.data.access_token);
+      res && setIsAuthenticated(true);
+      navigate('/');
+    } catch (err) {
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError('Login failed. Please try again.');
+      }
+      console.error('Login error:', err.response?.data || err.message);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto px-4 py-16">
@@ -134,7 +95,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

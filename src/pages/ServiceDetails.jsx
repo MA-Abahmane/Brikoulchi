@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { ServicesMap } from '../components/Map.jsx'
+// import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
 const ServiceDetails = () => {

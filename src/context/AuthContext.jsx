@@ -1,96 +1,104 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import BrikoulchiApi from '../api/BrikoulchiApi'
-const AuthContext = createContext()
+import { createContext, useContext, useState, useEffect } from 'react';
+import BrikoulchiApi from '../api/BrikoulchiApi';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [username, setUsername] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [accessToken, setAccessToken] = useState(null);
+  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
+
+  // Auto-check if user is authenticated when app loads
   useEffect(() => {
-    const getIsAuth = async () => {
-      const res = await BrikoulchiApi('/auth/isAuthenticated');
-      setIsAuthenticated(res);
-      getIsAuth();
-    }
+    const checkAuth = async () => {
+      try {
+        // Check if user is authenticated
+        const res = await axios.post('http://localhost:8000/api/auth/refresh', {}, {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        console.log('check');
+        console.log(res);
+
+        if (res.statusText === 'OK') {
+          console.log('checkAuth');
+
+          setIsAuthenticated(true);
+          setUsername(res.data.username ?? null);
+          setAccessToken(res.data.access_token)
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuth();
   }, []);
-
-  const setlogin = async (username, password) => {
-    console.log('im here');
-    // setIsAuthenticated(true);
-    const name = username.match(/^([^@]+)/)[1];
-    const User = {
-      firstName: '',
-      lastName: '',
-      username: '',
-      email: '',
-      phone1: '',
-      phone2: '',
-      password: '',
-      confirmPassword: ''
-    }
-    localStorage.setItem('currentUser', JSON.stringify(User))
-    setUsername(User)
-    // setIsAuthenticated(true)
-    return true
-  }
-
-
   const signup = async (newUser) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/auth/register', newUser, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-      console.log('signup successful')
-      navigate('/login')
+      await BrikoulchiApi.post('/api/auth/register', newUser);
+      console.log('Signup successful');
+      navigate('/');
       return true;
     } catch (error) {
-      throw (error);
-    }
-  }
-
-  const logout = async () => {
-    try {
-      const response = await BrikoulchiApi.post(`/auth/logout`, {}, {
-      });
-      console.log(response.data.message); // "Successfully logged out"
-      setIsAuthenticated(false)
-    } catch (error) {
-      console.error('Logout failed:', error.response.data);
+      console.error('Signup failed:', error.response?.data || error.message);
+      throw error;
     }
   };
 
-  // // Update user info
-  const updateUserInfo = async (updatedInfo) => {
-    //   return true
-    const res = await axios.put('http://127.0.0.1:8000/api/updateUserInfo', updatedInfo, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+  const logout = async () => {
+    try {
+      console.log('Logging out...');
 
-    })
-    console.log(res);
-  }
+      await BrikoulchiApi.post(
+        '/api/auth/logout',
+        {}, // Empty body (POST requests need either data or `null`)
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Fixed: Added space after "Bearer"
+          },
+        }
+      );
+
+      setIsAuthenticated(false);
+      setUsername(null);
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  const updateUserInfo = async (updatedInfo) => {
+    try {
+      const res = await BrikoulchiApi.put('/api/updateUserInfo', updatedInfo);
+      console.log('User updated:', res.data);
+    } catch (error) {
+      console.error('Update failed:', error.response?.data || error.message);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{
-      isAuthenticated,
-      username,
-      setlogin,
-      logout,
-      signup,
-      updateUserInfo
-    }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        username,
+        setIsAuthenticated,
+        setAccessToken,
+        logout,
+        signup,
+        updateUserInfo,
+        accessToken
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
-}
-
-export const useAuth = () => useContext(AuthContext)
-
+  );
+};
+export const useAuth = () => useContext(AuthContext);
