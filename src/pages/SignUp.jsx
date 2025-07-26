@@ -18,6 +18,7 @@ const SignUp = () => {
   })
   
   const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   
   // Redirect if already logged in
   if (isAuthenticated) {
@@ -49,6 +50,8 @@ const SignUp = () => {
     // Username validation
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required'
+    } else if (formData.username.length < 3) {
+      newErrors.username = 'Username must be at least 3 characters'
     }
     
     // Email validation
@@ -83,122 +86,149 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0
   }
   
-  const handleSubmit = () => {
-    if (validateForm()) {      
+  const handleSubmit = async () => {
+    if (validateForm()) {
+      setIsLoading(true)
+      
+      // Simulate loading delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
       const success = signup({
         ...formData,
       })
       
       if (success) {
-        console.log('Signup successful')
+        navigate('/login')
       } else {
         setErrors({
           form: 'Username or email already exists'
         })
       }
+      
+      setIsLoading(false)
     }
   }
   
   return (
-    <div className="max-w-md mx-auto px-4 py-16">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold text-royal-blue mb-6 text-center">Create an Account</h1>
-        
-        {errors.form && (
-          <div className="bg-red-50 text-red-600 p-4 rounded-md mb-6">
-            {errors.form}
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-primary/5 to-secondary/5">
+      <div className="max-w-md w-full">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i className="fas fa-user-plus text-2xl text-white"></i>
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Join Brikoulchi
+            </h1>
+            <p className="text-gray-600 mt-2">Create your account to get started</p>
           </div>
-        )}
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          {errors.form && (
+            <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl mb-6 flex items-center">
+              <i className="fas fa-exclamation-circle mr-3"></i>
+              {errors.form}
+            </div>
+          )}
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormInput
+              label="First Name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder="John"
+              required
+              error={errors.firstName}
+            />
+            
+            <FormInput
+              label="Last Name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Doe"
+              required
+              error={errors.lastName}
+            />
+          </div>
+          
           <FormInput
-            label="First Name"
-            name="firstName"
-            value={formData.firstName}
+            label="Username"
+            name="username"
+            value={formData.username}
             onChange={handleChange}
-            placeholder="John"
+            placeholder="johndoe"
             required
-            error={errors.firstName}
+            error={errors.username}
           />
           
           <FormInput
-            label="Last Name"
-            name="lastName"
-            value={formData.lastName}
+            label="Email"
+            name="email"
+            type="email"
+            value={formData.email}
             onChange={handleChange}
-            placeholder="Doe"
+            placeholder="john@example.com"
             required
-            error={errors.lastName}
+            error={errors.email}
           />
-        </div>
-        
-        <FormInput
-          label="Username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          placeholder="johndoe"
-          required
-          error={errors.username}
-        />
-        
-        <FormInput
-          label="Email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="john@example.com"
-          required
-          error={errors.email}
-        />
-        
-        <FormInput
-          label="Phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="1234567890"
-          required
-          error={errors.phone}
-        />
-        
-        <FormInput
-          label="Password"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="At least 8 characters"
-          required
-          error={errors.password}
-        />
-        
-        <FormInput
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          placeholder="Confirm your password"
-          required
-          error={errors.confirmPassword}
-        />
-        
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-blue-600 hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-md transition duration-150 mt-4"
-        >
-          Sign Up
-        </button>
-        
-        <div className="mt-6 text-center">
-          <p className="text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-royal-blue hover:text-royal-gold">
-              Log In
-            </Link>
-          </p>
+          
+          <FormInput
+            label="Phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="1234567890"
+            required
+            error={errors.phone}
+          />
+          
+          <FormInput
+            label="Password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="At least 8 characters"
+            required
+            error={errors.password}
+          />
+          
+          <FormInput
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirm your password"
+            required
+            error={errors.confirmPassword}
+          />
+          
+          <button
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none mt-6"
+          >
+            {isLoading ? (
+              <div className="flex items-center justify-center">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                Creating Account...
+              </div>
+            ) : (
+              'Create Account'
+            )}
+          </button>
+          
+          <div className="mt-8 text-center">
+            <p className="text-gray-600">
+              Already have an account?{' '}
+              <Link to="/login" className="text-primary hover:text-secondary font-semibold transition-colors">
+                Sign In
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -27,10 +27,10 @@ function Settings() {
   }
 
   return (
-    <div>
+    <div className="admin-page-container">
       <h1 className="page-title">Settings</h1>
       
-      <div className="card">
+      <div className="card" style={{ minHeight: 'calc(100vh - 200px)' }}>
         <h2 className="text-xl mb-4">Change Password</h2>
         {message.text && (
           <div className={`mb-4 p-3 rounded ${

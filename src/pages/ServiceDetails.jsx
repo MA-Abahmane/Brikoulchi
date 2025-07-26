@@ -18,7 +18,7 @@ const ServiceDetails = () => {
     const foundService = services.find(s => s.id === id)
     if (foundService) {
       setService(foundService)
-      
+
       // Load service provider info
       const users = JSON.parse(localStorage.getItem('users') || '[]')
       const foundProvider = users.find(u => u.username === foundService.userId)
@@ -26,7 +26,7 @@ const ServiceDetails = () => {
         const { password, ...providerWithoutPassword } = foundProvider
         setProvider(providerWithoutPassword)
       }
-      
+
       // Load reviews with user info
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
       const reviewsWithUsers = serviceReviews.map(review => {
@@ -36,7 +36,8 @@ const ServiceDetails = () => {
           userInfo: reviewUser ? {
             username: reviewUser.username,
             firstName: reviewUser.firstName,
-            lastName: reviewUser.lastName
+            lastName: reviewUser.lastName,
+            profileImage: reviewUser.profileImage
           } : null
         }
       })
@@ -64,7 +65,8 @@ const ServiceDetails = () => {
         userInfo: {
           username: user.username,
           firstName: user.firstName,
-          lastName: user.lastName
+          lastName: user.lastName,
+          profileImage: user.profileImage
         }
       }]
       setReviews(updatedReviews)
@@ -84,13 +86,13 @@ const ServiceDetails = () => {
     )
   }
 
-  const averageRating = reviews.length 
-    ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length 
+  const averageRating = reviews.length
+    ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length
     : 0
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
-      <button 
+      <button
         onClick={() => navigate('/services')}
         className="mb-6 flex items-center text-primary hover:text-primary-dark transition-colors"
       >
@@ -101,7 +103,7 @@ const ServiceDetails = () => {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Service Image */}
         <div className="h-64 relative">
-          <img 
+          <img
             src={`/${service.category.toLowerCase().replace(/\s+/g, '_')}.jpg`}
             alt={service.title}
             className="w-full h-full object-cover"
@@ -114,29 +116,40 @@ const ServiceDetails = () => {
         {/* Service Details */}
         <div className="p-8">
           <h1 className="text-3xl font-bold text-primary mb-4">{service.title}</h1>
-          
+
           {/* Provider Info */}
           {provider && (
-            <Link 
-              to={`/user/${provider.username}`}
-              className="flex items-center mb-6 hover:bg-gray-50 p-3 rounded-lg transition-colors"
-            >
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
-                {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
-              </div>
-              <div className="ml-4">
-                <div className="font-semibold text-gray-800">
-                  {provider.firstName} {provider.lastName}
+            <div className="flex items-center justify-between mb-6 bg-gray-50 p-3 rounded-lg">
+              <Link
+                to={`/user/${provider.username}`}
+                className="flex items-center hover:bg-gray-100 p-3 rounded-lg transition-colors"
+              >
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                  {provider.firstName?.charAt(0)}{provider.lastName?.charAt(0)}
                 </div>
-                <div className="text-sm text-gray-600">View Provider Profile</div>
-              </div>
-            </Link>
+                <div className="ml-4">
+                  <div className="font-semibold text-gray-800">
+                    {provider.firstName} {provider.lastName}
+                  </div>
+                  <div className="text-sm text-gray-600">View Provider Profile</div>
+                </div>
+              </Link>
+              {isAuthenticated && user?.username !== provider.username && (
+                <Link
+                  to="/webchat"
+                  className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors flex items-center"
+                >
+                  <i className="fas fa-comments mr-2"></i>
+                  Chat with Provider
+                </Link>
+              )}
+            </div>
           )}
-          
+
           <div className="flex items-center mb-6">
             <div className="flex text-secondary">
               {[1, 2, 3, 4, 5].map((star) => (
-                <i 
+                <i
                   key={star}
                   className={`fas fa-star ${star <= averageRating ? 'text-secondary' : 'text-gray-300'}`}
                 ></i>
@@ -264,19 +277,32 @@ const ServiceDetails = () => {
                     <div className="flex items-center">
                       <div className="flex text-secondary">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <i 
+                          <i
                             key={star}
                             className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
                           ></i>
                         ))}
                       </div>
                       {review.userInfo && (
-                        <Link 
-                          to={`/user/${review.userInfo.username}`}
-                          className="ml-4 font-medium text-primary hover:text-primary-dark"
-                        >
-                          {review.userInfo.firstName} {review.userInfo.lastName}
-                        </Link>
+                        <div className="ml-4 flex items-center">
+                          {review.userInfo.profileImage ? (
+                            <img
+                              src={review.userInfo.profileImage}
+                              alt={`${review.userInfo.firstName} ${review.userInfo.lastName}`}
+                              className="w-8 h-8 rounded-full object-cover mr-2"
+                            />
+                          ) : (
+                            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm mr-2">
+                              {review.userInfo.firstName[0]}{review.userInfo.lastName[0]}
+                            </div>
+                          )}
+                          <Link
+                            to={`/user/${review.userInfo.username}`}
+                            className="font-medium text-primary hover:text-primary-dark"
+                          >
+                            {review.userInfo.firstName} {review.userInfo.lastName}
+                          </Link>
+                        </div>
                       )}
                     </div>
                     <span className="text-gray-500 text-sm">

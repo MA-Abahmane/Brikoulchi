@@ -17,6 +17,7 @@ import Login from './pages/Login.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Account from './pages/Account.jsx'
 import MyServices from './pages/MyServices.jsx'
+import WebChat from './pages/WebChat.jsx'
 
 function App() {
   const { isAuthenticated } = useAuth()
@@ -62,6 +63,11 @@ function App() {
               <Route path="/user/:username" element={<UserProfile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/webchat" element={
+                <ProtectedRoute>
+                  <WebChat />
+                </ProtectedRoute>
+              } />
               <Route path="/account" element={
                 <ProtectedRoute>
                   <Account />

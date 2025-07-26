@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 
 const Hero = () => {
 
-   const videoRef = useRef(null);
+    const videoRef = useRef(null);
   const speedTarget = useRef(1); // Target speed (1 = normal)
   const animationRef = useRef(null);
 
@@ -52,21 +52,39 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Find the Best Local Services with Brikoulchi
+        <div className="text-center max-w-4xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Find the Best Local Services with
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
+              Brikoulchi
+            </span>
           </h1>
-          <p className="text-lg sm:text-xl text-white mb-8 max-w-xl mx-auto">
+          <p className="text-xl sm:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Connect with trusted local service providers in your area for all your needs
           </p>
-          <Link
-            to="/services"
-            className="inline-block bg-[#3B5BFF] hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            Browse Services
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center bg-white text-primary font-bold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+            >
+              <i className="fas fa-search mr-2"></i>
+              Browse Services
+            </Link>
+            <Link
+              to="/signup"
+              className="inline-flex items-center justify-center border-2 border-white text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:bg-white hover:text-primary transform hover:-translate-y-1"
+            >
+              <i className="fas fa-user-plus mr-2"></i>
+              Become a Provider
+            </Link>
+          </div>
         </div>
       </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+      <div className="absolute bottom-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-300/20 rounded-full blur-lg"></div>
     </div>
   )
 }
