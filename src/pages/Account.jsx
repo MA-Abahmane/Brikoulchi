@@ -2,19 +2,19 @@ import { useState, useEffect, useRef } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 const Account = () => {
-  const { user, updateUserInfo } = useAuth()
+  const { user, updateUserInfo, formData, setFormData } = useAuth()
 
-  const [formData, setFormData] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    phone1: '',
-    phone2: '',
-    address: '',
-    image: ''
-  })
+  // const [formData, setFormData] = useState({
+  //   id: '',
+  //   firstName: '',
+  //   lastName: '',
+  //   username: '',
+  //   email: '',
+  //   phone1: '',
+  //   phone2: '',
+  //   address: '',
+  //   // image: ''
+  // })
 
   const [message, setMessage] = useState({ type: '', text: '' })
   const [imagePreview, setImagePreview] = useState(null)
@@ -23,20 +23,21 @@ const Account = () => {
 
   useEffect(() => {
     if (user) {
-
-      setFormData({
-        id: user.id || '',
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        username: user.username || '',
-        email: user.email || '',
-        phone1: user.phone1 || '',
-        phone2: user.phone2 || '',
-        address: user.address || '',
-      })
+      if (user && user.id !== formData.id) {
+        setFormData({
+          id: user.id || '',
+          firstName: user.firstName || '',
+          lastName: user.lastName || '',
+          username: user.username || '',
+          email: user.email || '',
+          phone1: user.phone1 || '',
+          phone2: user.phone2 || '',
+          address: user.address || '',
+        });
+      }
       setImagePreview(user.image || null)
     }
-    
+
   }, [user])
 
   const handleChange = (e) => {
@@ -131,10 +132,10 @@ const Account = () => {
     }
     console.log('form data :', formData);
     for (let pair of data.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
+      console.log(`data   ${pair[0]}: ${pair[1]}`);
     } try {
       const success = await updateUserInfo(data)
-
+      console.log('success', success);
       if (success) {
         setMessage({
           type: 'success',

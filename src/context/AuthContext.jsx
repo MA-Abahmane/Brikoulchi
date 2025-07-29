@@ -9,6 +9,17 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
+    const [formData, setFormData] = useState({
+    id: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    phone1: '',
+    phone2: '',
+    address: '',
+    // image: ''
+  })
   const navigate = useNavigate();
 
   // Auto-check if user is authenticated when app loads
@@ -29,7 +40,7 @@ export const AuthProvider = ({ children }) => {
           console.log('checkAuth');
 
           setIsAuthenticated(true);
-          setUser(JSON.parse(localStorage.getItem('user')) ?? null);
+          setUser(res.data.user ?? null);
           setAccessToken(res.data.access_token)
         } else {
           setIsAuthenticated(false);
@@ -94,8 +105,10 @@ export const AuthProvider = ({ children }) => {
         },
       });
       console.log('User updated:', res.data);
+      return true;
     } catch (error) {
       console.error('Update failed:', error.response?.data || error.message);
+      return false;
     }
   };
 
@@ -104,6 +117,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         user,
+        formData,
+        setFormData,
         setUser,
         setIsAuthenticated,
         setAccessToken,
