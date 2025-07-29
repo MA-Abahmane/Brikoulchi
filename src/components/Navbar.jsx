@@ -26,21 +26,22 @@ const Navbar = () => {
       const checkNewMessages = () => {
         const users = JSON.parse(localStorage.getItem('users') || '[]')
           .filter(u => u.username !== user?.username);
+        console.log('im the authenticated user:', user);
         
-        for (const otherUser of users) {
-          const chatId = [user.username, otherUser.username].sort().join('_');
-          const messages = JSON.parse(localStorage.getItem(`chat_${chatId}`) || '[]');
+        // for (const otherUser of users) {
+        //   const chatId = [user.username, otherUser.username].sort().join('_');
+        //   const messages = JSON.parse(localStorage.getItem(`chat_${chatId}`) || '[]');
           
-          const hasUnread = messages.some(msg => 
-            msg.sender !== user.username && !msg.read
-          );
+        //   const hasUnread = messages.some(msg => 
+        //     msg.sender !== user.username && !msg.read
+        //   );
           
-          if (hasUnread) {
-            setHasNewMessages(true);
-            return;
-          }
-        }
-        setHasNewMessages(false);
+        //   if (hasUnread) {
+        //     setHasNewMessages(true);
+        //     return;
+        //   }
+        // }
+        // setHasNewMessages(false);
       };
 
       checkNewMessages();
@@ -120,7 +121,7 @@ const Navbar = () => {
                   </span>
                 </div>
                 <button 
-                  onClick={handleLogout}
+                  onClick={()=>{setConfirm(true)}}
                   className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 font-medium"
                 >
                   Logout
@@ -217,7 +218,7 @@ const Navbar = () => {
                     )}
                   </Link>
                   <button 
-                    onClick={handleLogout}
+                    onClick={()=>{setConfirm(true)}}
                     className="block w-full text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
                   >
                     <i className="fas fa-sign-out-alt w-5 mr-2"></i>

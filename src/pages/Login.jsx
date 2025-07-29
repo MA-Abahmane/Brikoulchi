@@ -3,14 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import BrikoulchiApi from '../api/BrikoulchiApi.jsx';
-import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
-  const { setIsAuthenticated, setAccessToken} = useAuth();
+  const { setIsAuthenticated, setAccessToken, setUser, isAuthenticated} = useAuth();
   const navigate = useNavigate();
-
+  if (isAuthenticated){
+    navigate('/');
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -32,6 +33,8 @@ const Login = () => {
       });
 
       setAccessToken(res.data.access_token);
+      setUser(res.data.user);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
       res && setIsAuthenticated(true);
       navigate('/');
     } catch (err) {

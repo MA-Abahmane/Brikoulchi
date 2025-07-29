@@ -2,12 +2,13 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import BrikoulchiApi from '../api/BrikoulchiApi';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import setupInterceptors from '../api/interceptors/setupInterceptors';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
-  const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   // Auto-check if user is authenticated when app loads
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
           console.log('checkAuth');
 
           setIsAuthenticated(true);
-          setUsername(res.data.username ?? null);
+          setUser(JSON.parse(localStorage.getItem('user')) ?? null);
           setAccessToken(res.data.access_token)
         } else {
           setIsAuthenticated(false);
@@ -36,10 +37,14 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Auth check failed:', error);
         setIsAuthenticated(false);
+        setUser(false);
+        localStorage.removeItem('user');
       }
     };
 
     checkAuth();
+    setUser(JSON.parse(localStorage.getItem('user')));
+    setupInterceptors(BrikoulchiApi, { setIsAuthenticated, setAccessToken })
   }, []);
   const signup = async (newUser) => {
     try {
@@ -66,10 +71,12 @@ export const AuthProvider = ({ children }) => {
           },
         }
       );
-
+      console.log(user);
       setIsAuthenticated(false);
-      setUsername(null);
-      navigate('/login');
+      setUser(null);
+
+      localStorage.removeItem('user');
+      navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -77,7 +84,15 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserInfo = async (updatedInfo) => {
     try {
-      const res = await BrikoulchiApi.put('/api/updateUserInfo', updatedInfo);
+      for (let pair of updatedInfo.entries()){
+        console.log(pair[0] + ':::' ,  pair[1]);
+      }
+      const res = await BrikoulchiApi.post(`/api/updateUserInfo/${user.id}`, updatedInfo, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       console.log('User updated:', res.data);
     } catch (error) {
       console.error('Update failed:', error.response?.data || error.message);
@@ -88,7 +103,8 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        username,
+        user,
+        setUser,
         setIsAuthenticated,
         setAccessToken,
         logout,

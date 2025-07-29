@@ -29,33 +29,33 @@ BrikoulchiApi.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             // Handle unauthorized access
-            console.log('Unauthorized access');
+            console.log('Unauthorized access hahahaha');
         }
         return Promise.reject(error);
     }
 );
-BrikoulchiApi.interceptors.response.use(
-    response => response,
-    async error => {
-        if (error.response.status === 401) {
-            try {
-                const res = await axios.post('http://localhost:8000/api/auth/refresh', {}, {
-                    withCredentials: true,
-                });
-                const { setAccessToken, setIsAuthenticated, } = useAuth();
-                const newToken = res.data.access_token;
-                setAccessToken(newToken);
-                setIsAuthenticated(true);
-                error.config.headers['Authorization'] = `Bearer ${newToken}`;
-                return axios(error.config);
-            } catch (refreshError) {
-                return Promise.reject(refreshError);
-            }
-        }
+// BrikoulchiApi.interceptors.response.use(
+//     response => response,
+//     async error => {
+//         if (error.response.status === 401) {
+//             try {
+//                 const res = await axios.post('http://localhost:8000/api/auth/refresh', {}, {
+//                     withCredentials: true,
+//                 });
+//                 const { setAccessToken, setIsAuthenticated, } = useAuth();
+//                 const newToken = res.data.access_token; 
+//                 setAccessToken(newToken);
+//                 setIsAuthenticated(true);
+//                 error.config.headers['Authorization'] = `Bearer ${newToken}`;
+//                 return axios(error.config);
+//             } catch (refreshError) {
+//                 return Promise.reject(refreshError);
+//             }
+//         }
 
-        return Promise.reject(error);
-    }
-);
+//         return Promise.reject(error);
+//     }
+// );
 
 
 export default BrikoulchiApi;

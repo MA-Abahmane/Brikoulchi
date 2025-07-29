@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 const Account = () => {
-  const { user, updateUserInfo, setIsAuthenticated } = useAuth()
+  const { user, updateUserInfo } = useAuth()
 
   const [formData, setFormData] = useState({
+    id: '',
     firstName: '',
     lastName: '',
     username: '',
@@ -13,19 +13,19 @@ const Account = () => {
     phone1: '',
     phone2: '',
     address: '',
-    profileImage: ''
+    image: ''
   })
 
   const [message, setMessage] = useState({ type: '', text: '' })
   const [imagePreview, setImagePreview] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
   const fileInputRef = useRef(null)
 
   useEffect(() => {
     if (user) {
-      console.log(localStorage.getItem('auth_id'));
 
       setFormData({
-        id: localStorage.getItem('auth_id'),
+        id: user.id || '',
         firstName: user.firstName || '',
         lastName: user.lastName || '',
         username: user.username || '',
@@ -33,10 +33,10 @@ const Account = () => {
         phone1: user.phone1 || '',
         phone2: user.phone2 || '',
         address: user.address || '',
-        profileImage: user.profileImage || ''
       })
-      setImagePreview(user.profileImage || null)
+      setImagePreview(user.image || null)
     }
+    
   }, [user])
 
   const handleChange = (e) => {
@@ -68,15 +68,8 @@ const Account = () => {
         return
       }
 
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result)
-        setFormData(prev => ({
-          ...prev,
-          profileImage: reader.result
-        }))
-      }
-      reader.readAsDataURL(file)
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   }
 
@@ -84,14 +77,14 @@ const Account = () => {
     setImagePreview(null)
     setFormData(prev => ({
       ...prev,
-      profileImage: ''
+      image: ''
     }))
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
   }
 
-  const handleSubmit =async () => {
+  const handleSubmit = async () => {
     // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone1) {
       setMessage({
@@ -129,8 +122,18 @@ const Account = () => {
       return
     }
 
-    try {
-      const success = await updateUserInfo(formData)
+    const data = new FormData()
+    for (const key in formData) {
+      data.append(key, formData[key])
+    }
+    if (imageFile) {
+      data.append('image', imageFile)
+    }
+    console.log('form data :', formData);
+    for (let pair of data.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    } try {
+      const success = await updateUserInfo(data)
 
       if (success) {
         setMessage({
