@@ -2,43 +2,54 @@ import { useState, useEffect, useRef } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 const Account = () => {
-  const { user, updateUserInfo, formData, setFormData } = useAuth()
+  const { user, updateUserInfo } = useAuth();
+  const [formData, setFormData] = useState({
+    id: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    phone1: '',
+    phone2: '',
+    address: '',
+    image: ''
+  });
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const fileInputRef = useRef(null);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-  // const [formData, setFormData] = useState({
-  //   id: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   username: '',
-  //   email: '',
-  //   phone1: '',
-  //   phone2: '',
-  //   address: '',
-  //   // image: ''
-  // })
-
-  const [message, setMessage] = useState({ type: '', text: '' })
-  const [imagePreview, setImagePreview] = useState(null)
-  const [imageFile, setImageFile] = useState(null)
-  const fileInputRef = useRef(null)
-
+  // 1. First effect - Initialize form data only once
   useEffect(() => {
-    if (user) {
-      if (user && user.id !== formData.id) {
-        setFormData({
-          id: user.id || '',
-          firstName: user.firstName || '',
-          lastName: user.lastName || '',
-          username: user.username || '',
-          email: user.email || '',
-          phone1: user.phone1 || '',
-          phone2: user.phone2 || '',
-          address: user.address || '',
-        });
-      }
-      setImagePreview(user.image || null)
+    if (user && !hasInitialized) {
+      const savedData = localStorage.getItem('profile_info_update');
+      const initialData = savedData 
+        ? JSON.parse(savedData)
+        : {
+            id: user.id || '',
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            username: user.username || '',
+            email: user.email || '',
+            phone1: user.phone1 || '',
+            phone2: user.phone2 || '',
+            address: user.address || '',
+            image: user.image || ''
+          };
+      
+      setFormData(initialData);
+      setImagePreview(user.image || null);
+      setHasInitialized(true);
     }
+  }, [user, hasInitialized]);
 
-  }, [user])
+  // 2. Second effect - Persist form data changes
+  useEffect(() => {
+    if (hasInitialized) {
+      localStorage.setItem('profile_info_update', JSON.stringify(formData));
+    }
+  }, [formData, hasInitialized]);
 
   const handleChange = (e) => {
     const { name, value } = e.target

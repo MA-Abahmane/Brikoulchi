@@ -9,17 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
-    const [formData, setFormData] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    phone1: '',
-    phone2: '',
-    address: '',
-    // image: ''
-  })
   const navigate = useNavigate();
 
   // Auto-check if user is authenticated when app loads
@@ -87,6 +76,7 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
 
       localStorage.removeItem('user');
+      localStorage.removeItem('profile_info_update');
       navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
@@ -117,8 +107,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         user,
-        formData,
-        setFormData,
         setUser,
         setIsAuthenticated,
         setAccessToken,
