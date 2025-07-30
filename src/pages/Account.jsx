@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 const Account = () => {
-  const { user, updateUserInfo } = useAuth();
+  const { user, updateUserInfo, setUser } = useAuth();
   const [formData, setFormData] = useState({
     id: '',
     firstName: '',
@@ -12,32 +12,31 @@ const Account = () => {
     phone1: '',
     phone2: '',
     address: '',
-    image: ''
   });
   const [message, setMessage] = useState({ type: '', text: '' });
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const fileInputRef = useRef(null);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const rmprofileRef = useRef(false);
 
   // 1. First effect - Initialize form data only once
   useEffect(() => {
     if (user && !hasInitialized) {
       const savedData = localStorage.getItem('profile_info_update');
-      const initialData = savedData 
+      const initialData = savedData
         ? JSON.parse(savedData)
         : {
-            id: user.id || '',
-            firstName: user.firstName || '',
-            lastName: user.lastName || '',
-            username: user.username || '',
-            email: user.email || '',
-            phone1: user.phone1 || '',
-            phone2: user.phone2 || '',
-            address: user.address || '',
-            image: user.image || ''
-          };
-      
+          id: user.id || '',
+          firstName: user.firstName || '',
+          lastName: user.lastName || '',
+          username: user.username || '',
+          email: user.email || '',
+          phone1: user.phone1 || '',
+          phone2: user.phone2 || '',
+          address: user.address || '',
+        };
+
       setFormData(initialData);
       setImagePreview(user.image || null);
       setHasInitialized(true);
@@ -86,15 +85,16 @@ const Account = () => {
   }
 
   const removeImage = () => {
-    setImagePreview(null)
-    setFormData(prev => ({
-      ...prev,
-      image: ''
-    }))
+    setImagePreview(null);
+    setImageFile(null);
+    rmprofileRef.current = true;
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''
+      fileInputRef.current.value = '';
     }
-  }
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
   const handleSubmit = async () => {
     // Basic validation
@@ -134,29 +134,44 @@ const Account = () => {
       return
     }
 
-    const data = new FormData()
+    const data = new FormData();
+
+    // Append all form data except rmprofileimage
     for (const key in formData) {
-      data.append(key, formData[key])
+      if (key !== 'rmprofileimage') {
+        data.append(key, formData[key]);
+      }
     }
+
+    // Append image file if exists
     if (imageFile) {
-      data.append('image', imageFile)
+      data.append('image', imageFile);
     }
-    console.log('form data :', formData);
-    for (let pair of data.entries()) {
-      console.log(`data   ${pair[0]}: ${pair[1]}`);
-    } try {
-      const success = await updateUserInfo(data)
-      console.log('success', success);
+
+    // Append rmprofileimage if true
+    console.log('check if there is rmpI', formData.rmprofileimage);
+
+    if (rmprofileRef.current) {
+      data.append('rmprofileimage', 'true');
+    }
+    console.log('test abde:::::::::::::::::::::::::::::::');
+    console.log(imagePreview);
+    console.log(imageFile);
+    console.table(user);
+    console.table(formData);
+    console.log('test abde:::::::::::::::::::::::::::::::');
+    try {
+      const success = await updateUserInfo(data);
       if (success) {
+        rmprofileRef.current = false;
+        localStorage.removeItem('profile_info_update');
         setMessage({
           type: 'success',
           text: 'Your information has been updated successfully!'
-        })
-      } else {
-        setMessage({
-          type: 'error',
-          text: 'Failed to update your information. Please try again.'
-        })
+        });
+        // Reset removal flag after successful update
+        setUser(formData);
+        setUser(prev => ({ ...prev, image: imagePreview }));
       }
     } catch (error) {
       console.error(error)
@@ -202,7 +217,8 @@ const Account = () => {
                 />
               ) : (
                 <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center border-4 border-gray-200">
-                  <i className="fas fa-user text-gray-400 text-2xl"></i>
+                  <i className="fas fa-user text-5xl"></i>
+
                 </div>
               )}
               {imagePreview && (
