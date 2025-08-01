@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 // import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { getInitialServices } from '../data/services.js'
+import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 
 const ServiceDetails = () => {
   const { id } = useParams()
@@ -13,20 +15,20 @@ const ServiceDetails = () => {
   const [comment, setComment] = useState('')
   const [reviews, setReviews] = useState([])
 
-  useEffect(() => {
-    const services = JSON.parse(localStorage.getItem('services') || '[]')
+  useEffect(async() => {
+    const services = await getInitialServices();
     const foundService = services.find(s => s.id === id)
     if (foundService) {
       setService(foundService)
 
       // Load service provider info
-      const users = JSON.parse(localStorage.getItem('users') || '[]')
-      const foundProvider = users.find(u => u.username === foundService.userId)
-      if (foundProvider) {
-        const { password, ...providerWithoutPassword } = foundProvider
-        setProvider(providerWithoutPassword)
-      }
-
+      try{
+        const res = BrikoulchiApi(`api/user/index/${service.user_id}`)
+        res && setProvider(res.data);
+      }catch(error){
+        console.log("Error while tyring to fetch the provider inforomations", error.message);
+        return false;
+      } 
       // Load reviews with user info
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
       const reviewsWithUsers = serviceReviews.map(review => {

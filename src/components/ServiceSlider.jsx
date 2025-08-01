@@ -29,7 +29,7 @@ const ServiceSlider = ({ title, services }) => {
               <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="h-48 relative">
                   <img 
-                    src="https://via.placeholder.com/640x480.png/0077bb?text=business+pariatur"
+                    src={service.image}
                     alt={service.name}
                     className="w-full h-full object-cover"
                   />
