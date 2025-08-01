@@ -6,13 +6,13 @@ const ServiceCard = ({ service }) => {
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
         <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
           <img 
-            src={`/${service.category.toLowerCase().replace(/\s+/g, '_')}.jpg`}
+            src={`/${service.category.name.toLowerCase().replace(/\s+/g, '_')}.jpg`}
             alt={service.title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           <div className="absolute top-4 right-4 bg-gradient-to-r from-primary to-secondary backdrop-blur-sm text-white text-xs font-bold px-3 py-2 rounded-full shadow-lg">
-            {service.category}
+            {service.category.name}
           </div>
         </div>
         <div className="p-6">

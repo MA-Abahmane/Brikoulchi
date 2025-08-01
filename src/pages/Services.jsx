@@ -1,39 +1,73 @@
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import CategoryFilter from '../components/CategoryFilter.jsx'
-import ServiceCard from '../components/ServiceCard.jsx'
-import { getServicesByCategory } from '../data/services.js'
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import CategoryFilter from '../components/CategoryFilter.jsx';
+import ServiceCard from '../components/ServiceCard.jsx';
+import { getServicesByCategory } from '../data/services.js';
 
 const Services = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const initialCategory = searchParams.get('category') || 'All Services'
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'All Services';
 
-  const [selectedCategory, setSelectedCategory] = useState(initialCategory)
-  const [services, setServices] = useState([])
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
-    const filteredServices =async () => {
-      const servs = await getServicesByCategory(selectedCategory)
-      setServices(servs)
-    }
-    filteredServices();
+    const fetchServices = async () => {
+      const fetchedServices = await getServicesByCategory(selectedCategory);
+      setServices(fetchedServices);
+    };
+    fetchServices();
 
     // Update URL with selected category
-    if (selectedCategory === 'All Services') {
-      setSearchParams({})
-    } else {
-      setSearchParams({ category: selectedCategory })
+    setSearchParams(
+      selectedCategory === 'All Services'
+        ? {}
+        : { category: selectedCategory }
+    );
+  }, [selectedCategory, setSearchParams]);
+
+  const filteredServices = services.filter((service) => {
+    if (!searchTerm) return true;
+
+    const lowerSearch = searchTerm.toLowerCase();
+    let match = false;
+
+    // Check all string fields in the service object (excluding 'category')
+    for (let key in service) {
+      if (
+        key !== 'category' &&
+        typeof service[key] === 'string' &&
+        service[key].toLowerCase().includes(lowerSearch)
+      ) {
+        match = true;
+        break; // stop early if found
+      }
     }
-  }, [selectedCategory, setSearchParams])
+
+    // Also check inside the category object
+    if (
+      service.category?.name?.toLowerCase().includes(lowerSearch) ||
+      service.category?.description?.toLowerCase().includes(lowerSearch)
+    ) {
+      match = true;
+    }
+
+    return match;
+  });
+
+
 
   const handleCategorySelect = (catname) => {
-    console.log(catname);
-    setSelectedCategory(catname)
-  }
+    setSelectedCategory(catname);
+  };
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
           Browse Services
@@ -43,7 +77,6 @@ const Services = () => {
         </p>
       </div>
 
-      {/* Search Bar */}
       <div className="mb-8">
         <div className="max-w-md mx-auto relative">
           <input
@@ -56,17 +89,15 @@ const Services = () => {
           <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         </div>
       </div>
-      
+
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Sidebar with filters */}
         <div className="w-full lg:w-64 flex-shrink-0">
-          <CategoryFilter 
+          <CategoryFilter
             selectedCategory={selectedCategory}
             onSelectCategory={handleCategorySelect}
           />
         </div>
 
-        {/* Main content */}
         <div className="flex-grow">
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -74,14 +105,14 @@ const Services = () => {
                 {selectedCategory === 'All Services' ? 'All Services' : `${selectedCategory} Services`}
               </h2>
               <p className="text-gray-600 mt-1">
-                {filteredServices.length} {filteredServices.length === 1 ? 'service' : 'services'} 
+                {filteredServices.length} {filteredServices.length === 1 ? 'service' : 'services'}
                 {searchTerm && ` found for "${searchTerm}"`}
               </p>
             </div>
-            
+
             {searchTerm && (
               <button
-                onClick={() => setSearchTerm('')}
+                onClick={handleClearSearch}
                 className="mt-4 sm:mt-0 text-primary hover:text-primary-dark transition-colors flex items-center"
               >
                 <i className="fas fa-times mr-2"></i>
@@ -89,10 +120,10 @@ const Services = () => {
               </button>
             )}
           </div>
-          
+
           {filteredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredServices.map(service => (
+              {filteredServices.map((service) => (
                 <div key={service.id} className="animate-fadeIn">
                   <ServiceCard service={service} />
                 </div>
@@ -107,14 +138,13 @@ const Services = () => {
                 {searchTerm ? 'No results found' : 'No services available'}
               </h3>
               <p className="text-gray-600 mb-6">
-                {searchTerm 
+                {searchTerm
                   ? `We couldn't find any services matching "${searchTerm}". Try adjusting your search terms.`
-                  : 'There are no services available in this category yet.'
-                }
+                  : 'There are no services available in this category yet.'}
               </p>
               {searchTerm && (
                 <button
-                  onClick={() => setSearchTerm('')}
+                  onClick={handleClearSearch}
                   className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
                 >
                   Clear Search
@@ -125,7 +155,7 @@ const Services = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Services
+export default Services;

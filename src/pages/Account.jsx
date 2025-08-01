@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import FormInput from '../components/FormInput.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 const Account = () => {
-  const { user, updateUserInfo, setUser } = useAuth();
+  const { user, updateUserInfo, message, setMessage, setUser } = useAuth();
   const [formData, setFormData] = useState({
     id: '',
     firstName: '',
@@ -13,7 +13,6 @@ const Account = () => {
     phone2: '',
     address: '',
   });
-  const [message, setMessage] = useState({ type: '', text: '' });
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const fileInputRef = useRef(null);
@@ -67,7 +66,7 @@ const Account = () => {
           type: 'error',
           text: 'Image size must be less than 5MB'
         })
-        return
+        return true;
       }
 
       // Check file type
@@ -81,6 +80,8 @@ const Account = () => {
 
       setImageFile(file);
       setImagePreview(URL.createObjectURL(file));
+      // setFormData(prev => ({...prev, image:imageFile}))
+      // setUser(prev => ({ ...prev, image: imageFile }));
     }
   }
 
@@ -165,13 +166,16 @@ const Account = () => {
       if (success) {
         rmprofileRef.current = false;
         localStorage.removeItem('profile_info_update');
+        setFormData(prev => ({ ...prev, image: imagePreview }));
         setMessage({
           type: 'success',
           text: 'Your information has been updated successfully!'
         });
-        // Reset removal flag after successful update
-        setUser(formData);
+        // setUser(formData);
         setUser(prev => ({ ...prev, image: imagePreview }));
+
+
+        // Reset removal flag after successful update
       }
     } catch (error) {
       console.error(error)
@@ -191,7 +195,7 @@ const Account = () => {
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-2xl font-bold text-royal-blue mb-6">Account Information</h1>
 
-        {message.text && (
+        {message.text ? (
           <div
             className={`p-4 rounded-md mb-6 ${message.type === 'success'
               ? 'bg-green-50 text-green-700'
@@ -200,7 +204,11 @@ const Account = () => {
           >
             {message.text}
           </div>
-        )}
+        ) : <div
+          className={`p-4 rounded-md mb-6 bg-white-50 text-white`}
+        >
+          test
+        </div>}
 
         {/* Profile Image Section */}
         <div className="mb-8">

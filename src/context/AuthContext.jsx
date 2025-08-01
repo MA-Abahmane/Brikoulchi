@@ -9,8 +9,14 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [message, setMessage] = useState({ type: '', text: '' });
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (message.text) {
+      const timer = setTimeout(() => setMessage({ type: '', text: '' }), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
   // Auto-check if user is authenticated when app loads
   useEffect(() => {
     const checkAuth = async () => {
@@ -85,8 +91,8 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserInfo = async (updatedInfo) => {
     try {
-      for (let pair of updatedInfo.entries()){
-        console.log(pair[0] + ':::' ,  pair[1]);
+      for (let pair of updatedInfo.entries()) {
+        console.log(pair[0] + ':::', pair[1]);
       }
       const res = await BrikoulchiApi.post(`/api/updateUserInfo/${user.id}`, updatedInfo, {
         headers: {
@@ -107,6 +113,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         user,
+        message,
+        setMessage,
         setUser,
         setIsAuthenticated,
         setAccessToken,

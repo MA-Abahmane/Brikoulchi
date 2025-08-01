@@ -7,9 +7,12 @@ import { useState } from "react";
 // }
 export async function APICategories() {
     try {
+        console.log('test getting categories');
         const res = await axios.get("http://127.0.0.1:8000/api/Categories")
-        // console.log(res.data);
-
+        console.log('after trying to fetch');
+        console.log('categories#########################');
+        console.log(res.data);
+        console.log('categories#########################');
         return res.data;
     }
     catch (error) {
@@ -19,9 +22,10 @@ export async function APICategories() {
 }
 export async function APIServices() {
     try {
-        const res = await axios.get('http://127.0.0.1:8000/api/Services')
-
-
+        const res = await axios.get('http://127.0.0.1:8000/api/Services');
+        console.log('services#########################');
+        console.log(res.data);
+        console.log('services#########################');
         return res.data;
 
     } catch (error) {
@@ -1350,12 +1354,12 @@ export const getUserServices = (userId) => {
 // Function to get services by category
 export const getServicesByCategory = async (catname) => {
     if (catname === "All Services") {
-        return getInitialServices()
+        return getInitialServices();
     }
     const services = await getInitialServices()
-    
-    console.log('services page');
-    console.log(services);
+
+    // console.log('services page');
+    // console.log(services);
 
     return services.filter(service => service.category.name === catname)
 }

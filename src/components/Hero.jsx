@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Hero = () => {
 
     const videoRef = useRef(null);
   const speedTarget = useRef(1); // Target speed (1 = normal)
   const animationRef = useRef(null);
+  const {user, isAuthenticated} = useAuth();
 
   const smoothSpeed = () => {
     if (!videoRef.current) return;
@@ -70,13 +72,13 @@ const Hero = () => {
               <i className="fas fa-search mr-2"></i>
               Browse Services
             </Link>
-            <Link
+            {!(isAuthenticated && user)&&<Link
               to="/signup"
               className="inline-flex items-center justify-center border-2 border-white text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:bg-white hover:text-primary transform hover:-translate-y-1"
             >
               <i className="fas fa-user-plus mr-2"></i>
               Become a Provider
-            </Link>
+            </Link>}
           </div>
         </div>
       </div>

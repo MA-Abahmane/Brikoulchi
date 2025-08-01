@@ -24,7 +24,7 @@ function Categories() {
           <p>Total Services: {servicesByCategory[category.name] || 0}</p>
           <ul style={{ marginTop: '10px', marginLeft: '20px' }}>
             {category.services.map(service => (
-              <li key={service} style={{ color: '#8ab8ff', marginBottom: '5px' }}>{service}</li>
+              <li key={service} style={{ color: '#8ab8ff', marginBottom: '5px' }}>{service.name}</li>
             ))}
           </ul>
         </div>
