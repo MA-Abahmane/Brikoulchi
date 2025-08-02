@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { getInitialServices } from '../data/services.js'
+import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 
 const ServiceDetails = () => {
   const { id } = useParams()
@@ -18,17 +19,31 @@ const ServiceDetails = () => {
     const fetchservices = async () => {
       const services = await getInitialServices();
       const foundService = services.find(s => s.id === parseInt(id))
-      console.log('reviews ::::::::::::::::::::::::', foundService);
       if (foundService) {
         setService(foundService)
         setProvider(foundService.user);
-        console.log('servs$$$$$$$$$$$$$$$$$$$$$$$$$$', service);
-        setReviews(foundService.reviews);
+        // setReviews(foundService.reviews);
       }
     }
     fetchservices();
-    console.log('revs$$$$$$$$$$$$$$$$$$$$$$$$$$', reviews);
-  }, [id])
+  }, [id]);
+  useEffect(() => {
+    const fetchreviews = async () => {
+      try {
+        const res = await BrikoulchiApi(`/api/Service/reviews/${id}`)
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^', res);
+        
+        if (res.data) {
+          setReviews(res.data)
+        }
+        return true;
+      } catch (error) {
+        console.log('error while fetching the reviwes of this service', error.message);
+        return false;
+      }
+    }
+    fetchreviews();
+  }, [id]);
 
   const handleRatingSubmit = () => {
     if (!isAuthenticated) {
@@ -64,6 +79,7 @@ const ServiceDetails = () => {
   }
 
   if (!service) {
+
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -74,6 +90,7 @@ const ServiceDetails = () => {
   const averageRating = reviews.length
     ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length
     : 0
+  console.log("%%%%%%%%%%%%%%%%%%%%%%", reviews);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
@@ -260,41 +277,42 @@ const ServiceDetails = () => {
                 <div key={review.id} className="border-b border-gray-200 pb-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center">
-                      <div className="flex text-secondary">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <i
-                            key={star}
-                            className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
-                          ></i>
-                        ))}
-                      </div>
-                      {review.userInfo && (
+                      
+                      {review.user && (
                         <div className="ml-4 flex items-center">
-                          {review.userInfo.profileImage ? (
+                          {review.user.image ? (
                             <img
-                              src={review.userInfo.profileImage}
-                              alt={`${review.userInfo.firstName} ${review.userInfo.lastName}`}
+                              src={review.user.image}
+                              alt={`${review.user.firstName} ${review.user.lastName}`}
                               className="w-8 h-8 rounded-full object-cover mr-2"
                             />
                           ) : (
                             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm mr-2">
-                              {review.userInfo.firstName[0]}{review.userInfo.lastName[0]}
+                              {review.user.firstName[0]}{review.user.lastName[0]}
                             </div>
                           )}
                           <Link
-                            to={`/user/${review.userInfo.username}`}
+                            to={`/user/${review.user.username}`}
                             className="font-medium text-primary hover:text-primary-dark"
                           >
-                            {review.userInfo.firstName} {review.userInfo.lastName}
+                            {review.user.firstName} {review.user.lastName}
                           </Link>
                         </div>
                       )}
+                      <div className="flex ml-3 text-secondary">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <i
+                          key={star}
+                          className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
+                          ></i>
+                        ))}
+                      </div>
                     </div>
                     <span className="text-gray-500 text-sm">
-                      {new Date(review.date).toLocaleDateString()}
+                      {new Date(review.updated_at).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="text-gray-700">{review.comment}</p>
+                  <p className="text-gray-700">{review.text}</p>
                 </div>
               ))}
             </div>

@@ -312,14 +312,16 @@ const Account = () => {
 
         <div className="flex justify-end mt-6">
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit(); setUser(prev => ({ ...prev, image: imagePreview }));
+            }}
             className="bg-[#3B5BFF] hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-md transition duration-150"
           >
             Save Changes
           </button>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
