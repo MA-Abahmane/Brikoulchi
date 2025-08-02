@@ -31,7 +31,7 @@ const ServiceDetails = () => {
       } 
       // Load reviews with user info
       const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
-      const reviewsWithUsers = serviceReviews.map(review => {
+      const reviewsWithUsers = service.reviews.map(review => {
         const reviewUser = users.find(u => u.username === review.userId)
         return {
           ...review,
