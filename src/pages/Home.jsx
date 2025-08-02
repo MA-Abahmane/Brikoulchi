@@ -53,9 +53,11 @@ const Home = () => {
 
     fetchData()
   }, [])
-  console.log('alllserv');
-
+  console.log('allservs');
+  
   console.log(allServices);
+  
+  console.log('allcats');
   console.log(allCategories);
   return (
     <div>

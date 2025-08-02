@@ -1,50 +1,33 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-// import { ServicesMap } from '../components/Map.jsx'
+import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { getInitialServices } from '../data/services.js'
-import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { isAuthenticated, user } = useAuth()
-  const [service, setService] = useState(null)
-  const [provider, setProvider] = useState(null)
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
-  const [reviews, setReviews] = useState([])
+  const { isAuthenticated, user } = useAuth();
+  const [service, setService] = useState(null);
+  const [provider, setProvider] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
+  const [reviews, setReviews] = useState([]);
 
-  useEffect(async() => {
-    const services = await getInitialServices();
-    const foundService = services.find(s => s.id === id)
-    if (foundService) {
-      setService(foundService)
-
-      // Load service provider info
-      try{
-        const res = BrikoulchiApi(`api/user/index/${service.user_id}`)
-        res && setProvider(res.data);
-      }catch(error){
-        console.log("Error while tyring to fetch the provider inforomations", error.message);
-        return false;
-      } 
-      // Load reviews with user info
-      const serviceReviews = JSON.parse(localStorage.getItem(`reviews_${id}`) || '[]')
-      const reviewsWithUsers = service.reviews.map(review => {
-        const reviewUser = users.find(u => u.username === review.userId)
-        return {
-          ...review,
-          userInfo: reviewUser ? {
-            username: reviewUser.username,
-            firstName: reviewUser.firstName,
-            lastName: reviewUser.lastName,
-            profileImage: reviewUser.profileImage
-          } : null
-        }
-      })
-      setReviews(reviewsWithUsers)
+  useEffect(() => {
+    const fetchservices = async () => {
+      const services = await getInitialServices();
+      const foundService = services.find(s => s.id === parseInt(id))
+      console.log('reviews ::::::::::::::::::::::::', foundService);
+      if (foundService) {
+        setService(foundService)
+        setProvider(foundService.user);
+        console.log('servs$$$$$$$$$$$$$$$$$$$$$$$$$$', service);
+        setReviews(foundService.reviews);
+      }
     }
+    fetchservices();
+    console.log('revs$$$$$$$$$$$$$$$$$$$$$$$$$$', reviews);
   }, [id])
 
   const handleRatingSubmit = () => {
@@ -106,12 +89,12 @@ const ServiceDetails = () => {
         {/* Service Image */}
         <div className="h-64 relative">
           <img
-            src={`/${service.category.toLowerCase().replace(/\s+/g, '_')}.jpg`}
+            src={`/${service.category.name.toLowerCase().replace(/\s+/g, '_')}.jpg`}
             alt={service.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute top-0 right-0 bg-primary text-white px-4 py-2 m-4 rounded-full">
-            {service.category}
+            {service.category.name}
           </div>
         </div>
 
