@@ -8,12 +8,13 @@ import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, accessToken } = useAuth();
   const [service, setService] = useState(null);
   const [provider, setProvider] = useState(null);
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [text, settext] = useState('');
   const [reviews, setReviews] = useState([]);
+  const [like, setlike] = useState([]);
 
   useEffect(() => {
     const fetchservices = async () => {
@@ -32,7 +33,7 @@ const ServiceDetails = () => {
       try {
         const res = await BrikoulchiApi(`/api/Service/reviews/${id}`)
         console.log('^^^^^^^^^^^^^^^^^^^^^^^^', res);
-        
+
         if (res.data) {
           setReviews(res.data)
         }
@@ -45,36 +46,33 @@ const ServiceDetails = () => {
     fetchreviews();
   }, [id]);
 
-  const handleRatingSubmit = () => {
+  const handleRatingSubmit = async () => {
     if (!isAuthenticated) {
       navigate('/login')
       return
     }
 
-    if (rating && comment) {
+    if (rating && text) {
       const newReview = {
-        id: Date.now(),
-        userId: user.username,
+        service_id: service.id,
+        user_id: user.username,
         rating,
-        comment,
-        date: new Date().toISOString()
+        like,
+        text,
       }
 
-      const updatedReviews = [...reviews, {
-        ...newReview,
-        userInfo: {
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          profileImage: user.profileImage
-        }
-      }]
-      setReviews(updatedReviews)
-      localStorage.setItem(`reviews_${id}`, JSON.stringify(updatedReviews))
+      try {
+        const res = await BrikoulchiApi.post('/api/auth/createReview', newReview, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        });
+        console.log(res);
+        return res;
 
-      // Reset form
-      setRating(0)
-      setComment('')
+      } catch (error) {
+
+      }
     }
   }
 
@@ -170,22 +168,22 @@ const ServiceDetails = () => {
               <div className="space-y-2">
                 <p className="flex items-center">
                   <i className="fas fa-phone mr-3 text-primary"></i>
-                  {service.phone1}
+                  {service.user.phone1}
                 </p>
                 {service.phone2 && (
                   <p className="flex items-center">
                     <i className="fas fa-phone mr-3 text-primary"></i>
-                    {service.phone2}
+                    {service.user.phone2}
                   </p>
                 )}
                 <p className="flex items-center">
                   <i className="fas fa-envelope mr-3 text-primary"></i>
-                  {service.email}
+                  {service.user.email}
                 </p>
-                {service.address && (
+                {service.user.address && (
                   <p className="flex items-center">
                     <i className="fas fa-map-marker-alt mr-3 text-primary"></i>
-                    {service.address}
+                    {service.user.address}
                   </p>
                 )}
               </div>
@@ -196,11 +194,11 @@ const ServiceDetails = () => {
               <div className="space-y-2">
                 <p className="flex items-center">
                   <i className="fas fa-tag mr-3 text-primary"></i>
-                  {service.serviceName}
+                  {service.name}
                 </p>
                 <p className="flex items-center">
                   <i className="fas fa-tools mr-3 text-primary"></i>
-                  {service.serviceType}
+                  {service.type}
                 </p>
                 {service.workDays && (
                   <p className="flex items-center">
@@ -245,8 +243,8 @@ const ServiceDetails = () => {
                     ))}
                   </div>
                   <textarea
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    value={text}
+                    onChange={(e) => settext(e.target.value)}
                     placeholder="Write your review..."
                     className="w-full p-3 border border-gray-300 rounded-md mb-4"
                     rows="4"
@@ -277,7 +275,7 @@ const ServiceDetails = () => {
                 <div key={review.id} className="border-b border-gray-200 pb-6">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center">
-                      
+
                       {review.user && (
                         <div className="ml-4 flex items-center">
                           {review.user.image ? (
@@ -302,8 +300,8 @@ const ServiceDetails = () => {
                       <div className="flex ml-3 text-secondary">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <i
-                          key={star}
-                          className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
+                            key={star}
+                            className={`fas fa-star ${star <= review.rating ? 'text-secondary' : 'text-gray-300'}`}
                           ></i>
                         ))}
                       </div>
