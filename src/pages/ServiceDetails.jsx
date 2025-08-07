@@ -14,7 +14,6 @@ const ServiceDetails = () => {
   const [rating, setRating] = useState(0);
   const [text, settext] = useState('');
   const [reviews, setReviews] = useState([]);
-  const [like, setlike] = useState([]);
 
   useEffect(() => {
     const fetchservices = async () => {
@@ -55,23 +54,27 @@ const ServiceDetails = () => {
     if (rating && text) {
       const newReview = {
         service_id: service.id,
-        user_id: user.username,
+        user_id: user.id,
         rating,
-        like,
         text,
       }
 
       try {
+        console.log('test before submit review');
+        console.log('review', newReview);
+        
         const res = await BrikoulchiApi.post('/api/auth/createReview', newReview, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           }
         });
+        console.log('test after submit review');
         console.log(res);
         return res;
 
       } catch (error) {
-
+          console.log('error', error.message);
+          
       }
     }
   }
