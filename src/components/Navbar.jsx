@@ -26,7 +26,7 @@ const Navbar = () => {
       const checkNewMessages = () => {
         const users = JSON.parse(localStorage.getItem('users') || '[]')
           .filter(u => u.username !== user?.username);
-        console.log('im the authenticated user:', user);
+        // console.log('im the authenticated user:', user);
         
         // for (const otherUser of users) {
         //   const chatId = [user.username, otherUser.username].sort().join('_');

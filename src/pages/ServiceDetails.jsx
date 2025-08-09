@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
@@ -14,6 +14,7 @@ const ServiceDetails = () => {
   const [rating, setRating] = useState(0);
   const [text, settext] = useState('');
   const [reviews, setReviews] = useState([]);
+  const like = useRef(false);
 
   useEffect(() => {
     const fetchservices = async () => {
@@ -27,30 +28,32 @@ const ServiceDetails = () => {
     }
     fetchservices();
   }, [id]);
-  useEffect(() => {
-    const fetchreviews = async () => {
-      try {
-        const res = await BrikoulchiApi(`/api/Service/reviews/${id}`)
-        console.log('^^^^^^^^^^^^^^^^^^^^^^^^', res);
+  const fetchreviews = async () => {
+    try {
+      const res = await BrikoulchiApi(`/api/Service/reviews/${id}`)
+      console.log('^^^^^^^^^^^^^^^^^^^^^^^^', res);
 
-        if (res.data) {
-          setReviews(res.data)
-        }
-        return true;
-      } catch (error) {
-        console.log('error while fetching the reviwes of this service', error.message);
-        return false;
+      if (res.data) {
+        setReviews(res.data)
       }
+      return true;
+    } catch (error) {
+      console.log('error while fetching the reviwes of this service', error.message);
+      return false;
     }
+  }
+  useEffect(() => {
     fetchreviews();
-  }, [id]);
+  }, [id, like]);
 
   const handleRatingSubmit = async () => {
+    
     if (!isAuthenticated) {
       navigate('/login')
       return
     }
-
+    
+    console.log('test submmit');
     if (rating && text) {
       const newReview = {
         service_id: service.id,
@@ -62,23 +65,42 @@ const ServiceDetails = () => {
       try {
         console.log('test before submit review');
         console.log('review', newReview);
-        
+
         const res = await BrikoulchiApi.post('/api/auth/createReview', newReview, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           }
         });
+        fetchreviews();
         console.log('test after submit review');
         console.log(res);
         return res;
 
       } catch (error) {
-          console.log('error', error.message);
-          
+        console.log('error', error.message);
+
       }
     }
   }
+  const ReactWithLike = async (reviewId) => {
+    try {
+      console.log('before making the request', like.current);
+      console.log('before making the request', user.id);
 
+      const res = await BrikoulchiApi.post(`/api/auth/ReactWithLike/${reviewId}`, { like: like.current, userId: user.id }, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      fetchreviews();
+      console.log('after making the request', like);
+      console.log('after making the request', user.id);
+      console.log(res);
+      return true;
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  }
   if (!service) {
 
     return (
@@ -314,6 +336,13 @@ const ServiceDetails = () => {
                     </span>
                   </div>
                   <p className="text-gray-700">{review.text}</p>
+                  <div>
+                    <button onClick={() => { like.current = !review.liked_by_users.some((u) => u.id === user.id); ReactWithLike(review.id) }}>
+                      {review.liked_by_users.some((u) => u.id === user.id) ? <i className='fas fa-thumbs-up text-blue-600'></i> :
+                        <i className='fas fa-thumbs-up text-gray-300'></i>}
+                    </button>
+                    <span className='text-gray-400'> {review.like_count}</span>
+                  </div>
                 </div>
               ))}
             </div>
