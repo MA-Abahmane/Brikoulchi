@@ -47,12 +47,12 @@ const ServiceDetails = () => {
   }, [id, like]);
 
   const handleRatingSubmit = async () => {
-    
+
     if (!isAuthenticated) {
       navigate('/login')
       return
     }
-    
+
     console.log('test submmit');
     if (rating && text) {
       const newReview = {
@@ -101,8 +101,22 @@ const ServiceDetails = () => {
       console.log('Error:', error);
     }
   }
+  const RmouveReview = async (reviewId) => {
+    try {
+      const res = await BrikoulchiApi.post(`api/auth/RemouveReview/${reviewId}`, { userId: user.id }, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      console.log(res);
+      fetchreviews();
+      return true;
+    } catch (error) {
+      console.log('Error:', error);
+      return false;
+    }
+  }
   if (!service) {
-
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -276,7 +290,7 @@ const ServiceDetails = () => {
                   ></textarea>
                   <button
                     onClick={handleRatingSubmit}
-                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
+                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150transition duration-150"
                   >
                     Submit Review
                   </button>
@@ -299,7 +313,7 @@ const ServiceDetails = () => {
               {reviews.map((review) => (
                 <div key={review.id} className="border-b border-gray-200 pb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center">
+                    <div className="flex flex-1 items-center">
 
                       {review.user && (
                         <div className="ml-4 flex items-center">
@@ -331,6 +345,7 @@ const ServiceDetails = () => {
                         ))}
                       </div>
                     </div>
+                    {review.user_id === user.id && <button onClick={()=>{RmouveReview(review.id)}} className='mr-3 '><i className='fas fa-times text-gray-400 hover:text-gray-600 transition duration-150'></i></button>}
                     <span className="text-gray-500 text-sm">
                       {new Date(review.updated_at).toLocaleDateString()}
                     </span>
@@ -338,8 +353,8 @@ const ServiceDetails = () => {
                   <p className="text-gray-700">{review.text}</p>
                   <div>
                     <button onClick={() => { like.current = !review.liked_by_users.some((u) => u.id === user.id); ReactWithLike(review.id) }}>
-                      {review.liked_by_users.some((u) => u.id === user.id) ? <i className='fas fa-thumbs-up text-blue-600'></i> :
-                        <i className='fas fa-thumbs-up text-gray-300'></i>}
+                      {review.liked_by_users.some((u) => u.id === user.id) ? <i className='fas fa-thumbs-up text-blue-600 hover:text-blue-700 transition duration-150'></i> :
+                        <i className='fas fa-thumbs-up text-gray-300 hover:text-gray-500 transition duration-150'></i>}
                     </button>
                     <span className='text-gray-400'> {review.like_count}</span>
                   </div>
