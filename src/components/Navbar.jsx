@@ -89,7 +89,6 @@ const Navbar = () => {
             <Link to="/services" className="text-gray-700 hover:text-primary transition-colors font-medium">
               Services
             </Link>
-            {console.log(isAuthenticated)}
             {isAuthenticated ? (
               <>
                 <Link to="/account" className="text-gray-700 hover:text-primary transition-colors font-medium">

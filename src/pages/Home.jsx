@@ -17,9 +17,6 @@ const Home = () => {
       try {
         const fetchedCategories = await getInitialCategories()
         const fetchedServices = await getInitialServices()
-        console.log('feched');
-        console.log(fetchedCategories);
-        console.log(fetchedServices);
         setAllCategories(fetchedCategories)
         setAllServices(fetchedServices)
 
@@ -53,12 +50,6 @@ const Home = () => {
 
     fetchData()
   }, [])
-  console.log('allservs');
-  
-  console.log(allServices);
-  
-  console.log('allcats');
-  console.log(allCategories);
   return (
     <div>
       {/* Hero Section */}
@@ -91,9 +82,6 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {
-              console.log(allCategories)
-            }
             {allCategories.slice(0, 8).map(category => (
               <CategoryCard key={category.id} category={category} />
             ))

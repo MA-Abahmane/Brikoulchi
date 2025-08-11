@@ -15,11 +15,8 @@ const CategoryFilter = ({ selectedCategory, onSelectCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       const Cats = await getInitialCategories();
-      console.log('filter categories');
-      console.log(Cats);
       setServiceCategories(Cats);
     }
-    console.log(typeof selectedCategory);
     fetchCategories();
   }, [])
   const toggleDropdown = () => {

@@ -15,24 +15,21 @@ const ServiceDetails = () => {
   const [text, settext] = useState('');
   const [reviews, setReviews] = useState([]);
   const like = useRef(false);
-
-  useEffect(() => {
-    const fetchservices = async () => {
-      const services = await getInitialServices();
-      const foundService = services.find(s => s.id === parseInt(id))
-      if (foundService) {
-        setService(foundService)
-        setProvider(foundService.user);
-        // setReviews(foundService.reviews);
-      }
+  const fetchservices = async () => {
+    const services = await getInitialServices();
+    const foundService = services.find(s => s.id === parseInt(id))
+    if (foundService) {
+      setService(foundService)
+      setProvider(foundService.user);
+      // setReviews(foundService.reviews);
     }
+  }
+  useEffect(() => {
     fetchservices();
   }, [id]);
   const fetchreviews = async () => {
     try {
       const res = await BrikoulchiApi(`/api/Service/reviews/${id}`)
-      console.log('^^^^^^^^^^^^^^^^^^^^^^^^', res);
-
       if (res.data) {
         setReviews(res.data)
       }
@@ -63,39 +60,30 @@ const ServiceDetails = () => {
       }
 
       try {
-        console.log('test before submit review');
-        console.log('review', newReview);
-
         const res = await BrikoulchiApi.post('/api/auth/createReview', newReview, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           }
         });
+
         fetchreviews();
-        console.log('test after submit review');
-        console.log(res);
+        settext('');
+        setRating(0);
         return res;
 
       } catch (error) {
         console.log('error', error.message);
-
       }
     }
   }
   const ReactWithLike = async (reviewId) => {
     try {
-      console.log('before making the request', like.current);
-      console.log('before making the request', user.id);
-
       const res = await BrikoulchiApi.post(`/api/auth/ReactWithLike/${reviewId}`, { like: like.current, userId: user.id }, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
       fetchreviews();
-      console.log('after making the request', like);
-      console.log('after making the request', user.id);
-      console.log(res);
       return true;
     } catch (error) {
       console.log('Error:', error);
@@ -108,7 +96,6 @@ const ServiceDetails = () => {
           Authorization: `Bearer ${accessToken}`
         }
       });
-      console.log(res);
       fetchreviews();
       return true;
     } catch (error) {
@@ -116,7 +103,7 @@ const ServiceDetails = () => {
       return false;
     }
   }
-  if (!service) {
+  if (!user || !service) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -127,8 +114,6 @@ const ServiceDetails = () => {
   const averageRating = reviews.length
     ? reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length
     : 0
-  console.log("%%%%%%%%%%%%%%%%%%%%%%", reviews);
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <button
@@ -138,7 +123,6 @@ const ServiceDetails = () => {
         <i className="fas fa-arrow-left mr-2"></i>
         Back to Services
       </button>
-
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Service Image */}
         <div className="h-64 relative">
@@ -290,7 +274,7 @@ const ServiceDetails = () => {
                   ></textarea>
                   <button
                     onClick={handleRatingSubmit}
-                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150transition duration-150"
+                    className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-6 rounded-md transition duration-150"
                   >
                     Submit Review
                   </button>
@@ -345,7 +329,7 @@ const ServiceDetails = () => {
                         ))}
                       </div>
                     </div>
-                    {review.user_id === user.id && <button onClick={()=>{RmouveReview(review.id)}} className='mr-3 '><i className='fas fa-times text-gray-400 hover:text-gray-600 transition duration-150'></i></button>}
+                    {review.user_id === user.id && <button onClick={() => { RmouveReview(review.id) }} className='mr-3 '><i className='fas fa-times text-gray-400 hover:text-gray-600 transition duration-150'></i></button>}
                     <span className="text-gray-500 text-sm">
                       {new Date(review.updated_at).toLocaleDateString()}
                     </span>

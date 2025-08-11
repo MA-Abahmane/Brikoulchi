@@ -3,12 +3,14 @@ import { useAuth } from '../context/AuthContext.jsx'
 import FormInput from '../components/FormInput.jsx'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { LocationPickerMap } from '../components/Map.jsx'
-import { addService, getUserServices } from '../data/services.js'
+import { addService, APIServices, getUserServices } from '../data/services.js'
 import APICategories from '../data/services.js'
-const Categories = APICategories();
+const withServices = true;
+const Categories = APICategories(withServices);
 const MyServices = () => {
   const { user } = useAuth()
   const [services, setServices] = useState([])
+  const [globalServices, setglobalServices] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedServiceType, setSelectedServiceType] = useState('')
@@ -40,14 +42,17 @@ const MyServices = () => {
   })
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState({ type: '', text: '' })
-  
+  const fetchuserservices = async () => {
+    const userServices = await getUserServices(user.id)
+    console.log('my services', userServices);
+    setServices(userServices)
+  }
   useEffect(() => {
     if (user) {
-      const userServices = getUserServices(user.username)
-      setServices(userServices)
+      fetchuserservices();
     }
   }, [user])
-  
+
   useEffect(() => {
     if (selectedCategory) {
       const category = Categories.find(c => c.name === selectedCategory)
@@ -60,7 +65,7 @@ const MyServices = () => {
       setAvailableServiceTypes([])
     }
   }, [selectedCategory])
-  
+
   useEffect(() => {
     if (selectedCategory && selectedServiceType) {
       const category = Categories.find(c => c.name === selectedCategory)
@@ -73,7 +78,7 @@ const MyServices = () => {
       setAvailableServiceTypes([])
     }
   }, [selectedCategory, selectedServiceType])
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -95,50 +100,50 @@ const MyServices = () => {
       [type]: value
     }))
   }
-  
+
   const handleLocationSelect = (newLocation) => {
     setLocation(newLocation)
   }
-  
+
   const validateForm = () => {
     const newErrors = {}
-    
+
     if (!selectedCategory) {
       newErrors.category = 'Please select a category'
     }
-    
+
     if (!selectedServiceType) {
       newErrors.serviceName = 'Please select a service'
     }
-    
+
     if (!formData.title.trim()) {
       newErrors.title = 'Title is required'
     }
-    
+
     if (!formData.description.trim()) {
       newErrors.description = 'Description is required'
     }
-    
+
     if (!formData.phone1.trim()) {
       newErrors.phone1 = 'Primary phone number is required'
     }
-    
+
     if (!Object.values(workDays).some(day => day)) {
       newErrors.workDays = 'Select at least one work day'
     }
-    
+
     if (!workHours.start || !workHours.end) {
       newErrors.workHours = 'Both start and end time are required'
     }
-    
+
     if (!location || !location.lat || !location.lng) {
       newErrors.location = 'Please select a location on the map'
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
-  
+
   const handleSubmit = () => {
     if (validateForm()) {
       const selectedDays = Object.entries(workDays)
@@ -161,11 +166,11 @@ const MyServices = () => {
         workHours: `${workHours.start} - ${workHours.end}`,
         location: location
       }
-      
+
       const createdService = addService(newService)
-      
+
       setServices(prev => [...prev, createdService])
-      
+
       setShowForm(false)
       setSelectedCategory('')
       setSelectedServiceType('')
@@ -180,18 +185,18 @@ const MyServices = () => {
         workHours: ''
       })
       setLocation(null)
-      
+
       setMessage({
         type: 'success',
         text: 'Your service has been created successfully!'
       })
-      
+
       setTimeout(() => {
         setMessage({ type: '', text: '' })
       }, 3000)
     }
   }
-  
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 ">
       <div className="flex justify-between items-center mb-8">
@@ -203,21 +208,20 @@ const MyServices = () => {
           {showForm ? 'Cancel' : 'Create New Service'}
         </button>
       </div>
-      
+
       {message.text && (
-        <div 
-          className={`p-4 rounded-md mb-6 ${
-            message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-          }`}
+        <div
+          className={`p-4 rounded-md mb-6 ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+            }`}
         >
           {message.text}
         </div>
       )}
-      
+
       {showForm && (
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <h2 className="text-xl font-semibold mb-6">Create a New Service</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <FormInput
               label="Category"
@@ -235,7 +239,7 @@ const MyServices = () => {
                 </option>
               ))}
             </FormInput>
-            
+
             <FormInput
               label="Service"
               name="serviceName"
@@ -254,7 +258,7 @@ const MyServices = () => {
               ))}
             </FormInput>
           </div>
-          
+
           <FormInput
             label="Service Type"
             name="serviceType"
@@ -269,7 +273,7 @@ const MyServices = () => {
               </option>
             ))}
           </FormInput>
-          
+
           <FormInput
             label="Title"
             name="title"
@@ -279,7 +283,7 @@ const MyServices = () => {
             required
             error={errors.title}
           />
-          
+
           <FormInput
             label="Description"
             name="description"
@@ -291,7 +295,7 @@ const MyServices = () => {
             rows={4}
             error={errors.description}
           />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormInput
               label="Primary Phone"
@@ -302,7 +306,7 @@ const MyServices = () => {
               required
               error={errors.phone1}
             />
-            
+
             <FormInput
               label="Secondary Phone (Optional)"
               name="phone2"
@@ -311,7 +315,7 @@ const MyServices = () => {
               placeholder="Alternative contact number"
             />
           </div>
-          
+
           <FormInput
             label="Email"
             name="email"
@@ -321,7 +325,7 @@ const MyServices = () => {
             placeholder="Your email address"
             required
           />
-          
+
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Work Days <span className="text-red-500">*</span>
@@ -330,11 +334,10 @@ const MyServices = () => {
               {Object.entries(workDays).map(([day, isChecked]) => (
                 <label
                   key={day}
-                  className={`flex items-center justify-center p-3 rounded-lg cursor-pointer border transition-colors ${
-                    isChecked 
-                      ? 'bg-primary text-white border-primary' 
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
-                  }`}
+                  className={`flex items-center justify-center p-3 rounded-lg cursor-pointer border transition-colors ${isChecked
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                    }`}
                 >
                   <input
                     type="checkbox"
@@ -378,7 +381,7 @@ const MyServices = () => {
               <p className="col-span-2 mt-1 text-sm text-red-500">{errors.workHours}</p>
             )}
           </div>
-          
+
           <FormInput
             label="Address"
             name="address"
@@ -386,7 +389,7 @@ const MyServices = () => {
             onChange={handleChange}
             placeholder="Your business address"
           />
-          
+
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Location <span className="text-red-500">*</span>
@@ -394,17 +397,17 @@ const MyServices = () => {
             <p className="text-sm text-gray-500 mb-2">
               Click on the map to set your service location
             </p>
-            
-            <LocationPickerMap 
+
+            <LocationPickerMap
               initialPosition={location}
               onLocationSelected={handleLocationSelect}
             />
-            
+
             {errors.location && (
               <p className="mt-1 text-sm text-red-500">{errors.location}</p>
             )}
           </div>
-          
+
           <div className="flex justify-end">
             <button
               onClick={handleSubmit}
@@ -415,10 +418,10 @@ const MyServices = () => {
           </div>
         </div>
       )}
-      
+
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl font-semibold mb-6">My Created Services</h2>
-        
+
         {services.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map(service => (

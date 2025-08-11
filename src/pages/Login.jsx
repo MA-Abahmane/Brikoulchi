@@ -32,7 +32,7 @@ const Login = () => {
         password
       });
 
-      setAccessToken(res.data.access_token);
+      setAccessToken(res.data.access_token);  
       setUser(res.data.user);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       res && setIsAuthenticated(true);

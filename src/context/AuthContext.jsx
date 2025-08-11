@@ -28,12 +28,7 @@ export const AuthProvider = ({ children }) => {
             Authorization: `Bearer ${accessToken}`
           }
         });
-        console.log('check');
-        console.log(res);
-
         if (res.statusText === 'OK') {
-          console.log('checkAuth');
-
           setIsAuthenticated(true);
           setUser(res.data.user ?? null);
           setAccessToken(res.data.access_token)
@@ -77,7 +72,6 @@ export const AuthProvider = ({ children }) => {
           },
         }
       );
-      console.log(user);
       setIsAuthenticated(false);
       setUser(null);
 
@@ -100,7 +94,6 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log('User updated:', res.data);
       return true;
     } catch (error) {
       console.error('Update failed:', error.response?.data || error.message);

@@ -1,42 +1,37 @@
 // Service categories and subcategories data
 
 import axios from "axios"
-import { useState } from "react";
 // export default function hello(){
 //     return 0;
 // }
-export async function APICategories() {
+export async function APICategories(withServices = false) {
     try {
-        console.log('test getting categories');
-        const res = await axios.get("http://127.0.0.1:8000/api/Categories")
-        console.log('after trying to fetch');
-        console.log('categories#########################');
-        console.log(res.data);
-        console.log('categories#########################');
+        const url = withServices ? `http://127.0.0.1:8000/api/Categories/${withServices}` :
+            "http://127.0.0.1:8000/api/Categories";
+        const res = await axios.get(url);
         return res.data;
     }
     catch (error) {
-        console.log("my msg")
         console.log(error.message);
     }
 }
-export async function APIServices() {
+export async function APIServices(userId = null) {
     try {
-        const res = await axios.get('http://127.0.0.1:8000/api/Services');
-        console.log('services#########################');
-        console.log(res.data);
-        console.log('services#########################');
-        return res.data;
+        const url = userId
+            ? `http://127.0.0.1:8000/api/Services/${userId}`
+            : `http://127.0.0.1:8000/api/Services`;
 
+        const res = await axios.get(url);
+        return res.data;
     } catch (error) {
         console.log(error.message + "fetching services error");
     }
 }
-export async function getInitialServices() {
-    return APIServices();
+export async function getInitialServices(userId = null) {
+    return APIServices(userId);
 }
-export default async function getInitialCategories() {
-    return APICategories();
+export default async function getInitialCategories(withServices) {
+    return APICategories(withServices);
 }
 // export const serviceCategories = [
 //     {
@@ -1347,8 +1342,8 @@ export const addService = (service) => {
 
 // Function to get services by userId
 export const getUserServices = (userId) => {
-    // const services = getInitialServices()
-    // return services.filter(service => service.userId === userId)
+    const services = getInitialServices(userId);
+    return services
 }
 
 // Function to get services by category
