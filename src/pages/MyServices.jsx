@@ -5,17 +5,16 @@ import ServiceCard from '../components/ServiceCard.jsx'
 import { LocationPickerMap } from '../components/Map.jsx'
 import { addService, APIServices, getUserServices } from '../data/services.js'
 import APICategories from '../data/services.js'
-const withServices = true;
-const Categories = APICategories(withServices);
 const MyServices = () => {
   const { user } = useAuth()
   const [services, setServices] = useState([])
-  const [globalServices, setglobalServices] = useState([])
+  const [Categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedServiceType, setSelectedServiceType] = useState('')
+  const [selectedGlobalService, setSelectedGlobalService] = useState('')
+  const [selectedService, setSlectedService] = useState('')
+  const [availableGlobalServices, setAvailableGlobalServices] = useState([])
   const [availableServices, setAvailableServices] = useState([])
-  const [availableServiceTypes, setAvailableServiceTypes] = useState([])
   const [location, setLocation] = useState(null)
   const [formData, setFormData] = useState({
     title: '',
@@ -42,6 +41,14 @@ const MyServices = () => {
   })
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState({ type: '', text: '' })
+  const fetchcategories = async () => {
+    const Categories = await APICategories(true);
+    console.log('the categories', Categories);
+    setCategories(Categories);
+  }
+  useEffect(() => {
+   fetchcategories();
+  }, [])
   const fetchuserservices = async () => {
     const userServices = await getUserServices(user.id)
     console.log('my services', userServices);
@@ -56,28 +63,23 @@ const MyServices = () => {
   useEffect(() => {
     if (selectedCategory) {
       const category = Categories.find(c => c.name === selectedCategory)
-      setAvailableServices(category ? category.services : [])
-      setSelectedServiceType('')
-      setAvailableServiceTypes([])
-    } else {
+      setAvailableGlobalServices(category ? category.globalservices : [])
+      setSelectedGlobalService('')
       setAvailableServices([])
-      setSelectedServiceType('')
-      setAvailableServiceTypes([])
+    } else {
+      setAvailableGlobalServices([])
+      setSelectedGlobalService('')
+      setAvailableServices([])
     }
   }, [selectedCategory])
-
+  const fetchservices = async ()=>{
+    const services = await APIServices(null,selectedGlobalService);
+    console.log('sub global services:', services);
+    setAvailableServices(services);
+  }
   useEffect(() => {
-    if (selectedCategory && selectedServiceType) {
-      const category = Categories.find(c => c.name === selectedCategory)
-      if (category && category.subcategories && category.subcategories[selectedServiceType]) {
-        setAvailableServiceTypes(category.subcategories[selectedServiceType])
-      } else {
-        setAvailableServiceTypes([])
-      }
-    } else {
-      setAvailableServiceTypes([])
-    }
-  }, [selectedCategory, selectedServiceType])
+    fetchservices();
+  }, [selectedCategory, selectedGlobalService])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -112,7 +114,7 @@ const MyServices = () => {
       newErrors.category = 'Please select a category'
     }
 
-    if (!selectedServiceType) {
+    if (!selectedGlobalService) {
       newErrors.serviceName = 'Please select a service'
     }
 
@@ -152,10 +154,10 @@ const MyServices = () => {
         .join(', ')
 
       const newService = {
-        userId: user.username,
+        userId: user.id,
         category: selectedCategory,
-        serviceName: selectedServiceType,
-        serviceType: document.getElementById('serviceType').value,
+        global_service_id: selectedGlobalService,
+        service_id: document.getElementById('service').value,
         title: formData.title,
         description: formData.description,
         phone1: formData.phone1,
@@ -167,13 +169,13 @@ const MyServices = () => {
         location: location
       }
 
-      const createdService = addService(newService)
+      addService(newService)
 
-      setServices(prev => [...prev, createdService])
+      setServices([...services, newService]);
 
       setShowForm(false)
       setSelectedCategory('')
-      setSelectedServiceType('')
+      setSelectedGlobalService('')
       setFormData({
         title: '',
         description: '',
@@ -241,35 +243,35 @@ const MyServices = () => {
             </FormInput>
 
             <FormInput
-              label="Service"
-              name="serviceName"
+              label="Global Service"
+              name="globalserviceName"
               type="select"
-              value={selectedServiceType}
-              onChange={(e) => setSelectedServiceType(e.target.value)}
+              value={selectedGlobalService}
+              onChange={(e) => setSelectedGlobalService(e.target.value)}
               required
               disabled={!selectedCategory}
               error={errors.serviceName}
             >
-              <option value="">Select a service</option>
-              {availableServices.map(service => (
-                <option key={service} value={service}>
-                  {service}
+              <option value="">Select a global service</option>
+              {availableGlobalServices.map(service => (
+                <option key={service.id} value={service.id}>
+                  {service.name}
                 </option>
               ))}
             </FormInput>
           </div>
 
           <FormInput
-            label="Service Type"
-            name="serviceType"
-            id="serviceType"
+            label="Service"
+            name="serviceName"
+            id="service"
             type="select"
-            disabled={!selectedServiceType}
+            disabled={!selectedGlobalService}
           >
-            <option value="">Select a service type</option>
-            {availableServiceTypes.map(type => (
-              <option key={type} value={type}>
-                {type}
+            <option value="">Select a service</option>
+            {availableServices.map(service => (
+              <option key={service.id} value={service.id}>
+                {service.name}
               </option>
             ))}
           </FormInput>

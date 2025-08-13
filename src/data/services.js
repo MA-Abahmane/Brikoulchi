@@ -1,12 +1,15 @@
 // Service categories and subcategories data
 
 import axios from "axios"
+import BrikoulchiApi from "../api/BrikoulchiApi";
+import { useAuth } from "../context/AuthContext";
 // export default function hello(){
 //     return 0;
 // }
-export async function APICategories(withServices = false) {
+const { accsessToken } = useAuth();
+export async function APICategories(withGlobalServices = false) {
     try {
-        const url = withServices ? `http://127.0.0.1:8000/api/Categories/${withServices}` :
+        const url = withGlobalServices ? `http://127.0.0.1:8000/api/Categories/${withGlobalServices}` :
             "http://127.0.0.1:8000/api/Categories";
         const res = await axios.get(url);
         return res.data;
@@ -15,12 +18,16 @@ export async function APICategories(withServices = false) {
         console.log(error.message);
     }
 }
-export async function APIServices(userId = null) {
-    try {
-        const url = userId
-            ? `http://127.0.0.1:8000/api/Services/${userId}`
-            : `http://127.0.0.1:8000/api/Services`;
+export async function APIServices(userId = null, globalserviceId = null) {
+    console.log('userID', userId);
+    console.log('globalID', globalserviceId);
 
+    try {
+        let url = userId
+            ? `http://127.0.0.1:8000/api/Services/${userId}`
+            : globalserviceId
+                ? `http://127.0.0.1:8000/api/GServices/${globalserviceId}`
+                : `http://127.0.0.1:8000/api/Services`;
         const res = await axios.get(url);
         return res.data;
     } catch (error) {
@@ -30,8 +37,8 @@ export async function APIServices(userId = null) {
 export async function getInitialServices(userId = null) {
     return APIServices(userId);
 }
-export default async function getInitialCategories(withServices) {
-    return APICategories(withServices);
+export default async function getInitialCategories(withGlobalServices) {
+    return APICategories(withGlobalServices);
 }
 // export const serviceCategories = [
 //     {
@@ -1328,16 +1335,18 @@ export default async function getInitialCategories(withServices) {
 // }
 
 // Function to add a new service
-export const addService = (service) => {
-    // const services = getInitialServices()
-    // const newService = {
-    //     ...service,
-    //     id: Date.now().toString()
-    // }
-
-    // services.push(newService)
-    // localStorage.setItem('services', JSON.stringify(services))
-    // return newService
+export const addService = async (service) => {
+    try {
+        const res = await BrikoulchiApi.post('/api/create/service', service, {
+            headers: {
+                Authorization: `Bearer ${accsessToken}`
+            }
+        })
+        console.log('service created: ', res.data);
+        return res.data
+    } catch (error) {
+        console.log('Error while creating the service:', error.message);
+    }
 }
 
 // Function to get services by userId
