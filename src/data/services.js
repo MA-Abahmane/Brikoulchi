@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext";
 // export default function hello(){
 //     return 0;
 // }
-const { accsessToken } = useAuth();
 export async function APICategories(withGlobalServices = false) {
     try {
         const url = withGlobalServices ? `http://127.0.0.1:8000/api/Categories/${withGlobalServices}` :
@@ -19,16 +18,17 @@ export async function APICategories(withGlobalServices = false) {
     }
 }
 export async function APIServices(userId = null, globalserviceId = null) {
-    console.log('userID', userId);
-    console.log('globalID', globalserviceId);
-
+    
     try {
         let url = userId
-            ? `http://127.0.0.1:8000/api/Services/${userId}`
-            : globalserviceId
-                ? `http://127.0.0.1:8000/api/GServices/${globalserviceId}`
-                : `http://127.0.0.1:8000/api/Services`;
-        const res = await axios.get(url);
+        ? `http://127.0.0.1:8000/api/Services/${userId}`
+        : globalserviceId
+        ? `http://127.0.0.1:8000/api/GServices/${globalserviceId}`
+        : `http://127.0.0.1:8000/api/Services`;
+        const res = await BrikoulchiApi.get(url);      
+        // console.log('userID', userId);
+        // console.log('globalID', globalserviceId);
+        // console.log('this is the response:', res);  
         return res.data;
     } catch (error) {
         console.log(error.message + "fetching services error");
@@ -1335,14 +1335,16 @@ export default async function getInitialCategories(withGlobalServices) {
 // }
 
 // Function to add a new service
-export const addService = async (service) => {
+export const addService = async (service, accessToken) => {
+    console.log('created service:',service);
+    
     try {
-        const res = await BrikoulchiApi.post('/api/create/service', service, {
+        const res = await BrikoulchiApi.post('/api/auth/create/service', service, {
             headers: {
-                Authorization: `Bearer ${accsessToken}`
+                Authorization: `Bearer ${accessToken}`
             }
         })
-        console.log('service created: ', res.data);
+        console.log('service test created: ', res.data);
         return res.data
     } catch (error) {
         console.log('Error while creating the service:', error.message);

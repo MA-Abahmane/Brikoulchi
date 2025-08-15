@@ -6,13 +6,13 @@ import { LocationPickerMap } from '../components/Map.jsx'
 import { addService, APIServices, getUserServices } from '../data/services.js'
 import APICategories from '../data/services.js'
 const MyServices = () => {
-  const { user } = useAuth()
+  const { user, accessToken } = useAuth()
   const [services, setServices] = useState([])
   const [Categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedGlobalService, setSelectedGlobalService] = useState('')
-  const [selectedService, setSlectedService] = useState('')
+  const [selectedService, setSelectedService] = useState('')
   const [availableGlobalServices, setAvailableGlobalServices] = useState([])
   const [availableServices, setAvailableServices] = useState([])
   const [location, setLocation] = useState(null)
@@ -47,7 +47,7 @@ const MyServices = () => {
     setCategories(Categories);
   }
   useEffect(() => {
-   fetchcategories();
+    fetchcategories();
   }, [])
   const fetchuserservices = async () => {
     const userServices = await getUserServices(user.id)
@@ -62,7 +62,10 @@ const MyServices = () => {
 
   useEffect(() => {
     if (selectedCategory) {
-      const category = Categories.find(c => c.name === selectedCategory)
+      const category = Categories.find(c => c.id === selectedCategory)
+      console.log('categorie:', category);
+      console.log('categories:', Categories);
+
       setAvailableGlobalServices(category ? category.globalservices : [])
       setSelectedGlobalService('')
       setAvailableServices([])
@@ -72,8 +75,8 @@ const MyServices = () => {
       setAvailableServices([])
     }
   }, [selectedCategory])
-  const fetchservices = async ()=>{
-    const services = await APIServices(null,selectedGlobalService);
+  const fetchservices = async () => {
+    const services = await APIServices(null, selectedGlobalService);
     console.log('sub global services:', services);
     setAvailableServices(services);
   }
@@ -154,24 +157,24 @@ const MyServices = () => {
         .join(', ')
 
       const newService = {
-        userId: user.id,
-        category: selectedCategory,
+        user_id: user.id,
+        category_id: selectedCategory,
         global_service_id: selectedGlobalService,
-        service_id: document.getElementById('service').value,
+        initial_service_id: selectedService,
         title: formData.title,
+        type: 'freelance',
+        status: 'busy',
         description: formData.description,
-        phone1: formData.phone1,
-        phone2: formData.phone2 || '',
-        email: formData.email,
-        address: formData.address || '',
         workDays: selectedDays,
         workHours: `${workHours.start} - ${workHours.end}`,
-        location: location
+        lat: 1.643,
+        lng: 5.634,
+        // location: location
       }
 
-      addService(newService)
+      addService(newService, accessToken)
 
-      setServices([...services, newService]);
+      setServices([...services]);
 
       setShowForm(false)
       setSelectedCategory('')
@@ -230,13 +233,13 @@ const MyServices = () => {
               name="category"
               type="select"
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={(e) => setSelectedCategory(parseInt(e.target.value))}
               required
               error={errors.category}
             >
               <option value="">Select a category</option>
               {Categories.map(category => (
-                <option key={category.id} value={category.name}>
+                <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}
@@ -247,7 +250,7 @@ const MyServices = () => {
               name="globalserviceName"
               type="select"
               value={selectedGlobalService}
-              onChange={(e) => setSelectedGlobalService(e.target.value)}
+              onChange={(e) => setSelectedGlobalService(parseInt(e.target.value))}
               required
               disabled={!selectedCategory}
               error={errors.serviceName}
@@ -263,7 +266,9 @@ const MyServices = () => {
 
           <FormInput
             label="Service"
-            name="serviceName"
+            value={selectedService}
+            onChange={(e) => setSelectedService(parseInt(e.target.value))}
+            name="service"
             id="service"
             type="select"
             disabled={!selectedGlobalService}
