@@ -7,6 +7,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showDeleteService, setShowDeleteService] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState({ type: '', text: '' });
@@ -104,11 +105,14 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        
         isAuthenticated,
         user,
         message,
+        showDeleteService,
         setMessage,
         setUser,
+        setShowDeleteService,
         setIsAuthenticated,
         setAccessToken,
         logout,

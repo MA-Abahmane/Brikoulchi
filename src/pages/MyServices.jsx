@@ -6,7 +6,7 @@ import { LocationPickerMap } from '../components/Map.jsx'
 import { addService, APIServices, getUserServices } from '../data/services.js'
 import APICategories from '../data/services.js'
 const MyServices = () => {
-  const { user, accessToken } = useAuth()
+  const { user, accessToken, setShowDeleteService} = useAuth()
   const [services, setServices] = useState([])
   const [Categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -48,6 +48,7 @@ const MyServices = () => {
   }
   useEffect(() => {
     fetchcategories();
+    setShowDeleteService(true);
   }, [])
   const fetchuserservices = async () => {
     const userServices = await getUserServices(user.id)
@@ -149,7 +150,7 @@ const MyServices = () => {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
       const selectedDays = Object.entries(workDays)
         .filter(([_, isSelected]) => isSelected)
@@ -172,9 +173,8 @@ const MyServices = () => {
         // location: location
       }
 
-      addService(newService, accessToken)
-
-      setServices([...services]);
+      await addService(newService, accessToken);
+      await fetchuserservices();
 
       setShowForm(false)
       setSelectedCategory('')
@@ -428,7 +428,6 @@ const MyServices = () => {
 
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl font-semibold mb-6">My Created Services</h2>
-
         {services.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map(service => (

@@ -7,10 +7,10 @@ import { BrowserRouter } from 'react-router-dom'
 import TestReq from './pages/testReq.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <BrowserRouter>
-     <AuthProvider>
-    <App />
-     </AuthProvider>
-      </BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>
 );

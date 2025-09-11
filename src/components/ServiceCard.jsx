@@ -1,16 +1,26 @@
 import { Link } from 'react-router-dom'
-
+import { useAuth } from '../context/AuthContext';
+import { remouveService } from '../data/services';
 const ServiceCard = ({ service }) => {
+  const { isAuthenticated, showDeleteService } = useAuth();
+  const RemouveService = async (serviceId) => {
+    const res = remouveService(serviceId);
+    return res;
+  }
   return (
     <Link to={`/service/${service.id}`} className="block group">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
         <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
-          <img 
+          <img
             src={service.image}
             alt={service.title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent">
+            {(isAuthenticated && showDeleteService) && <button onClick={(e) => { e.preventDefault(); RemouveService(service.id) }}>
+              <i className='fas fa-times p-4 text-gray-400 hover:text-gray-600 transition duration-150'></i>
+            </button>}
+          </div>
           <div className="absolute top-4 right-4 bg-gradient-to-r from-primary to-secondary backdrop-blur-sm text-white text-xs font-bold px-3 py-2 rounded-full shadow-lg">
             {service.category.name}
           </div>
@@ -22,7 +32,7 @@ const ServiceCard = ({ service }) => {
           <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
             {service.description}
           </p>
-          
+
           <div className="space-y-3">
             <div className="flex items-center text-sm text-gray-500">
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3">
@@ -43,7 +53,7 @@ const ServiceCard = ({ service }) => {
               <span className="truncate">{service.email}</span>
             </div>
           </div>
-          
+
           <div className="mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center justify-between">
               <span className="text-primary font-semibold text-sm">View Details</span>

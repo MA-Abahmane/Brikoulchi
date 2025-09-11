@@ -18,11 +18,11 @@ import SignUp from './pages/SignUp.jsx'
 import Account from './pages/Account.jsx'
 import MyServices from './pages/MyServices.jsx'
 import WebChat from './pages/WebChat.jsx'
-
+import { useLocation } from 'react-router-dom'
 function App() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, setShowDeleteService } = useAuth()
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
-  
+  const location = useLocation();
   // Protected route component
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated) {
@@ -30,7 +30,9 @@ function App() {
     }
     return children
   }
-
+  useEffect(()=>{
+    setShowDeleteService(false);
+  }, [location.pathname]);
   // Admin protected route
   const AdminProtectedRoute = ({ children }) => {
     if (!isAdminAuthenticated) {
@@ -88,3 +90,12 @@ function App() {
 }
 
 export default App
+// export default function App() {
+//   return (
+//     <div className="p-8">
+//       <h1 className="text-5xl font-bold text-red-500">
+//         Tailwind should now work! ✅
+//       </h1>
+//     </div>
+//   );
+// }
