@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext';
-import { remouveService } from '../data/services';
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, setDeletedServiceId, setShowConfirmBox }) => {
   const { isAuthenticated, showDeleteService } = useAuth();
-  const RemouveService = async (serviceId) => {
-    const res = remouveService(serviceId);
-    return res;
-  }
+
   return (
     <Link to={`/service/${service.id}`} className="block group">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
@@ -17,7 +13,7 @@ const ServiceCard = ({ service }) => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent">
-            {(isAuthenticated && showDeleteService) && <button onClick={(e) => { e.preventDefault(); RemouveService(service.id) }}>
+            {(isAuthenticated && showDeleteService) && <button onClick={(e) => { e.preventDefault(); setDeletedServiceId(service.id); setShowConfirmBox(true) }}>
               <i className='fas fa-times p-4 text-gray-400 hover:text-gray-600 transition duration-150'></i>
             </button>}
           </div>

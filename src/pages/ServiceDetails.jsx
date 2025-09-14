@@ -4,11 +4,11 @@ import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { getInitialServices } from '../data/services.js'
 import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
-
+import { remouveService } from '../data/services.js'
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { isAuthenticated, user, accessToken } = useAuth();
+  const { isAuthenticated, user, accessToken, showDeleteService, setShowDeleteService } = useAuth();
   const [service, setService] = useState(null);
   const [provider, setProvider] = useState(null);
   const [rating, setRating] = useState(0);
@@ -21,7 +21,6 @@ const ServiceDetails = () => {
     if (foundService) {
       setService(foundService)
       setProvider(foundService.user);
-      // setReviews(foundService.reviews);
     }
   }
   useEffect(() => {
@@ -42,7 +41,9 @@ const ServiceDetails = () => {
   useEffect(() => {
     fetchreviews();
   }, [id, like]);
-
+  if ((user && service) && (user.id === service.user_id)) {
+    setShowDeleteService(true);
+  }
   const handleRatingSubmit = async () => {
 
     if (!isAuthenticated) {
@@ -75,6 +76,15 @@ const ServiceDetails = () => {
         console.log('error', error.message);
       }
     }
+  }
+  const RemouveService = async (serviceId) => {
+    const res = await remouveService(serviceId, accessToken, user.id);
+    res ? navigate('/my-services') : '';
+    return res;
+  }
+  const EditService = async (serviceId) => {
+    const res = await editService(serviceId, accessToken, user.id, newServiceInfo);
+    return res;
   }
   const ReactWithLike = async (reviewId) => {
     try {
@@ -250,7 +260,7 @@ const ServiceDetails = () => {
             <h2 className="text-xl font-semibold mb-6">Reviews</h2>
 
             {/* Add Review */}
-            <div className="bg-gray-50 p-6 rounded-lg mb-8">
+            {!(isAuthenticated && showDeleteService) && <div className="bg-gray-50 p-6 rounded-lg mb-8">
               <h3 className="text-lg font-medium mb-4">Add a Review</h3>
               {isAuthenticated ? (
                 <>
@@ -290,10 +300,10 @@ const ServiceDetails = () => {
                   </Link>
                 </div>
               )}
-            </div>
+            </div>}
 
             {/* Reviews List */}
-            <div className="space-y-6">
+            {reviews.length ? <div className="space-y-6">
               {reviews.map((review) => (
                 <div key={review.id} className="border-b border-gray-200 pb-6">
                   <div className="flex items-center justify-between mb-2">
@@ -344,9 +354,21 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> : <div>No reviviews for this service</div>}
           </div>
         </div>
+        {(isAuthenticated && showDeleteService) && <div>
+          <button onClick={(e) => { RemouveService(service.id) }}>
+            <div className="bg-red-600 text-white px-4 py-2 m-4 rounded-full hover:bg-red-500 transition duration-150">
+              delete service
+            </div>
+          </button>
+          <button onClick={(e) => { EditService(service.id) }}>
+            <div className="bg-red-600 text-white px-4 py-2 m-4 rounded-full hover:bg-red-500 transition duration-150">
+              delete service
+            </div>
+          </button>
+        </div>}
       </div>
     </div>
   )

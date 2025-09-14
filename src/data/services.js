@@ -56,19 +56,35 @@ export const addService = async (service, accessToken) => {
         console.log('Error while creating the service:', error.message);
     }
 }
-export const remouveService = async (serviceId) => {
+export const remouveService = async (serviceId, accessToken, userId) => {
     console.log("huhuuh");
     try {
         console.log('testttes');
-        const res = await BrikoulchiApi.post(`/api/auth/delete/service/${serviceId}`,{}, {
+        const res = await BrikoulchiApi.post(`/api/auth/delete/service/${serviceId}`, { userId }, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        console.log('the service has beeb deleted sucessfully');
-        return res;
+        console.log('the service has been deleted sucessfully', res);
+        return true;
     } catch {
         console.log('Error can\'t delete that service');
+        return false;
+    }
+}
+export const editService = async (serviceId, accessToken, userId, service) => {
+    console.log("huhuuh");
+    try {
+        console.log('testttes');
+        const res = await BrikoulchiApi.post(`/api/auth/edit/service/${serviceId}`, { userId, service }, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        console.log('the service has been edited sucessfully', res);
+        return true;
+    } catch {
+        console.log('Error can\'t edit that service');
         return false;
     }
 }
