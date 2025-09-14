@@ -35,7 +35,8 @@ const MyServices = () => {
   }
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 ">
-      {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(deletedServiceId) }} onCancel={() => { setShowConfirmBox(false) }} />}      <div className="flex justify-between items-center mb-8">
+      {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(deletedServiceId) }} onCancel={() => { setShowConfirmBox(false) }} />}
+      <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-royal-blue">My Services</h1>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -55,7 +56,7 @@ const MyServices = () => {
       )}
 
       {showForm && (
-        <ServiceForm fetchuserservices={fetchuserservices} setShowForm={setShowForm} setMessage = {setMessage}/>
+        <ServiceForm fetchuserservices={fetchuserservices} setShowForm={setShowForm} setMessage={setMessage} />
       )}
 
       <div className="bg-white rounded-lg shadow-lg p-8">

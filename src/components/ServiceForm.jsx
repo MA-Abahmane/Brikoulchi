@@ -3,7 +3,7 @@ import FormInput from "./FormInput"
 import { LocationPickerMap } from "./Map"
 import { useAuth } from "../context/AuthContext"
 import { addService, APICategories, APIServices } from "../data/services"
-export default function ServiceForm({fetchuserservices, setShowForm, setMessage}) {
+export default function ServiceForm({ fetchuserservices, setShowForm, setMessage, editmode, service }) {
     const { user, accessToken } = useAuth()
     const [selectedCategory, setSelectedCategory] = useState('')
     const [Categories, setCategories] = useState([])
@@ -21,6 +21,7 @@ export default function ServiceForm({fetchuserservices, setShowForm, setMessage}
         workDays: '',
         workHours: ''
     })
+    
     const [workDays, setWorkDays] = useState({
         monday: false,
         tuesday: false,
@@ -41,6 +42,11 @@ export default function ServiceForm({fetchuserservices, setShowForm, setMessage}
         console.log('the categories', Categories);
         setCategories(Categories);
     }
+    useEffect(() => {
+        // setSelectedCategory(service.category[service.category_id]);
+        console.log(service);
+        setFormData(service);
+    })
     useEffect(() => {
         fetchcategories();
     }, [])
@@ -196,7 +202,7 @@ export default function ServiceForm({fetchuserservices, setShowForm, setMessage}
                         required
                         error={errors.category}
                     >
-                        <option value="">Select a category</option>
+                        {/* <option value="">{service ? service.category.name : "Select a category"}</option> */}
                         {Categories.map(category => (
                             <option key={category.id} value={category.id}>
                                 {category.name}
@@ -379,7 +385,7 @@ export default function ServiceForm({fetchuserservices, setShowForm, setMessage}
                         onClick={handleSubmit}
                         className="bg-[#3B5BFF] hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-md transition duration-150"
                     >
-                        Create Service
+                        {editmode ? 'Edit Service' : 'Create Service'}
                     </button>
                 </div>
             </div>

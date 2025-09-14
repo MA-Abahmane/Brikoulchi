@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ServicesMap } from '../components/Map.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import { getInitialServices } from '../data/services.js'
+import { editService, getInitialServices } from '../data/services.js'
 import BrikoulchiApi from '../api/BrikoulchiApi.jsx'
 import { remouveService } from '../data/services.js'
+import ConfirmationBox from '../components/ConfirmationBox.jsx'
+import ServiceForm from '../components/ServiceForm.jsx'
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -14,6 +16,8 @@ const ServiceDetails = () => {
   const [rating, setRating] = useState(0);
   const [text, settext] = useState('');
   const [reviews, setReviews] = useState([]);
+  const [showConfirmBox, setShowConfirmBox] = useState(false);
+  const [showEditService, setShowEditService] = useState(false);
   const like = useRef(false);
   const fetchservices = async () => {
     const services = await getInitialServices();
@@ -126,6 +130,7 @@ const ServiceDetails = () => {
     : 0
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
+      {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(service.id) }} onCancel={() => { setShowConfirmBox(false) }} />}
       <button
         onClick={() => navigate('/services')}
         className="mb-6 flex items-center text-primary hover:text-primary-dark transition-colors"
@@ -133,7 +138,8 @@ const ServiceDetails = () => {
         <i className="fas fa-arrow-left mr-2"></i>
         Back to Services
       </button>
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+
+      {!showEditService ? <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Service Image */}
         <div className="h-64 relative">
           <img
@@ -354,22 +360,26 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               ))}
-            </div> : <div>No reviviews for this service</div>}
+            </div> : <div className='text-gray-500 mx-4'>No reviviews for this service</div>}
           </div>
         </div>
         {(isAuthenticated && showDeleteService) && <div>
-          <button onClick={(e) => { RemouveService(service.id) }}>
-            <div className="bg-red-600 text-white px-4 py-2 m-4 rounded-full hover:bg-red-500 transition duration-150">
+          <button onClick={() => { setShowEditService(true) }}>
+            <div className="bg-blue-600 text-white px-4 py-2 ml-8 rounded-full hover:bg-blue-500 transition duration-150">
+              edit service
+            </div>
+          </button>
+          <button onClick={() => { setShowConfirmBox(true) }}>
+            <div className="bg-red-600 text-white px-4 py-2 m-2 mb-4 rounded-full hover:bg-red-500 transition duration-150">
               delete service
             </div>
           </button>
-          <button onClick={(e) => { EditService(service.id) }}>
-            <div className="bg-red-600 text-white px-4 py-2 m-4 rounded-full hover:bg-red-500 transition duration-150">
-              delete service
-            </div>
-          </button>
+
         </div>}
-      </div>
+      </div> :
+        <div>
+          <ServiceForm service = {service} editmode = {true}/>
+        </div>}
     </div>
   )
 }

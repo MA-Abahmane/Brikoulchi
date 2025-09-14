@@ -75,7 +75,7 @@ export const remouveService = async (serviceId, accessToken, userId) => {
 export const editService = async (serviceId, accessToken, userId, service) => {
     console.log("huhuuh");
     try {
-        console.log('testttes');
+        console.log('testttes', 'edit service');
         const res = await BrikoulchiApi.post(`/api/auth/edit/service/${serviceId}`, { userId, service }, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
