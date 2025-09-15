@@ -28,7 +28,7 @@ export async function APIServices(userId = null, globalserviceId = null) {
         const res = await BrikoulchiApi.get(url);
         // console.log('userID', userId);
         // console.log('globalID', globalserviceId);
-        // console.log('this is the response:', res);  
+        console.log('this is the response:', res);  
         return res.data;
     } catch (error) {
         console.log(error.message + "fetching services error");
