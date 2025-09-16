@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState({ type: '', text: '' });
+
   const navigate = useNavigate();
   useEffect(() => {
     if (message.text) {
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     checkAuth();
-    setUser(JSON.parse(localStorage.getItem('user')));
+    // setUser(JSON.parse(localStorage.getItem('user')));
     setupInterceptors(BrikoulchiApi, { setIsAuthenticated, setAccessToken })
   }, []);
   const signup = async (newUser) => {
@@ -89,12 +90,14 @@ export const AuthProvider = ({ children }) => {
       for (let pair of updatedInfo.entries()) {
         console.log(pair[0] + ':::', pair[1]);
       }
-      const res = await BrikoulchiApi.post(`/api/updateUserInfo/${user.id}`, updatedInfo, {
+      const res = await BrikoulchiApi.post(`/api/auth/updateUserInfo/${user.id}`, updatedInfo, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log(res);
+
       return true;
     } catch (error) {
       console.error('Update failed:', error.response?.data || error.message);
@@ -105,7 +108,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        
+
         isAuthenticated,
         user,
         message,

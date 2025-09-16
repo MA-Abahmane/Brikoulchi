@@ -5,12 +5,11 @@ import { getUserServices, remouveService } from '../data/services.js'
 import ConfirmationBox from '../components/ConfirmationBox.jsx'
 import ServiceForm from '../components/ServiceForm.jsx'
 const MyServices = () => {
-  const { user, accessToken, setShowDeleteService } = useAuth()
+  const { user, accessToken, setShowDeleteService, message, setMessage } = useAuth()
   const [services, setServices] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [deletedServiceId, setDeletedServiceId] = useState([])
   const [showConfirmBox, setShowConfirmBox] = useState(false)
-  const [message, setMessage] = useState({ type: '', text: '' })
 
   useEffect(() => {
     setShowDeleteService(true);

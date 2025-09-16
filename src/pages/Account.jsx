@@ -160,6 +160,9 @@ const Account = () => {
     console.log(imageFile);
     console.table(user);
     console.table(formData);
+    for (let [key, value] of data.entries()) {
+      console.log(`${key}:`,typeof value);
+    }
     console.log('test abde:::::::::::::::::::::::::::::::');
     try {
       const success = await updateUserInfo(data);
@@ -173,7 +176,7 @@ const Account = () => {
         });
         // setUser(formData);
         setUser(prev => ({ ...prev, image: imagePreview }));
-
+        
 
         // Reset removal flag after successful update
       }

@@ -26,9 +26,9 @@ export async function APIServices(userId = null, globalserviceId = null) {
                 ? `http://127.0.0.1:8000/api/GServices/${globalserviceId}`
                 : `http://127.0.0.1:8000/api/Services`;
         const res = await BrikoulchiApi.get(url);
+        console.log(globalserviceId, 'this the golobal service id', res);
         // console.log('userID', userId);
         // console.log('globalID', globalserviceId);
-        console.log('this is the response:', res);  
         return res.data;
     } catch (error) {
         console.log(error.message + "fetching services error");

@@ -10,7 +10,7 @@ import ServiceForm from '../components/ServiceForm.jsx'
 const ServiceDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { isAuthenticated, user, accessToken, showDeleteService, setShowDeleteService } = useAuth();
+  const { isAuthenticated, user, accessToken, showDeleteService, setShowDeleteService, message } = useAuth();
   const [service, setService] = useState(null);
   const [provider, setProvider] = useState(null);
   const [rating, setRating] = useState(0);
@@ -45,9 +45,11 @@ const ServiceDetails = () => {
   useEffect(() => {
     fetchreviews();
   }, [id, like]);
-  if ((user && service) && (user.id === service.user_id)) {
-    setShowDeleteService(true);
-  }
+  useEffect(() => {
+    if ((user && service) && (user.id === service.user_id)) {
+      setShowDeleteService(true);
+    }
+  });
   const handleRatingSubmit = async () => {
 
     if (!isAuthenticated) {
@@ -130,6 +132,7 @@ const ServiceDetails = () => {
     : 0
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
+
       {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(service.id) }} onCancel={() => { setShowConfirmBox(false) }} />}
       <button
         onClick={() => navigate('/services')}
@@ -138,7 +141,14 @@ const ServiceDetails = () => {
         <i className="fas fa-arrow-left mr-2"></i>
         Back to Services
       </button>
-
+      {message.text && (
+        <div
+          className={`p-4 rounded-md mb-6 ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+            }`}
+        >
+          {message.text}
+        </div>
+      )}
       {!showEditService ? <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Service Image */}
         <div className="h-64 relative">
@@ -378,7 +388,7 @@ const ServiceDetails = () => {
         </div>}
       </div> :
         <div>
-          <ServiceForm service = {service} editmode = {true}/>
+          <ServiceForm setShowEditService={setShowEditService} service={service} editmode={true} />
         </div>}
     </div>
   )
