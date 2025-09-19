@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 export async function APICategories(withGlobalServices = false) {
     try {
         const url = withGlobalServices ? `http://127.0.0.1:8000/api/Categories/${withGlobalServices}` :
-            "http://127.0.0.1:8000/api/Categories";
+        "http://127.0.0.1:8000/api/Categories";
         const res = await axios.get(url);
         return res.data;
     }
@@ -18,7 +18,6 @@ export async function APICategories(withGlobalServices = false) {
     }
 }
 export async function APIServices(userId = null, globalserviceId = null) {
-
     try {
         let url = userId
             ? `http://127.0.0.1:8000/api/Services/${userId}`

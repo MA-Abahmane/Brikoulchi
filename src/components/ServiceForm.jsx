@@ -3,14 +3,15 @@ import FormInput from "./FormInput"
 import { LocationPickerMap } from "./Map"
 import { useAuth } from "../context/AuthContext"
 import { addService, APICategories, APIServices, editService } from "../data/services"
-export default function ServiceForm({ fetchuserservices, setShowEditService, editmode, service = null }) {
+export default function ServiceForm({ fetchservice, fetchuserservices, setShowEditService, editmode, service = null }) {
     const { user, accessToken, setMessage } = useAuth()
-    const [selectedCategory, setSelectedCategory] = useState(0)
+    const [selectedCategory, setSelectedCategory] = useState(service ? service.category_id : 0)
     const [Categories, setCategories] = useState([])
-    const [selectedGlobalService, setSelectedGlobalService] = useState(0)
+    const [selectedGlobalService, setSelectedGlobalService] = useState(service ? service.global_service_id : 0);
     const [availableGlobalServices, setAvailableGlobalServices] = useState([])
-    const [selectedService, setSelectedService] = useState(0)
+    const [selectedService, setSelectedService] = useState(service ? service.initial_service_id : 0);
     const [availableServices, setAvailableServices] = useState([])
+    const [pastService, setPastService] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -46,31 +47,38 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
     useEffect(() => {
         fetchcategories();
     }, []);
-
+    useEffect(() => {
+        const category = Categories.find(c => c.id === selectedCategory)
+        setAvailableGlobalServices(category ? category.globalservices : [])
+        console.log('it works', category, 'hahahaha');
+        console.log(Categories);
+        console.log('it works', selectedCategory, 'hehehehe');
+    }, [Categories]);
+const fetchservices = async (globalServiceId) => {
+        const services = await APIServices(null, globalServiceId);
+        setAvailableServices(services);
+        console.log('hahaha sub global services:', availableServices);
+        console.log(selectedGlobalService);
+        console.log(services, 'hwhwhwh');
+        return services;
+    }
     useEffect(() => {
         if (selectedCategory) {
             const category = Categories.find(c => c.id === selectedCategory)
             console.log('categorie:', category);
             console.log('categories:', Categories);
             setAvailableGlobalServices(category ? category.globalservices : [])
-            setSelectedGlobalService('')
-            setAvailableServices([])
+            selectedCategory === service.category_id ? fetchservices(service.global_service_id) : setAvailableServices([])
         } else {
             setAvailableGlobalServices([])
             setSelectedGlobalService('')
             setAvailableServices([])
         }
     }, [selectedCategory])
-    const fetchservices = async () => {
-        const services = await APIServices(null, service ? service.global_service_id : selectedGlobalService);
-        console.log('sub global services:', services);
-        setAvailableServices(services);
-        console.log(services, 'hwhwhwh');
-
-    }
+    
     useEffect(() => {
-        fetchservices();
-    }, [selectedCategory, selectedGlobalService])
+        fetchservices(selectedGlobalService);
+    }, [selectedGlobalService])
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData(prev => ({
@@ -79,27 +87,18 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
         }))
     }
     useEffect(() => {
-        if (service && Categories.length > 0) {
-            setSelectedCategory(service.category_id || 0);
-            setSelectedGlobalService(service.global_service_id || 0);
-            setSelectedService(service.initial_service_id || 0);
-
-            // normalize to ensure no undefined/null values
-            setFormData({
-                title: service.title ?? '',
-                description: service.description ?? '',
-                phone1: service.phone1 ?? user?.phone1 ?? '',
-                phone2: service.phone2 ?? user?.phone2 ?? '',
-                email: service.email ?? user?.email ?? '',
-                address: service.address ?? user?.address ?? '',
-                workDays: service.workDays ?? '',
-                workHours: service.workHours ?? ''
-            });
-
-            setAvailableGlobalServices(
-                Categories.find(cat => cat.id === service.category_id)?.globalservices || []
-            );
-        }
+        !pastService && setPastService((service && availableServices.length > 0) ? availableServices.find(ser => ser.id === service.initial_service_id).name : false)
+        //         // normalize to ensure no undefined/null values
+        setFormData({
+            title: service.title ?? '',
+            description: service.description ?? '',
+            phone1: service.phone1 ?? user?.phone1 ?? '',
+            phone2: service.phone2 ?? user?.phone2 ?? '',
+            email: service.email ?? user?.email ?? '',
+            address: service.address ?? user?.address ?? '',
+            workDays: service.workDays ?? '',
+            workHours: service.workHours ?? ''
+        });
     }, [Categories]);
     const handleWorkDayChange = (day) => {
         setWorkDays(prev => ({
@@ -137,10 +136,6 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
         if (!formData.description.trim()) {
             newErrors.description = 'Description is required'
         }
-
-        // if (!formData.phone1.trim() && !service) {
-        //     newErrors.phone1 = 'Primary phone number is required'
-        // }
 
         if (!Object.values(workDays).some(day => day)) {
             newErrors.workDays = 'Select at least one work day'
@@ -214,6 +209,7 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
                 setMessage({ type: '', text: '' })
             }, 6000)
         }
+        fetchservice()
     }
     return <>
         {
@@ -248,7 +244,9 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
                         disabled={service ? false : !selectedCategory}
                         error={errors.serviceName}
                     >
-                        <option className="bg-blue-300" value={service ? service.global_service_id : 0}>{service && Categories.length ? `${Categories.find(cat => cat.id === service.category_id).globalservices.find(ser => ser.id === service.global_service_id).name}` : "Select a global service"}</option>
+                        {
+                            service.category_id === selectedCategory ? service && Categories.length && <option className="bg-blue-300" value={service ? service.global_service_id : 0}>{`${Categories.find(cat => cat.id === service.category_id).globalservices.find(ser => ser.id === service.global_service_id).name}`}</option> : <option>Select a global service</option>
+                        }
                         {availableGlobalServices.map(service => (
                             <option key={service.id} value={service.id}>
                                 {service.name}
@@ -266,12 +264,18 @@ export default function ServiceForm({ fetchuserservices, setShowEditService, edi
                     type="select"
                     disabled={service ? false : !selectedGlobalService}
                 >
-                    <option className="bg-blue-300" value={service ? service.initial_service_id : 0}>{service && availableServices.length ? availableServices.find(ser => ser.id === service.initial_service_id).name : "Select a global service"}</option>
-                    {availableServices.map(service => (
-                        <option key={service.id} value={service.id}>
-                            {service.name}
-                        </option>
-                    ))}
+                    {
+                        console.log('abarkou""""""""""""""""""""""', availableServices, service, selectedGlobalService, 'pastserv', pastService, 'availaible G serv', availableGlobalServices)
+                    }
+                    {
+                        (service.global_service_id === selectedGlobalService && service.category_id === selectedCategory) ? <option className="bg-blue-300" value={service ? service.initial_service_id : 0}> {pastService} </option> : <option>Select a global service</option>
+                    }
+                    {
+                        availableServices.map(service => (
+                            <option key={service.id} value={service.id}>
+                                {service.name}
+                            </option>
+                        ))}
                 </FormInput>
 
                 <FormInput

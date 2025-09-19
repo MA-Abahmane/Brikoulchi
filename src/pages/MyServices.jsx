@@ -12,7 +12,7 @@ const MyServices = () => {
   const [showConfirmBox, setShowConfirmBox] = useState(false)
 
   useEffect(() => {
-    setShowDeleteService(true);
+    setShowDeleteService(true);    
   }, [])
   const fetchuserservices = async () => {
     const userServices = await getUserServices(user.id)

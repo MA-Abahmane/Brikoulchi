@@ -44,6 +44,8 @@ const ServiceDetails = () => {
   }
   useEffect(() => {
     fetchreviews();
+    console.log('hahahahahha', user);
+    
   }, [id, like]);
   useEffect(() => {
     if ((user && service) && (user.id === service.user_id)) {
@@ -388,7 +390,7 @@ const ServiceDetails = () => {
         </div>}
       </div> :
         <div>
-          <ServiceForm setShowEditService={setShowEditService} service={service} editmode={true} />
+          <ServiceForm setShowEditService={setShowEditService} fetchservice = {fetchservices} service={service} editmode={true} />
         </div>}
     </div>
   )

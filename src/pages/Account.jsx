@@ -40,7 +40,7 @@ const Account = () => {
       setImagePreview(user.image || null);
       setHasInitialized(true);
     }
-  }, [user, hasInitialized]);
+  }, [hasInitialized]);
 
   // 2. Second effect - Persist form data changes
   useEffect(() => {
@@ -160,8 +160,9 @@ const Account = () => {
     console.log(imageFile);
     console.table(user);
     console.table(formData);
+    console.table('tata', JSON.stringify(localStorage.getItem('profile_info_update')));
     for (let [key, value] of data.entries()) {
-      console.log(`${key}:`,typeof value);
+      console.log(`${key}:`, typeof value);
     }
     console.log('test abde:::::::::::::::::::::::::::::::');
     try {
@@ -175,9 +176,8 @@ const Account = () => {
           text: 'Your information has been updated successfully!'
         });
         // setUser(formData);
-        setUser(prev => ({ ...prev, image: imagePreview }));
-        
-
+        setUser({ ...formData, image: imagePreview });
+        localStorage.setItem('user', JSON.stringify(formData));
         // Reset removal flag after successful update
       }
     } catch (error) {

@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
       }
     };
-
     checkAuth();
+    console.log('user local', localStorage.getItem('user'));
     // setUser(JSON.parse(localStorage.getItem('user')));
     setupInterceptors(BrikoulchiApi, { setIsAuthenticated, setAccessToken })
   }, []);
