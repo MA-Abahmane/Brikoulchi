@@ -15,6 +15,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
     const [formData, setFormData] = useState({
         title: '',
         description: '',
+        type: '',
         phone1: user?.phone1 || '',
         phone2: user?.phone2 || '',
         email: user?.email || '',
@@ -43,10 +44,29 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
         console.log('the categories', Categories);
         setCategories(Categories);
     }
-
     useEffect(() => {
         fetchcategories();
+        if (!service.workDays) return;
+
+        const selectedDays = service.workDays.split(",");
+        console.table(selectedDays);
+
+        let updatedWorkDays = { ...workDays };
+
+        Object.entries(workDays).forEach(([day]) => {
+            const formattedDay = day.charAt(0).toUpperCase() + day[1];
+            console.log('this is a working day', selectedDays.includes(formattedDay), formattedDay, '@@@@@@@@@@@@@@')
+            if (selectedDays.includes(formattedDay)) {
+                console.log('hahaha');
+
+                updatedWorkDays = { ...updatedWorkDays, [day]: true };
+            }
+        });
+
+        setWorkDays(updatedWorkDays);
+        console.log("Updated workDays:", updatedWorkDays);
     }, []);
+
     useEffect(() => {
         const category = Categories.find(c => c.id === selectedCategory)
         setAvailableGlobalServices(category ? category.globalservices : [])
@@ -54,7 +74,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
         console.log(Categories);
         console.log('it works', selectedCategory, 'hehehehe');
     }, [Categories]);
-const fetchservices = async (globalServiceId) => {
+    const fetchservices = async (globalServiceId) => {
         const services = await APIServices(null, globalServiceId);
         setAvailableServices(services);
         console.log('hahaha sub global services:', availableServices);
@@ -68,14 +88,15 @@ const fetchservices = async (globalServiceId) => {
             console.log('categorie:', category);
             console.log('categories:', Categories);
             setAvailableGlobalServices(category ? category.globalservices : [])
-            selectedCategory === service.category_id ? fetchservices(service.global_service_id) : setAvailableServices([])
+            service ? (selectedCategory === service.category_id ? fetchservices(service.global_service_id) : setAvailableServices([])
+            ) : null
         } else {
             setAvailableGlobalServices([])
             setSelectedGlobalService('')
             setAvailableServices([])
         }
     }, [selectedCategory])
-    
+
     useEffect(() => {
         fetchservices(selectedGlobalService);
     }, [selectedGlobalService])
@@ -89,16 +110,17 @@ const fetchservices = async (globalServiceId) => {
     useEffect(() => {
         !pastService && setPastService((service && availableServices.length > 0) ? availableServices.find(ser => ser.id === service.initial_service_id).name : false)
         //         // normalize to ensure no undefined/null values
-        setFormData({
+        service ? setFormData({
             title: service.title ?? '',
             description: service.description ?? '',
+            type: service.type ?? '',
             phone1: service.phone1 ?? user?.phone1 ?? '',
             phone2: service.phone2 ?? user?.phone2 ?? '',
             email: service.email ?? user?.email ?? '',
             address: service.address ?? user?.address ?? '',
             workDays: service.workDays ?? '',
             workHours: service.workHours ?? ''
-        });
+        }) : null;
     }, [Categories]);
     const handleWorkDayChange = (day) => {
         setWorkDays(prev => ({
@@ -136,6 +158,9 @@ const fetchservices = async (globalServiceId) => {
         if (!formData.description.trim()) {
             newErrors.description = 'Description is required'
         }
+        if (!formData.type.trim()) {
+            newErrors.type = 'Type is required'
+        }
 
         if (!Object.values(workDays).some(day => day)) {
             newErrors.workDays = 'Select at least one work day'
@@ -157,8 +182,8 @@ const fetchservices = async (globalServiceId) => {
         if (validateForm()) {
             const selectedDays = Object.entries(workDays)
                 .filter(([_, isSelected]) => isSelected)
-                .map(([day]) => day.charAt(0).toUpperCase() + day.slice(1))
-                .join(', ')
+                .map(([day]) => day.charAt(0).toUpperCase() + day[1])
+                .join(',')
 
             const newService = {
                 user_id: user.id,
@@ -166,7 +191,7 @@ const fetchservices = async (globalServiceId) => {
                 global_service_id: selectedGlobalService,
                 initial_service_id: selectedService,
                 title: formData.title,
-                type: 'freelance',
+                type: formData.type,
                 status: 'busy',
                 description: formData.description,
                 workDays: selectedDays,
@@ -188,6 +213,7 @@ const fetchservices = async (globalServiceId) => {
             setFormData({
                 title: '',
                 description: '',
+                type: '',
                 phone1: user?.phone1 || '',
                 phone2: user?.phone2 || '',
                 email: user?.email || '',
@@ -245,7 +271,7 @@ const fetchservices = async (globalServiceId) => {
                         error={errors.serviceName}
                     >
                         {
-                            service.category_id === selectedCategory ? service && Categories.length && <option className="bg-blue-300" value={service ? service.global_service_id : 0}>{`${Categories.find(cat => cat.id === service.category_id).globalservices.find(ser => ser.id === service.global_service_id).name}`}</option> : <option>Select a global service</option>
+                            service ? service.category_id === selectedCategory ? service && Categories.length && <option className="bg-blue-300" value={service ? service.global_service_id : 0}>{`${Categories.find(cat => cat.id === service.category_id).globalservices.find(ser => ser.id === service.global_service_id).name}`}</option> : <option>Select a global service</option> : <option>Select a global service</option>
                         }
                         {availableGlobalServices.map(service => (
                             <option key={service.id} value={service.id}>
@@ -268,7 +294,7 @@ const fetchservices = async (globalServiceId) => {
                         console.log('abarkou""""""""""""""""""""""', availableServices, service, selectedGlobalService, 'pastserv', pastService, 'availaible G serv', availableGlobalServices)
                     }
                     {
-                        (service.global_service_id === selectedGlobalService && service.category_id === selectedCategory) ? <option className="bg-blue-300" value={service ? service.initial_service_id : 0}> {pastService} </option> : <option>Select a global service</option>
+                        service ? (service.global_service_id === selectedGlobalService && service.category_id === selectedCategory) ? <option className="bg-blue-300" value={service ? service.initial_service_id : 0}> {pastService} </option> : <option>Select a global service</option> : <option>Select a global service</option>
                     }
                     {
                         availableServices.map(service => (
@@ -297,6 +323,20 @@ const fetchservices = async (globalServiceId) => {
                     placeholder="Describe your service..."
                     rows={4}
                 />
+                <FormInput
+                    label="Type"
+                    name="type"
+                    type="select"
+                    value={formData.type}
+                    onChange={handleChange}
+                    placeholder="E.g., Freelance"
+                    rows={4}
+                >
+                    <option value={'freelance'}>Freelance</option>
+                    <option value={'timecount'}>Timecount</option>
+                    <option value={'fulltime'}>Fulltime</option>
+                    <option value={'parttime'}>Parttime</option>
+                </FormInput>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormInput
