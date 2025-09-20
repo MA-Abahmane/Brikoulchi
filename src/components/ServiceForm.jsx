@@ -3,6 +3,7 @@ import FormInput from "./FormInput"
 import { LocationPickerMap } from "./Map"
 import { useAuth } from "../context/AuthContext"
 import { addService, APICategories, APIServices, editService } from "../data/services"
+import ConfirmationBox from "./ConfirmationBox"
 export default function ServiceForm({ fetchservice, fetchuserservices, setShowEditService, editmode, service = null }) {
     const { user, accessToken, setMessage } = useAuth()
     const [selectedCategory, setSelectedCategory] = useState(service ? service.category_id : 0)
@@ -12,10 +13,11 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
     const [selectedService, setSelectedService] = useState(service ? service.initial_service_id : 0);
     const [availableServices, setAvailableServices] = useState([])
     const [pastService, setPastService] = useState(false)
+    const [showConfirmBox, setShowConfirmBox] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        type: '',
+        type: 'freelance',
         phone1: user?.phone1 || '',
         phone2: user?.phone2 || '',
         email: user?.email || '',
@@ -38,7 +40,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
         end: ''
     })
     const [errors, setErrors] = useState({})
-    const [location, setLocation] = useState(null);
+    const [location, setLocation] = useState(service ? { lat: service.lat, lng: service.lng } : { lat: 1.45, lng: 2.6 });
     const fetchcategories = async () => {
         const Categories = await APICategories(true);
         console.log('the categories', Categories);
@@ -46,14 +48,14 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
     }
     useEffect(() => {
         fetchcategories();
-        if (!service.workDays) return;
+        if (!service) return;
 
         const selectedDays = service.workDays.split(",");
         console.table(selectedDays);
 
         let updatedWorkDays = { ...workDays };
-
-        Object.entries(workDays).forEach(([day]) => {
+        console.log(service);
+        Object.keys(workDays).forEach((day) => {
             const formattedDay = day.charAt(0).toUpperCase() + day[1];
             console.log('this is a working day', selectedDays.includes(formattedDay), formattedDay, '@@@@@@@@@@@@@@')
             if (selectedDays.includes(formattedDay)) {
@@ -65,6 +67,10 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
 
         setWorkDays(updatedWorkDays);
         console.log("Updated workDays:", updatedWorkDays);
+        const workingHours = service.workHours.split('-');
+        const workingTime = { start: workingHours[0], end: workingHours[1] };
+        console.log('this is the working time', workingTime);
+        setWorkHours(workingTime);
     }, []);
 
     useEffect(() => {
@@ -179,6 +185,8 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
     }
 
     const handleSubmit = async () => {
+        console.log('this is the location : ^^^^^^^^^^^^^^^^^^%%%%%%%%%%%%%%%%%%', location);
+
         if (validateForm()) {
             const selectedDays = Object.entries(workDays)
                 .filter(([_, isSelected]) => isSelected)
@@ -195,9 +203,9 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                 status: 'busy',
                 description: formData.description,
                 workDays: selectedDays,
-                workHours: `${workHours.start} - ${workHours.end}`,
-                lat: 1.643,
-                lng: 5.634,
+                workHours: `${workHours.start}-${workHours.end}`,
+                lat: location.lat,
+                lng: location.lng
             }
             if (service) {
                 await editService(service.id, accessToken, user.id, newService);
@@ -235,7 +243,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                 setMessage({ type: '', text: '' })
             }, 6000)
         }
-        fetchservice()
+        service && fetchservice();
     }
     return <>
         {
@@ -403,7 +411,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                         </label>
                         <input
                             type="time"
-                            value={workHours.start}
+                            value={workHours.start + ':00'}
                             onChange={(e) => handleWorkHourChange('start', e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                         />
@@ -414,7 +422,7 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                         </label>
                         <input
                             type="time"
-                            value={workHours.end}
+                            value={workHours.end + ':00'}
                             onChange={(e) => handleWorkHourChange('end', e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                         />
@@ -452,6 +460,12 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                 </div>
 
                 <div className="flex justify-end">
+                    {editmode && <button
+                        onClick={() => { setShowConfirmBox(true) }}
+                        className="bg-red-500 hover:bg-red-600 text-white font-medium mr-2 py-2 px-6 rounded-md transition duration-150"
+                    >
+                        {'Cancel'}
+                    </button>}
                     <button
                         onClick={handleSubmit}
                         className="bg-[#3B5BFF] hover:bg-blue-800 text-white font-medium py-2 px-6 rounded-md transition duration-150"
@@ -459,7 +473,9 @@ export default function ServiceForm({ fetchservice, fetchuserservices, setShowEd
                         {editmode ? 'Edit Service' : 'Create Service'}
                     </button>
                 </div>
+                {showConfirmBox && <ConfirmationBox message={'are you shure you want to cancel the edition'} onConfirm={() => { setShowConfirmBox(false); setShowEditService(false) }} onCancel={() => { setShowConfirmBox(false) }} />}
             </div>
+
         }
     </>
 
