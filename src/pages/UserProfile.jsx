@@ -3,27 +3,32 @@ import { useParams, Link } from 'react-router-dom'
 import ServiceCard from '../components/ServiceCard.jsx'
 import { getUserServices } from '../data/services.js'
 import { useAuth } from '../context/AuthContext.jsx'
+import axios from 'axios'
 
 const UserProfile = () => {
-  const { username } = useParams()
-  const { user: currentUser, isAuthenticated } = useAuth()
-  const [user, setUser] = useState(null)
+  const { isAuthenticated, user } = useAuth()
   const [services, setServices] = useState([])
-  
-  useEffect(() => {
-    // Get user data
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
-    const foundUser = users.find(u => u.username === username)
-    if (foundUser) {
-      const { password, ...userWithoutPassword } = foundUser
-      setUser(userWithoutPassword)
+  const [currentUser, setCurrentUser] = useState([])
+  const { username } = useParams();
+  async function fetchTheProvidersinfo(username) {
+    try {
+      const res = await axios.get(`/profile/${username}`);
+      if (res.status === 200){
+        console.log('Succsess The Provider Has Been Found!?');
+        setCurrentUser(res.user);
+        return res;
+      }else{ 
+        console.log('This User Isn\'t One Of Our Providers');
+        return false;
+      }
+    } catch {
+      console.log('Error While Fetching The Provider');
+      return false;
     }
-    
-    // Get user's services
-    const userServices = getUserServices(username)
-    setServices(userServices)
-  }, [username])
-  
+  }
+  useEffect(() => {
+    console.log(user, 'this is the user');
+  }, [])
   if (!user) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
@@ -31,7 +36,7 @@ const UserProfile = () => {
       </div>
     )
   }
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -49,7 +54,7 @@ const UserProfile = () => {
                 <p className="text-gray-600">@{user.username}</p>
               </div>
             </div>
-            {isAuthenticated && currentUser?.username !== user.username && (
+            {/* {isAuthenticated && currentUser?.username !== user.username && (
               <Link
                 to="/webchat"
                 className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors flex items-center"
@@ -57,9 +62,9 @@ const UserProfile = () => {
                 <i className="fas fa-comments mr-2"></i>
                 Send Message
               </Link>
-            )}
+            )} */}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
@@ -88,7 +93,7 @@ const UserProfile = () => {
                 )}
               </div>
             </div>
-            
+
             <div>
               <h2 className="text-xl font-semibold mb-4">Service Statistics</h2>
               <div className="grid grid-cols-2 gap-4">
@@ -111,15 +116,15 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Services Section */}
         <div className="border-t border-gray-200 p-8">
           <h2 className="text-2xl font-bold text-primary mb-6">
             Services by {user.firstName}
           </h2>
-          
-          {services.length > 
- 0 ? (
+
+          {services.length >
+            0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map(service => (
                 <ServiceCard key={service.id} service={service} />

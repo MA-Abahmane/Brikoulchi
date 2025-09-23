@@ -44,7 +44,6 @@ const ServiceDetails = () => {
   }
   useEffect(() => {
     fetchreviews();
-    console.log('hahahahahha', user);
     
   }, [id, like]);
   useEffect(() => {
@@ -137,7 +136,7 @@ const ServiceDetails = () => {
 
       {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(service.id) }} onCancel={() => { setShowConfirmBox(false) }} />}
       <button
-        onClick={() => navigate('/services')}
+        onClick={() => navigate('/my-services')}  
         className="mb-6 flex items-center text-primary hover:text-primary-dark transition-colors"
       >
         <i className="fas fa-arrow-left mr-2"></i>
@@ -243,10 +242,6 @@ const ServiceDetails = () => {
             <div>
               <h2 className="text-xl font-semibold mb-4">Service Details</h2>
               <div className="space-y-2">
-                <p className="flex items-center">
-                  <i className="fas fa-tag mr-3 text-primary"></i>
-                  {service.name}
-                </p>
                 <p className="flex items-center">
                   <i className="fas fa-tools mr-3 text-primary"></i>
                   {service.type}
@@ -357,10 +352,11 @@ const ServiceDetails = () => {
                         ))}
                       </div>
                     </div>
-                    {review.user_id === user.id && <button onClick={() => { RmouveReview(review.id) }} className='mr-3 '><i className='fas fa-times text-gray-400 hover:text-gray-600 transition duration-150'></i></button>}
-                    <span className="text-gray-500 text-sm">
+                    <span className="text-gray-500 mr-4 text-sm">
                       {new Date(review.updated_at).toLocaleDateString()}
                     </span>
+                    {review.user_id === user.id && <button onClick={() => { RmouveReview(review.id) }} className='mr-3 '>
+                      <i className='fas fa-times text-gray-400 hover:text-gray-600 transition duration-150'></i></button>}
                   </div>
                   <p className="text-gray-700">{review.text}</p>
                   <div>
