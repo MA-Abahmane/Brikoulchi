@@ -34,19 +34,19 @@ const ServiceCard = ({ service, setDeletedServiceId, setShowConfirmBox }) => {
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3">
                 <i className="fas fa-tag text-primary text-xs"></i>
               </div>
-              <span className="font-medium">{service.serviceName} - {service.serviceType}</span>
+              <span className="font-medium">{service.title} - {service.type}</span>
             </div>
             <div className="flex items-center text-sm text-gray-500">
               <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
                 <i className="fas fa-phone text-green-600 text-xs"></i>
               </div>
-              <span>{service.phone1}</span>
+              <span>{service.user.phone1}</span>
             </div>
             <div className="flex items-center text-sm text-gray-500">
               <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                 <i className="fas fa-envelope text-blue-600 text-xs"></i>
               </div>
-              <span className="truncate">{service.email}</span>
+              <span className="truncate">{service.user.email}</span>
             </div>
           </div>
 

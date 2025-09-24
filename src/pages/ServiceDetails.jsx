@@ -44,7 +44,7 @@ const ServiceDetails = () => {
   }
   useEffect(() => {
     fetchreviews();
-    
+
   }, [id, like]);
   useEffect(() => {
     if ((user && service) && (user.id === service.user_id)) {
@@ -136,7 +136,7 @@ const ServiceDetails = () => {
 
       {showConfirmBox && <ConfirmationBox message={'are you shure you want to delete this service'} onConfirm={() => { setShowConfirmBox(false); RemouveService(service.id) }} onCancel={() => { setShowConfirmBox(false) }} />}
       <button
-        onClick={() => navigate('/my-services')}  
+        onClick={() => navigate('/my-services')}
         className="mb-6 flex items-center text-primary hover:text-primary-dark transition-colors"
       >
         <i className="fas fa-arrow-left mr-2"></i>
@@ -181,8 +181,7 @@ const ServiceDetails = () => {
                   <div className="font-semibold text-gray-800">
                     {provider.firstName} {provider.lastName}
                   </div>
-                  <div className="text-sm text-gray-600">View Provider Profile</div>
-                </div>
+                  {user?.username !== provider.username && <div className="text-sm text-gray-600">View Provider Profile</div>}                </div>
               </Link>
               {isAuthenticated && user?.username !== provider.username && (
                 <Link
@@ -386,7 +385,7 @@ const ServiceDetails = () => {
         </div>}
       </div> :
         <div>
-          <ServiceForm setShowEditService={setShowEditService} fetchservice = {fetchservices} service={service} editmode={true} />
+          <ServiceForm setShowEditService={setShowEditService} fetchservice={fetchservices} service={service} editmode={true} />
         </div>}
     </div>
   )
